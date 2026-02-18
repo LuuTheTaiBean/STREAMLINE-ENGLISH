@@ -409,8 +409,8 @@
                 score: score,
                 total: currentQuestions.length,
                 timeTaken: timeTakenSeconds,
-                startTime: serverTimestamp(),
-                submittedAt: serverTimestamp()
+                startTime: quizStartTime,
+                submittedAt: new Date()
             });
 
 
