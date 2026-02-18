@@ -11,21 +11,216 @@
 
     <!-- XLSX -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+
     <style>
         body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            min-height: 100vh;
             user-select: none;
         }
+
+        h2 {
+            font-weight: 700;
+            color: white;
+        }
+
+        h4 {
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .main-card {
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+            margin-bottom: 30px;
+        }
+
+        .btn {
+            border-radius: 12px;
+            padding: 10px 18px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .table {
+            border-radius: 15px;
+            overflow: hidden;
+            background: white;
+        }
+
+        .table thead {
+            background: #4f46e5;
+            color: white;
+        }
+
+        .card {
+            border-radius: 15px;
+            border: none;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            transition: 0.3s;
+        }
+
+        .card:hover {
+            transform: scale(1.01);
+        }
+
+        .alert {
+            border-radius: 15px;
+            font-size: 18px;
+            font-weight: 600;
+            text-align: center;
+        }
+
+        #timer {
+            font-size: 24px;
+            color: #dc2626;
+        }
+
+        select,
+        input[type="file"],
+        input[type="number"] {
+            border-radius: 12px !important;
+            padding: 10px !important;
+        }
+
+        ul li {
+            background: #f3f4f6;
+            padding: 10px 15px;
+            margin-bottom: 8px;
+            border-radius: 10px;
+            list-style: none;
+        }
+
+        /* ===== QUESTION CARD ===== */
+
+        .question-card {
+            background: white;
+            border-radius: 20px;
+            padding: 25px;
+            margin-bottom: 25px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: 0.3s ease;
+        }
+
+        .question-card:hover {
+            transform: translateY(-3px);
+        }
+
+        .question-title {
+            font-weight: 700;
+            font-size: 18px;
+            color: #4f46e5;
+            margin-bottom: 10px;
+        }
+
+        .question-text {
+            font-size: 16px;
+            margin-bottom: 20px;
+            font-weight: 500;
+        }
+
+        /* ===== ANSWERS ===== */
+
+        .answers {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 15px;
+        }
+
+
+        .answer-option {
+            display: flex;
+            align-items: center;
+            padding: 14px 16px;
+            border-radius: 14px;
+            border: 2px solid #e5e7eb;
+            cursor: pointer;
+            transition: 0.3s;
+            position: relative;
+            background: white;
+            min-height: 55px;
+        }
+
+
+        .answer-option:hover {
+            background: #f3f4ff;
+            border-color: #6366f1;
+        }
+
+        .answer-option input {
+            display: none;
+        }
+
+        .custom-radio {
+            width: 18px;
+            height: 18px;
+            border: 2px solid #9ca3af;
+            border-radius: 50%;
+            margin-right: 10px;
+            position: relative;
+            transition: 0.3s;
+        }
+
+        .answer-option input:checked+.custom-radio {
+            border-color: #4f46e5;
+            background: #4f46e5;
+        }
+
+        .answer-option input:checked+.custom-radio::after {
+            content: "";
+            width: 8px;
+            height: 8px;
+            background: white;
+            border-radius: 50%;
+            position: absolute;
+            top: 3px;
+            left: 3px;
+        }
+
+        .answer-option input:checked~.answer-text {
+            font-weight: 600;
+            color: #4f46e5;
+        }
+
+        /* ===== RESULT STATE ===== */
+
+        .answer-option.correct {
+            border-color: #16a34a !important;
+            background: #dcfce7 !important;
+        }
+
+        .answer-option.wrong {
+            border-color: #dc2626 !important;
+            background: #fee2e2 !important;
+        }
+
+        .answer-option.disabled {
+            pointer-events: none;
+            opacity: 0.9;
+        }
     </style>
+
 
 </head>
 
 <body class="bg-light">
 
     <div class="container py-4">
-        <h2 class="text-center mb-4">🎯 Quiz System</h2>
+        <h2 class="text-center mb-5">🚀 Modern Quiz System</h2>
 
         <!-- ADMIN / TEACHER -->
-        <div id="adminTeacherPanel" class="d-none">
+        <div id="adminTeacherPanel" class="d-none main-card">
             <h4>📥 Upload Quiz (Excel)</h4>
             <input type="file" id="excelFile" class="form-control mb-3">
             <input type="number" id="quizTime" class="form-control mb-3" placeholder="Nhập thời gian làm bài (phút)"
@@ -67,13 +262,13 @@
         </div>
 
         <!-- STUDENT -->
-        <div id="studentPanel" class="d-none">
+        <div id="studentPanel" class="d-none main-card">
             <h4>📝 Làm Quiz</h4>
             <select id="quizSelect" class="form-select mb-3"></select>
             <button class="btn btn-success mb-3" onclick="startQuiz()">
                 ▶ Bắt đầu làm bài
             </button>
-            <div class="alert alert-warning">
+            <div class="alert alert-light shadow-sm">
                 ⏳ Thời gian còn lại:
                 <strong id="timer">00:00</strong>
             </div>
@@ -89,7 +284,7 @@
         </div>
 
         <!-- PARENT -->
-        <div id="parentPanel" class="d-none">
+        <div id="parentPanel" class="d-none main-card">
             <h4>📊 Điểm của con</h4>
             <ul id="childScores"></ul>
         </div>
@@ -310,26 +505,38 @@
                     { key: "D", text: q.D }
                 ];
 
-                shuffle(answers); // đảo đáp án
+                shuffle(answers);
 
                 let html = `
-                    <div class="card p-3 mb-3">
-                        <strong>Câu ${index + 1}: ${q.question}</strong>
-                    `;
+            <div class="question-card">
+                <div class="question-title">
+                    Câu ${index + 1}
+                </div>
+                <div class="question-text">
+                    ${q.question}
+                </div>
+                <div class="answers">
+        `;
 
                 answers.forEach(ans => {
                     html += `
-                <div>
+                <label class="answer-option">
                     <input type="radio" name="${q.id}" value="${ans.key}">
-                    ${ans.text}
-                </div>
+                    <span class="custom-radio"></span>
+                    <span class="answer-text">${ans.text}</span>
+                </label>
             `;
                 });
 
-                html += "</div>";
+                html += `
+                </div>
+            </div>
+        `;
+
                 area.innerHTML += html;
             });
         }
+
 
         window.startQuiz = async function () {
 
@@ -387,9 +594,34 @@
 
             if (timerInterval) clearInterval(timerInterval);
 
+
+            // Thêm
             let score = 0;
 
             currentQuestions.forEach(q => {
+
+                const options = document.querySelectorAll(
+                    `input[name="${q.id}"]`
+                );
+
+                options.forEach(input => {
+
+                    const label = input.closest(".answer-option");
+
+                    // disable hết để không sửa được
+                    label.classList.add("disabled");
+
+                    // nếu là đáp án đúng
+                    if (input.value === q.correct) {
+                        label.classList.add("correct");
+                    }
+
+                    // nếu học sinh chọn sai
+                    if (input.checked && input.value !== q.correct) {
+                        label.classList.add("wrong");
+                    }
+                });
+
                 const selected = document.querySelector(
                     `input[name="${q.id}"]:checked`
                 );
@@ -397,9 +629,8 @@
                 if (selected && selected.value === q.correct) {
                     score++;
                 }
-            });
 
-            // 🔥 THÊM ĐOẠN NÀY Ở ĐÂY
+            });
             const quizEndTime = new Date();
             const timeTakenSeconds = Math.floor((quizEndTime - quizStartTime) / 1000);
 
@@ -417,7 +648,7 @@
             alert("Điểm của bạn: " + score);
 
             quizStarted = false;
-            document.getElementById("quizArea").innerHTML = "";
+            // document.getElementById("quizArea").innerHTML = "";
         };
 
 
