@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Dashboard</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        body {
+            background: #f4f6f9;
+        }
+
+        .admin-header {
+            background: #1e293b;
+            color: white;
+            padding: 15px;
+        }
+
+        .card {
+            border-radius: 15px;
+        }
+
+        img.preview {
+            width: 80px;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="admin-header d-flex justify-content-between align-items-center">
+        <h4>👑 ADMIN DASHBOARD</h4>
+        <button id="logoutBtn" class="btn btn-light btn-sm">Đăng xuất</button>
+    </div>
+
+    <div class="container mt-4">
+
+        <!-- ================= UNIT MANAGEMENT ================= -->
+        <h5 class="mb-3">📚 Quản lý Unit</h5>
+
+        <div class="card p-3 mb-4 shadow">
+            <input type="hidden" id="unitId">
+
+            <div class="row">
+                <div class="col-md-6 mb-2">
+                    <input type="text" id="unitTitle" class="form-control" placeholder="Tên Unit">
+                </div>
+                <div class="col-md-6 mb-2">
+                    <textarea id="unitDesc" class="form-control" placeholder="Mô tả"></textarea>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-4 mb-2">
+                    <label>Ảnh</label>
+                    <input type="file" id="unitImage" class="form-control" accept="image/*">
+                </div>
+                <div class="col-md-4 mb-2">
+                    <label>Audio (.mp3)</label>
+                    <input type="file" id="unitAudio" class="form-control" accept="audio/*">
+                </div>
+                <div class="col-md-4 mb-2">
+                    <label>Lyrics (.lrc)</label>
+                    <input type="file" id="unitLyrics" class="form-control" accept=".lrc">
+                </div>
+            </div>
+
+            <button id="saveUnitBtn" class="btn btn-primary mt-2">
+                Lưu Unit
+            </button>
+        </div>
+
+        <table class="table table-bordered table-hover bg-white shadow">
+            <thead class="table-dark">
+                <tr>
+                    <th>Ảnh</th>
+                    <th>Tên</th>
+                    <th>Audio</th>
+                    <th>Lyrics</th>
+                    <th>Hành động</th>
+                </tr>
+            </thead>
+            <tbody id="unitTable"></tbody>
+        </table>
+
+        <!-- ================= USER MANAGEMENT ================= -->
+
+        <hr class="my-5">
+
+        <h5>👥 Quản lý người dùng</h5>
+        <table class="table table-bordered bg-white shadow">
+            <thead class="table-dark">
+                <tr>
+                    <th>Họ và tên</th>
+                    <th>Email</th>
+                    <th>Role</th>
+                    <th>Đổi Role</th>
+                    <th>Xóa</th>
+                </tr>
+            </thead>
+
+            <tbody id="userTable"></tbody>
+        </table>
+
+    </div>
+
+    <script type="module">
+
+        import { auth } from "./firebase-config.js";
+        import { onAuthStateChanged, signOut }
+            from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+
+        import {
+            getFirestore,
+            collection,
+            addDoc,
+            getDocs,
+            deleteDoc,
+            updateDoc,
+            doc,
+            getDoc
+        } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+
+        import {
+            getStorage,
+            ref,
+            uploadBytes,
+            getDownloadURL,
+            deleteObject
+        } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-storage.js";
+
+
+        const db = getFirestore();
+        const storage = getStorage();
+
+        // 🔐 CHECK ADMIN
+        onAuthStateChanged(auth, async (user) => {
+            if (!user) location.href = "login.html";
+
+            const userDoc = await getDoc(doc(db, "users", user.uid));
+            if (!userDoc.exists() || userDoc.data().role !== "admin") {
+                alert("Không có quyền!");
+                location.href = "index.html";
+            }
+        });
+
+        // ===================== UNIT =====================
+
+        const unitTable = document.getElementById("unitTable");
+        const saveBtn = document.getElementById("saveUnitBtn");
+
+        async function loadUnits() {
+            unitTable.innerHTML = "";
+            const snapshot = await getDocs(collection(db, "units"));
+
+            snapshot.forEach((docSnap) => {
+                const data = docSnap.data();
+
+                unitTable.innerHTML += `
+                    <tr>
+                        <td><img src="${data.imageUrl || ''}" class="preview"></td>
+                        <td>${data.title}</td>
+                        <td>
+                            ${data.audioUrl ? `<audio controls src="${data.audioUrl}" width="120"></audio>` : ''}
+                        </td>
+                        <td>
+                            ${data.lyricsUrl ? `<a href="${data.lyricsUrl}" target="_blank">Xem</a>` : ''}
+                        </td>
+                        <td>
+                            <button class="btn btn-warning btn-sm"
+                                onclick="editUnit('${docSnap.id}','${data.title}','${data.description}')">
+                                Sửa
+                            </button>
+                            <button class="btn btn-danger btn-sm"
+                                onclick="deleteUnit('${docSnap.id}')">
+                                Xóa
+                            </button>
+                        </td>
+                    </tr>
+                `;
+            });
+        }
+
+        loadUnits();
+
+        saveBtn.addEventListener("click", async () => {
+
+            try {
+
+                const id = unitId.value;
+                const title = unitTitle.value;
+                const desc = unitDesc.value;
+
+                if (!title) return alert("Nhập tên!");
+
+                let dataToSave = {
+                    title,
+                    description: desc
+                };
+
+                const imageFile = unitImage.files[0];
+                const audioFile = unitAudio.files[0];
+                const lyricsFile = unitLyrics.files[0];
+
+                if (imageFile) {
+                    const imageRef = ref(storage, "units/images/" + Date.now() + "_" + imageFile.name);
+                    await uploadBytes(imageRef, imageFile);
+                    dataToSave.imageUrl = await getDownloadURL(imageRef);
+                }
+
+                if (audioFile) {
+                    const audioRef = ref(storage, "units/audio/" + Date.now() + "_" + audioFile.name);
+                    await uploadBytes(audioRef, audioFile);
+                    dataToSave.audioUrl = await getDownloadURL(audioRef);
+                }
+
+                if (lyricsFile) {
+                    const lyricsRef = ref(storage, "units/lyrics/" + Date.now() + "_" + lyricsFile.name);
+                    await uploadBytes(lyricsRef, lyricsFile);
+                    dataToSave.lyricsUrl = await getDownloadURL(lyricsRef);
+                }
+
+                if (id) {
+                    await updateDoc(doc(db, "units", id), dataToSave);
+                    alert("Cập nhật thành công!");
+                } else {
+                    dataToSave.createdAt = new Date();
+                    await addDoc(collection(db, "units"), dataToSave);
+                    alert("Thêm thành công!");
+                }
+
+                unitId.value = "";
+                unitTitle.value = "";
+                unitDesc.value = "";
+
+                loadUnits();
+
+            } catch (error) {
+                console.error("Lỗi:", error);
+                alert("Có lỗi xảy ra! Mở F12 xem Console.");
+            }
+        });
+
+
+        window.deleteUnit = async (id) => {
+            if (!confirm("Chắc chắn xóa?")) return;
+
+            const unitDoc = await getDoc(doc(db, "units", id));
+            const data = unitDoc.data();
+
+            if (data.imageUrl) await deleteObject(ref(storage, data.imageUrl.replace(
+                "https://firebasestorage.googleapis.com/v0/b/YOUR_BUCKET/o/",
+                ""
+            )));
+
+            if (data.audioUrl) await deleteObject(ref(storage, data.audioUrl));
+            if (data.lyricsUrl) await deleteObject(ref(storage, data.lyricsUrl));
+
+            await deleteDoc(doc(db, "units", id));
+            loadUnits();
+        };
+
+        window.editUnit = (id, title, desc) => {
+            unitId.value = id;
+            unitTitle.value = title;
+            unitDesc.value = desc;
+            window.scrollTo(0, 0);
+        };
+
+        // ===================== USERS =====================
+
+        const userTable = document.getElementById("userTable");
+
+        async function loadUsers() {
+            userTable.innerHTML = "";
+            const snapshot = await getDocs(collection(db, "users"));
+
+            snapshot.forEach((docSnap) => {
+                const data = docSnap.data();
+
+                userTable.innerHTML += `
+                    <tr>
+                        <td>${data.fullname || "Chưa cập nhật"}</td>
+                        <td>${data.email}</td>
+                        <td>${data.role}</td>
+                        <td>
+                            <select onchange="changeRole('${docSnap.id}', this.value)"
+                                class="form-select form-select-sm">
+
+                                <option value="student" ${data.role === "student" ? "selected" : ""}>Student</option>
+                                <option value="teacher" ${data.role === "teacher" ? "selected" : ""}>Teacher</option>
+                                <option value="admin" ${data.role === "admin" ? "selected" : ""}>Admin</option>
+                                <option value="parent" ${data.role === "parent" ? "selected" : ""}>Parent</option>
+                                <option value="user" ${data.role === "user" ? "selected" : ""}>Guest</option>
+
+                            </select>
+
+                        </td>
+                        <td>
+                            <button onclick="deleteUser('${docSnap.id}')"
+                                class="btn btn-danger btn-sm">
+                                Xóa
+                            </button>
+                        </td>
+                    </tr>
+                `;
+            });
+        }
+
+        loadUsers();
+
+        window.changeRole = async (id, newRole) => {
+            await updateDoc(doc(db, "users", id), { role: newRole });
+            alert("Đổi role thành công!");
+            loadUsers();
+        };
+
+        window.deleteUser = async (id) => {
+            if (!confirm("Xóa user?")) return;
+            await deleteDoc(doc(db, "users", id));
+            loadUsers();
+        };
+
+        // ===================== LOGOUT =====================
+
+        logoutBtn.addEventListener("click", async () => {
+            await signOut(auth);
+            location.href = "login.html";
+        });
+
+    </script>
+
+</body>
+
+</html>

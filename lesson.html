@@ -1,0 +1,1425 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="shortcut icon" href="./img/logo.svg" type="image/x-icon">
+  <title>Mr Trung's English</title>
+  <link href="https://fonts.googleapis.com/css2?family=Delius&display=swap" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" rel="stylesheet" />
+  <link href="style.css" rel="stylesheet" />
+</head>
+
+<body>
+  <div class="container-fluid d-flex p-0">
+    <div class="col-md-2 sidebar border-end vh-100 overflow-auto d-none d-md-block">
+      <ul class="list-unstyled">
+        <li class="sticky-title p-3 bg-success" onclick="toggleSubList('book1')">Streamline English 1</li>
+        <ul id="book1" class="list-unstyled d-none"></ul>
+        <li class="sticky-title p-3 bg-success" onclick="toggleSubList('book2')">Streamline English 2</li>
+        <ul id="book2" class="list-unstyled d-none"></ul>
+        <li class="sticky-title p-3 bg-success" onclick="toggleSubList('book3')">Streamline English 3</li>
+        <ul id="book3" class="list-unstyled d-none"></ul>
+        <li class="sticky-title p-3 bg-success" onclick="toggleSubList('book4')">Streamline English 4</li>
+        <ul id="book4" class="list-unstyled d-none"></ul>
+        <li class="sticky-title p-3 bg-success" onclick="toggleSubList('book5')">Level 1</li>
+        <ul id="book5" class="list-unstyled d-none"></ul>
+        <li class="sticky-title p-3 bg-success" onclick="toggleSubList('book6')">Level 2</li>
+        <ul id="book6" class="list-unstyled d-none"></ul>
+        <li class="sticky-title p-3 bg-success" onclick="toggleSubList('book7')">Level 3</li>
+        <ul id="book7" class="list-unstyled d-none"></ul>
+        <li class="sticky-title p-3 bg-success" onclick="toggleSubList('book8')">Streamline English 8</li>
+        <ul id="book8" class="list-unstyled d-none"></ul>
+        <li class="sticky-title p-3 bg-success" onclick="toggleSubList('book9')">Streamline English 9</li>
+        <ul id="book9" class="list-unstyled d-none"></ul>
+        <li class="sticky-title p-3 bg-success" onclick="toggleSubList('book10')">Streamline English 10</li>
+        <ul id="book10" class="list-unstyled d-none"></ul>
+      </ul>
+    </div>
+
+    <button class="btn btn-success position-fixed top-0 end-0 m-3 d-md-none" type="button" data-bs-toggle="offcanvas"
+      data-bs-target="#bookOffcanvas" aria-controls="bookOffcanvas">
+      <i class="fa-solid fa-bars"></i>
+    </button>
+
+    <div class="offcanvas offcanvas-end w-75 bg-primary" tabindex="-1" id="bookOffcanvas"
+      aria-labelledby="bookOffcanvasLabel">
+      <div class="offcanvas-header">
+        <h5 class="offcanvas-title" id="bookOffcanvasLabel">Streamline English</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+      </div>
+      <div class="offcanvas-body p-0">
+        <ul class="list-unstyled">
+          <li class="sticky-title p-3 bg-success" onclick="toggleSubList('book1-offcanvas')">Streamline English 1</li>
+          <ul id="book1-offcanvas" class="list-unstyled d-none"></ul>
+          <li class="sticky-title p-3 bg-success" onclick="toggleSubList('book2-offcanvas')">Streamline English 2</li>
+          <ul id="book2-offcanvas" class="list-unstyled d-none"></ul>
+          <li class="sticky-title p-3 bg-success" onclick="toggleSubList('book3-offcanvas')">Streamline English 3</li>
+          <ul id="book3-offcanvas" class="list-unstyled d-none"></ul>
+          <li class="sticky-title p-3 bg-success" onclick="toggleSubList('book4-offcanvas')">Streamline English 4</li>
+          <ul id="book4-offcanvas" class="list-unstyled d-none"></ul>
+          <li class="sticky-title p-3 bg-success" onclick="toggleSubList('book5-offcanvas')">Level 1</li>
+          <ul id="book5-offcanvas" class="list-unstyled d-none"></ul>
+          <li class="sticky-title p-3 bg-success" onclick="toggleSubList('book6-offcanvas')">Level 2</li>
+          <ul id="book6-offcanvas" class="list-unstyled d-none"></ul>
+          <li class="sticky-title p-3 bg-success" onclick="toggleSubList('book7-offcanvas')">Level 3</li>
+          <ul id="book7-offcanvas" class="list-unstyled d-none"></ul>
+          <li class="sticky-title p-3 bg-success" onclick="toggleSubList('book8-offcanvas')">Streamline English 8</li>
+          <ul id="book8-offcanvas" class="list-unstyled d-none"></ul>
+          <li class="sticky-title p-3 bg-success" onclick="toggleSubList('book9-offcanvas')">Streamline English 9</li>
+          <ul id="book9-offcanvas" class="list-unstyled d-none"></ul>
+          <li class="sticky-title p-3 bg-success" onclick="toggleSubList('book10-offcanvas')">Streamline English 10</li>
+          <ul id="book10-offcanvas" class="list-unstyled d-none"></ul>
+
+        </ul>
+      </div>
+    </div>
+
+    <div class="col-md-9 p-3">
+      <div id="units-container"></div>
+    </div>
+    <div
+      class="col-md-1 border-start vh-100 d-flex flex-column justify-content-between align-items-center p-3 d-none d-md-flex">
+      <div></div>
+      <div class="icon play-pause-btn"><i class="fa-solid fa-play"></i></div>
+      <div class="icon"><i class="fa-solid fa-repeat"></i></div>
+      <div class="icon"><i class="fa-brands fa-quinscape"></i></div>
+      <div class="icon"><i class="fa-solid fa-folder-closed"></i></div>
+      <div class="icon">
+        <i class="fa-solid fa-book" id="vocabIcon"></i>
+      </div>
+
+      <div class="icon"><i class="fa-solid fa-gear"></i></div>
+      <div class="icon">
+        <i id="markLearnedBtn" class="fa-solid fa-graduation-cap mark-learned-icon"></i>
+      </div>
+
+      <!-- <div class="icon"><i class="fa-solid fa-graduation-cap"></i>
+      </div> -->
+      <!-- Logout -->
+      <div class="icon" onclick="logout()">
+        <i class="fa-solid fa-arrow-right-from-bracket"></i>
+      </div>
+
+      <div class="logo">
+        <a href="https://luuthetaibean.github.io/app/"> <img src="https://luuthetaibean.github.io/app/img/E-MIT.svg"
+            alt="Logo" /></a>
+
+      </div>
+    </div>
+
+    <div class="d-md-none fixed-bottom bg-primary d-flex justify-content-around p-3">
+      <div class="icon play-pause-btn">
+        <i class="fa-solid fa-play" id="mobile-play-pause-icon"></i>
+      </div>
+      <div class="icon"><i class="fa-solid fa-repeat"></i></div>
+      <div class="icon"><i class="fa-brands fa-quinscape"></i></div>
+      <div class="icon"><i class="fa-solid fa-folder-closed"></i></div>
+      <div class="icon">
+        <i class="fa-solid fa-book" id="vocabIcon"></i>
+      </div>
+
+      <div class="icon"><i class="fa-solid fa-gear"></i></div>
+      <div class="icon">
+        <i id="markLearnedBtnMobile" class="fa-solid fa-graduation-cap mark-learned-icon"></i>
+      </div>
+
+      <!-- <div class="icon"><i class="fa-solid fa-graduation-cap"></i>
+      </div> -->
+      <!-- Logout -->
+      <div class="icon" onclick="logout()">
+        <i class="fa-solid fa-arrow-right-from-bracket"></i>
+      </div>
+    </div>
+  </div>
+
+  <!-- Settings Panel -->
+  <div id="settingsPanel" class="settings-panel d-none">
+    <div class="settings-title">
+      <!-- <i class="fa-solid fa-gear me-2"></i> -->
+      <span>Settings</span>
+      <i id="closeSettings" class="fa-solid fa-xmark close-icon"></i>
+    </div>
+
+    <div class="setting-row">
+      <div class="setting-left">
+        <i class="fa-solid fa-palette"></i>
+        <span>Màu nền</span>
+      </div>
+      <input type="color" id="bgColor">
+    </div>
+
+    <div class="setting-row">
+      <div class="setting-left">
+        <i class="fa-solid fa-font"></i>
+        <span>Màu chữ</span>
+      </div>
+      <input type="color" id="textColor">
+    </div>
+
+    <div class="setting-column">
+      <label>
+        Cỡ chữ: <span id="fontSizeValue">16</span>px
+      </label>
+      <input type="range" id="fontSize" min="12" max="23" value="16">
+    </div>
+
+    <div class="setting-column">
+      <label>Font chữ</label>
+      <select id="fontFamily">
+        <option value="'Poppins', sans-serif">Poppins</option>
+        <option value="'Roboto', sans-serif">Roboto</option>
+        <option value="Arial, sans-serif">Arial</option>
+        <option value="'Georgia', serif">Georgia</option>
+        <option value="'Courier New', monospace">Courier New</option>
+        <option value="'Pacifico', cursive">Pacifico</option>
+      </select>
+    </div>
+  </div>
+
+  <!-- User Info Modal -->
+  <div id="userInfoBox" class="user-info-overlay d-none">
+    <div class="user-info-card">
+
+      <div class="user-info-header">
+        <div class="avatar-circle">
+          <i class="fa-solid fa-user"></i>
+        </div>
+        <h4>Learner Profile</h4>
+      </div>
+
+      <div class="user-info-body">
+        <div class="info-row">
+          <span>Unit</span>
+          <strong id="infoUnitName"></strong>
+        </div>
+
+        <div class="info-row">
+          <span>Full name</span>
+          <strong id="infoFullname"></strong>
+        </div>
+
+        <div class="info-row">
+          <span>Email address</span>
+          <strong id="infoEmail"></strong>
+        </div>
+
+        <div class="info-row highlight">
+          <span>Listening count</span>
+          <strong id="infoListenCount"></strong>
+        </div>
+        <div class="info-row highlight">
+          <span>Total Units Learned</span>
+          <strong id="infoTotalUnits"></strong>
+        </div>
+        <div class="info-row highlight">
+          <span>Most Listened Unit</span>
+          <strong id="infoMostUnit"></strong>
+        </div>
+        <div class="info-row highlight">
+          <span>Highest Listen Count</span>
+          <strong id="infoMostCount"></strong>
+        </div>
+
+      </div>
+
+      <button class="btn-close-custom" id="closeUserInfo">
+        Close
+      </button>
+
+    </div>
+  </div>
+  <!-- Notebook Panel -->
+  <div id="notebookPanel" class="notebook-panel d-none">
+    <div class="notebook-header">
+      <h5>My Notebooks</h5>
+      <div>
+        <button id="addTabBtn" class="btn btn-sm btn-success">+ Tab</button>
+        <button id="closeNotebook" class="btn btn-sm btn-danger">Close</button>
+      </div>
+    </div>
+
+    <div id="tabsContainer" class="tabs-container"></div>
+
+    <div id="tabContentContainer" class="tab-content-container">
+      <textarea id="noteContent" placeholder="Write your notes here..."></textarea>
+    </div>
+  </div>
+
+  <div id="quizPanel" class="quiz-panel d-none">
+    <div class="quiz-card">
+      <div class="d-flex justify-content-between align-items-center">
+        <h4>Listening Quiz</h4>
+        <button id="closeQuiz" class="btn btn-sm btn-danger">X</button>
+      </div>
+      <div id="quizContainer"></div>
+      <button id="submitQuiz" class="btn btn-success mt-3">Submit</button>
+      <div id="quizResult" class="mt-3"></div>
+    </div>
+  </div>
+
+  <!-- Vocabulary Panel -->
+  <div id="vocabPanel" class="vocab-overlay d-none">
+    <div class="vocab-container">
+
+      <!-- Header -->
+      <div class="vocab-header">
+        <h3>📘 My Vocabulary</h3>
+        <button id="closeVocab" class="close-btn">✖</button>
+      </div>
+
+      <!-- Form -->
+      <div class="vocab-form">
+        <input type="text" id="vocabWord" placeholder="Word">
+        <input type="text" id="vocabMeaning" placeholder="Meaning">
+        <input type="text" id="vocabExample" placeholder="Example sentence">
+        <button id="saveVocab" class="btn-save">Save Word</button>
+      </div>
+
+      <!-- List -->
+      <div id="vocabList" class="vocab-list"></div>
+
+      <!-- Flashcard -->
+      <div id="flashcardBox" class="flashcard-wrapper d-none">
+        <div class="flashcard" id="flashcard">
+          <div class="card-front">
+            <h2 id="flashWord"></h2>
+          </div>
+          <div class="card-back">
+            <p id="flashMeaning"></p>
+          </div>
+        </div>
+
+        <div class="flash-buttons">
+          <button id="flipCard" class="btn-secondary">Flip</button>
+          <button id="nextCard" class="btn-primary">Next</button>
+        </div>
+      </div>
+
+      <button id="startFlashcard" class="btn-start">Start Flashcard</button>
+
+    </div>
+  </div>
+
+
+
+  <div id="dictionaryPopup" class="dictionary-popup d-none">
+    <div class="dictionary-card">
+      <h5 id="dictWord"></h5>
+      <p id="dictPhonetic"></p>
+      <button id="playAudioBtn">🔊 Play</button>
+      <p id="dictMeaning"></p>
+      <p id="dictExample"></p>
+      <button onclick="closeDictionary()">Close</button>
+    </div>
+  </div>
+
+
+  <script>
+
+    // ... các biến hiện có của bạn
+    let currentAudio = new Audio();
+    let userProgress = [];
+    let stopAt = null;
+    let isManualPlay = false;
+    let currentUnitId = null;
+    let allUnitsData = [];
+
+
+    // Thêm biến này để theo dõi số lần lặp lại
+    // let repeatCount = 0; // 0: không lặp, 1: lặp 1 lần, 2: lặp 2 lần, v.v.
+    let repeatTimes = 0;
+    let repeatRemaining = 0;
+
+    const playPauseButton = document.querySelector(".play-pause-btn");
+    const playPauseIcon = playPauseButton.querySelector("i");
+    const mobilePlayPauseIcon = document.getElementById("mobile-play-pause-icon");
+
+    // Lấy icon lặp lại
+    const repeatButtons = document.querySelectorAll(".icon .fa-repeat");
+
+
+    playPauseButton.addEventListener("click", togglePlayPause);
+    mobilePlayPauseIcon.addEventListener("click", togglePlayPause);
+
+    // Thêm sự kiện click cho nút lặp lại
+    repeatButtons.forEach(icon => {
+      icon.closest(".icon").addEventListener("click", toggleRepeat);
+    });
+
+
+    function togglePlayPause() {
+      if (currentAudio.src) {
+        if (currentAudio.paused) {
+          currentAudio.play().then(() => {
+            updatePlayPauseIcon(true);
+            isManualPlay = false;
+            stopAt = null;
+            // repeatCount = 0; // Khi người dùng play thủ công, reset lặp lại
+          }).catch(err => {
+            console.error("Không thể phát audio:", err);
+          });
+        } else {
+          currentAudio.pause();
+          updatePlayPauseIcon(false);
+        }
+      }
+    }
+
+    function updatePlayPauseIcon(isPlaying) {
+      const iconClass = isPlaying ? "fa-pause" : "fa-play";
+
+      const desktopIcon = document.querySelector(".play-pause-btn i");
+      const mobileIcon = document.getElementById("mobile-play-pause-icon");
+
+      if (desktopIcon) {
+        desktopIcon.classList.remove("fa-play", "fa-pause");
+        desktopIcon.classList.add(iconClass);
+      }
+
+      if (mobileIcon) {
+        mobileIcon.classList.remove("fa-play", "fa-pause");
+        mobileIcon.classList.add(iconClass);
+      }
+    }
+
+    // Hàm xử lý khi ấn nút lặp lại
+    function toggleRepeat() {
+
+      repeatTimes++;
+
+      if (repeatTimes > 5) {
+        repeatTimes = 0;   // Giới hạn tối đa 5 lần rồi reset
+      }
+
+      repeatRemaining = repeatTimes;
+
+      updateRepeatIcon();
+    }
+
+    let currentQuiz = [];
+
+    function generateQuiz() {
+
+      const lyricsLines = document.querySelectorAll("#lyrics-container p");
+
+      if (lyricsLines.length < 10) {
+        alert("Not enough lyrics to create quiz");
+        return;
+      }
+
+      const linesArray = Array.from(lyricsLines).map(p => p.textContent);
+
+      // Random 5 lines
+      const selected = linesArray.sort(() => 0.5 - Math.random()).slice(0, 10);
+
+      currentQuiz = selected.map(line => {
+
+        const words = line.split(" ").filter(w => w.length > 3);
+        const correct = words[Math.floor(Math.random() * words.length)];
+
+        const question = line.replace(correct, "_____");
+
+        // tạo đáp án nhiễu
+        const allWords = linesArray.join(" ").split(" ").filter(w => w.length > 3);
+        const wrongAnswers = [];
+
+        while (wrongAnswers.length < 3) {
+          const randomWord = allWords[Math.floor(Math.random() * allWords.length)];
+          if (randomWord !== correct && !wrongAnswers.includes(randomWord)) {
+            wrongAnswers.push(randomWord);
+          }
+        }
+
+        const options = [correct, ...wrongAnswers].sort(() => 0.5 - Math.random());
+
+        return {
+          question,
+          correct,
+          options
+        };
+      });
+
+      renderQuiz();
+    }
+    function renderQuiz() {
+
+      const quizPanel = document.getElementById("quizPanel");
+      const container = document.getElementById("quizContainer");
+
+      container.innerHTML = "";
+
+      currentQuiz.forEach((q, index) => {
+
+        const div = document.createElement("div");
+        div.className = "mb-3";
+
+        div.innerHTML = `
+              <p><strong>Question ${index + 1}:</strong> ${q.question}</p>
+              ${q.options.map(opt => `
+                <div>
+                  <input type="radio" name="q${index}" value="${opt}">
+                  ${opt}
+                </div>
+              `).join("")}
+            `;
+
+        container.appendChild(div);
+      });
+
+      quizPanel.classList.remove("d-none");
+    }
+    document.getElementById("submitQuiz").addEventListener("click", submitQuiz);
+
+    async function submitQuiz() {
+
+      let score = 0;
+
+      currentQuiz.forEach((q, index) => {
+
+        const selected = document.querySelector(`input[name="q${index}"]:checked`);
+
+        if (selected && selected.value === q.correct) {
+          score++;
+        }
+      });
+
+      const percent = Math.round((score / 10) * 100);
+
+      document.getElementById("quizResult").innerHTML =
+        `<h5>Your score: ${score}/10 (${percent}%)</h5>`;
+      let feedback = "";
+
+      if (percent === 100) feedback = "Excellent! 🎉";
+      else if (percent >= 80) feedback = "Very good! 👍";
+      else if (percent >= 50) feedback = "Keep practicing 💪";
+      else feedback = "Try again! 🔥";
+
+      document.getElementById("quizResult").innerHTML +=
+        `<p>${feedback}</p>`;
+
+      await saveQuizResult(score, percent);
+
+    }
+
+
+
+    // Hàm cập nhật icon lặp lại (ví dụ: thêm số bên cạnh icon)
+    function updateRepeatIcon() {
+
+      // Xóa tất cả badge cũ
+      document.querySelectorAll('.repeat-badge').forEach(b => b.remove());
+
+      if (repeatTimes > 0) {
+
+        repeatButtons.forEach(icon => {
+
+          icon.style.position = "relative";
+
+          const badge = document.createElement("span");
+          badge.className = "repeat-badge position-absolute badge bg-success";
+          badge.style.top = "-5px";
+          badge.style.right = "-10px";
+          badge.style.fontSize = "10px";
+          badge.textContent = repeatRemaining;
+
+          icon.appendChild(badge);
+        });
+
+      }
+    }
+    function toggleSubList(bookId) {
+      const subList = document.getElementById(bookId);
+      subList.classList.toggle("d-none");
+    }
+    currentAudio.addEventListener("ended", () => {
+
+      // 🎯 Mỗi lần nghe hết 1 vòng đều tăng
+      if (window.currentUser && currentUnitId) {
+        window.increaseListenCount(window.currentUser.uid, currentUnitId);
+      }
+
+      if (repeatRemaining > 0) {
+
+        repeatRemaining--;
+
+        updateRepeatIcon();
+
+        currentAudio.currentTime = 0;
+        currentAudio.play();
+
+      } else {
+
+        repeatTimes = 0;
+        repeatRemaining = 0;
+        updateRepeatIcon();
+
+        updatePlayPauseIcon(false);
+
+      }
+
+    });
+
+
+    function loadData() {
+      fetch("data.json")
+        .then(res => res.json())
+        .then(data => {
+          allUnitsData = data;
+          const books = {
+            book1: [],
+            book2: [],
+            book3: [],
+            book4: [],
+            book5: [],
+            book6: [],
+            book7: [],
+            book8: [],
+            book9: [],
+            book10: []
+          };
+          data.forEach(item => books[item.book]?.push(item));
+          // Sắp xếp theo số Unit
+          Object.keys(books).forEach(book => {
+            const bookList = document.getElementById(book);
+            const bookCanvas = document.getElementById(book + "-offcanvas");
+            books[book].sort((a, b) => a.unit.localeCompare(b.unit, 'en', { numeric: false }));
+            books[book].forEach(item => {
+              const createItem = (container) => {
+                const li = document.createElement("li");
+                li.textContent = item.unit;
+                li.className = "p-2 border-bottom";
+                li.addEventListener("click", () => loadUnitContent(item));
+                container.appendChild(li);
+              };
+              createItem(bookList);
+              createItem(bookCanvas);
+            });
+          });
+
+          function loadUnitContent(item) {
+            // ===== RESET QUIZ KHI ĐỔI UNIT =====
+            currentQuiz = [];
+            document.getElementById("quizContainer").innerHTML = "";
+            document.getElementById("quizResult").innerHTML = "";
+            document.getElementById("quizPanel").classList.add("d-none");
+
+            currentUnitId = item.id;
+
+            // Reset notebook khi đổi Unit
+            notesData = {};
+            currentTabId = null;
+            noteContent.value = "";
+            renderTabs();
+
+
+            fetchLyrics(item.lyrics).then((lyricsData) => {
+              document.getElementById("units-container").innerHTML = `
+                  <div class="container">
+                      <h2 class="text-center fw-bold">${item.unit}</h2>
+                      <div class="row">
+                          <div class="col-md-5 mb-4 mb-md-0 d-flex align-items-center">
+                              <div id="lyrics-container" class="lyrics-box"></div>
+                          </div>
+                          <div class="col-md-7 d-flex justify-content-center align-items-center mb-2">
+                              <img src="${item.image}" class="img-fluid" />
+                          </div>
+                      </div>
+                  </div>
+                    `;
+              const desktopBtn = document.getElementById("markLearnedBtn");
+              const mobileBtn = document.getElementById("markLearnedBtnMobile");
+              desktopBtn.onclick = () => window.showUserInfo(item.id, item.unit);
+              mobileBtn.onclick = () => window.showUserInfo(item.id, item.unit);
+
+
+              desktopBtn.classList.remove("learned");
+              mobileBtn.classList.remove("learned");
+              desktopBtn.style.pointerEvents = "auto";
+              mobileBtn.style.pointerEvents = "auto";
+
+              if (userProgress.includes(item.id)) {
+                desktopBtn.classList.add("learned");
+                mobileBtn.classList.add("learned");
+                desktopBtn.style.pointerEvents = "none";
+                mobileBtn.style.pointerEvents = "none";
+              }
+
+              currentAudio.src = item.audio;
+              currentAudio.pause();
+              currentAudio.currentTime = 0;
+              stopAt = null;
+              updatePlayPauseIcon(false);
+              isManualPlay = false;
+              // repeatCount = 0; // Reset lặp lại khi tải Unit mới
+              repeatTimes = 0;
+              repeatRemaining = 0;
+              updateRepeatIcon(); // Cập nhật icon lặp lại
+              displayLyrics(lyricsData);
+            });
+          }
+
+          function fetchLyrics(path) {
+            return fetch(path)
+              .then(res => res.text())
+              .then(text => parseLyrics(text))
+              .catch(() => []);
+          }
+
+          function parseLyrics(text) {
+            return text.split(/\r?\n/).map(line => {
+              const match = line.match(/\[(\d+):(\d+\.\d+)\](.*)/);
+              if (match) {
+                const time = parseInt(match[1]) * 60 + parseFloat(match[2]);
+                const text = match[3].replace(/\\n/g, "<br>");
+                return {
+                  time,
+                  text
+                };
+              }
+              return null;
+            }).filter(line => line !== null);
+          }
+          function displayLyrics(lyricsData) {
+
+            const container = document.getElementById("lyrics-container");
+
+            if (!container) return;
+
+            container.innerHTML = lyricsData
+              .map(line => {
+                const words = line.text.split(" ").map(word =>
+                  `<span class="word">${word}</span>`
+                ).join(" ");
+
+                return `<p data-time="${line.time}">${words}</p>`;
+              })
+              .join("");
+
+            // ===== THÊM ĐOẠN NÀY NGAY TẠI ĐÂY =====
+            container.querySelectorAll(".word").forEach(span => {
+              span.addEventListener("click", (e) => {
+                e.stopPropagation();
+
+                const cleanWord = span.textContent
+                  .replace(/[.,!?]/g, "")
+                  .toLowerCase();
+
+                fetchDictionary(cleanWord);
+              });
+            });
+            // ======================================
+
+
+            function handleTimeUpdate() {
+              const currentTime = currentAudio.currentTime;
+              let activeLine = null;
+
+              if (!isManualPlay) {
+                lyricsData.forEach((line, index) => {
+                  const nextLine = lyricsData[index + 1];
+
+                  if (
+                    currentTime >= line.time &&
+                    (!nextLine || currentTime < nextLine.time)
+                  ) {
+                    activeLine = container.querySelector(`p[data-time="${line.time}"]`);
+                  }
+                });
+
+                container.querySelectorAll("p").forEach(p =>
+                  p.classList.remove("active")
+                );
+
+                if (activeLine) {
+                  activeLine.classList.add("active");
+                  activeLine.scrollIntoView({
+                    behavior: "smooth",
+                    block: "center"
+                  });
+                }
+              }
+
+              if (stopAt !== null && currentTime >= stopAt) {
+                currentAudio.pause();
+                stopAt = null;
+                updatePlayPauseIcon(false);
+              }
+            }
+
+            currentAudio.removeEventListener("timeupdate", handleTimeUpdate);
+            currentAudio.addEventListener("timeupdate", handleTimeUpdate);
+
+            container.querySelectorAll("p").forEach((p, index) => {
+              p.addEventListener("click", () => {
+
+                const start = parseFloat(p.dataset.time);
+                const nextLine = lyricsData[index + 1];
+
+                stopAt = nextLine ? nextLine.time : null;
+
+                currentAudio.currentTime = start;
+                currentAudio.play();
+
+                updatePlayPauseIcon(true);
+
+                container.querySelectorAll("p").forEach(el =>
+                  el.classList.remove("active")
+                );
+
+                p.classList.add("active");
+
+                isManualPlay = true;
+
+                repeatTimes = 0;
+                repeatRemaining = 0;
+                updateRepeatIcon();
+              });
+            });
+          }
+
+
+        })
+        .catch(err => console.error("Lỗi tải dữ liệu:", err));
+    }
+
+    // Icon folder (desktop + mobile)
+    const folderIcons = document.querySelectorAll(".fa-gear");
+    const settingsPanel = document.getElementById("settingsPanel");
+
+    // Đóng settings khi click ra ngoài
+    document.addEventListener("click", function (event) {
+      const isClickInside = settingsPanel.contains(event.target);
+      const isClickOnGear = event.target.closest(".fa-gear");
+
+      if (!settingsPanel.classList.contains("d-none")
+        && !isClickInside
+        && !isClickOnGear) {
+        settingsPanel.classList.add("d-none");
+      }
+    });
+
+    folderIcons.forEach(icon => {
+      icon.addEventListener("click", () => {
+        settingsPanel.classList.toggle("d-none");
+      });
+    });
+
+    // Các input
+    const bgColorInput = document.getElementById("bgColor");
+    const textColorInput = document.getElementById("textColor");
+    const fontFamilySelect = document.getElementById("fontFamily");
+    const closeSettingsBtn = document.getElementById("closeSettings");
+
+    // Vùng áp dụng giao diện (bạn có thể đổi thành body hoặc units-container)
+    const targetArea = document.body;
+
+    // Đổi màu nền
+    bgColorInput.addEventListener("input", () => {
+      targetArea.style.backgroundColor = bgColorInput.value;
+    });
+
+    // Đổi màu chữ
+    textColorInput.addEventListener("input", () => {
+      targetArea.style.color = textColorInput.value;
+    });
+
+    // Đổi font
+    fontFamilySelect.addEventListener("change", () => {
+      targetArea.style.fontFamily = fontFamilySelect.value;
+    });
+
+    // Đóng panel
+    closeSettingsBtn.addEventListener("click", () => {
+      settingsPanel.classList.add("d-none");
+    });
+
+
+    const fontSizeInput = document.getElementById("fontSize");
+    const fontSizeValue = document.getElementById("fontSizeValue");
+
+    // Giá trị mặc định
+    fontSizeValue.textContent = fontSizeInput.value;
+
+    // Đổi cỡ chữ realtime
+    fontSizeInput.addEventListener("input", () => {
+      const size = fontSizeInput.value;
+      targetArea.style.fontSize = size + "px";
+      fontSizeValue.textContent = size;
+    });
+
+    const notebookPanel = document.getElementById("notebookPanel");
+    const closeNotebook = document.getElementById("closeNotebook");
+    const notebookIcons = document.querySelectorAll(".fa-folder-closed");
+    const tabsContainer = document.getElementById("tabsContainer");
+    const addTabBtn = document.getElementById("addTabBtn");
+    const noteContent = document.getElementById("noteContent");
+
+    let currentTabId = null;
+    let notesData = {};
+
+    notebookIcons.forEach(icon => {
+      icon.addEventListener("click", async () => {
+        notebookPanel.classList.toggle("d-none");
+
+        if (!notebookPanel.classList.contains("d-none")) {
+          await loadNotebook();  // chỉ load khi mở panel
+        }
+      });
+    });
+
+
+
+    closeNotebook.addEventListener("click", () => {
+      notebookPanel.classList.add("d-none");
+    });
+
+    addTabBtn.addEventListener("click", () => {
+      const tabName = prompt("Enter tab name:");
+      if (!tabName) return;
+
+      const id = "tab_" + Date.now();
+      notesData[id] = { name: tabName, content: "" };
+      currentTabId = id;
+
+      renderTabs();
+      saveNotebook();
+    });
+
+    function renderTabs() {
+      tabsContainer.innerHTML = "";
+
+      Object.keys(notesData).sort((a, b) =>
+        notesData[a].name.localeCompare(notesData[b].name, "en", {
+          sensitivity: "base"
+        })
+      ).forEach(id => {
+
+        const tab = document.createElement("div");
+        tab.className = "tab-item d-flex align-items-center justify-content-between";
+        tab.style.gap = "6px";
+
+        const nameSpan = document.createElement("span");
+        nameSpan.textContent = notesData[id].name;
+        nameSpan.style.flex = "1";
+
+        if (id === currentTabId) tab.classList.add("active");
+
+        // Click mở tab
+        nameSpan.addEventListener("click", () => {
+          currentTabId = id;
+          noteContent.value = notesData[id].content;
+          renderTabs();
+        });
+
+        // Double click đổi tên
+        nameSpan.addEventListener("dblclick", () => {
+          const newName = prompt("Rename tab:", notesData[id].name);
+          if (newName) {
+            notesData[id].name = newName;
+            renderTabs();
+            saveNotebook();
+          }
+        });
+
+        // ===== NÚT XOÁ =====
+        const deleteBtn = document.createElement("i");
+        deleteBtn.className = "fa-solid fa-xmark text-danger";
+        deleteBtn.style.cursor = "pointer";
+        deleteBtn.style.fontSize = "12px";
+
+        deleteBtn.addEventListener("click", (e) => {
+          e.stopPropagation();
+
+          const confirmDelete = confirm("Delete this tab?");
+          if (!confirmDelete) return;
+
+          delete notesData[id];
+
+          // Nếu đang xoá tab hiện tại
+          if (currentTabId === id) {
+            const remainingTabs = Object.keys(notesData);
+            currentTabId = remainingTabs[0] || null;
+          }
+
+          renderTabs();
+          saveNotebook();
+        });
+
+        tab.appendChild(nameSpan);
+        tab.appendChild(deleteBtn);
+
+        tabsContainer.appendChild(tab);
+      });
+
+      if (currentTabId) {
+        noteContent.value = notesData[currentTabId].content;
+      } else {
+        noteContent.value = "";
+      }
+    }
+
+    noteContent.addEventListener("input", () => {
+      if (!currentTabId) return;
+
+      notesData[currentTabId].content = noteContent.value;
+      saveNotebook();
+    });
+    const quizIcons = document.querySelectorAll(".fa-quinscape");
+
+    quizIcons.forEach(icon => {
+      icon.addEventListener("click", () => {
+        if (!currentUnitId) {
+          alert("Please open a Unit first!");
+          return;
+        }
+        generateQuiz();
+      });
+    });
+
+    document.getElementById("closeQuiz").addEventListener("click", () => {
+      document.getElementById("quizPanel").classList.add("d-none");
+    });
+    async function fetchDictionary(word) {
+      try {
+        const response = await fetch(
+          `https://api.dictionaryapi.dev/api/v2/entries/en/${word}`
+        );
+
+        const data = await response.json();
+
+        if (!data[0]) {
+          alert("No definition found");
+          return;
+        }
+
+        const meaning = data[0].meanings[0].definitions[0].definition;
+        const example = data[0].meanings[0].definitions[0].example || "No example";
+        const phonetic = data[0].phonetic || "";
+        let audioUrl = null;
+
+        if (data[0].phonetics.length > 0) {
+          audioUrl = data[0].phonetics.find(p => p.audio)?.audio;
+        }
+
+        document.getElementById("playAudioBtn").onclick = () => {
+          if (audioUrl) {
+            new Audio(audioUrl).play();
+          }
+        };
+
+
+        document.getElementById("dictWord").textContent = word;
+        document.getElementById("dictPhonetic").textContent = phonetic;
+        document.getElementById("dictMeaning").textContent = meaning;
+        document.getElementById("dictExample").textContent = example;
+
+        document.getElementById("dictionaryPopup").classList.remove("d-none");
+
+      } catch (error) {
+        console.error("Dictionary error:", error);
+      }
+    }
+
+    document.querySelectorAll(".word").forEach(span => {
+      span.addEventListener("click", (e) => {
+        e.stopPropagation();
+
+        const cleanWord = span.textContent
+          .replace(/[.,!?]/g, "")
+          .toLowerCase();
+
+        fetchDictionary(cleanWord);
+      });
+    });
+
+    function closeDictionary() {
+      document.getElementById("dictionaryPopup").classList.add("d-none");
+    }
+
+  </script>
+
+  <script type="module">
+    import { updateDoc, increment }
+      from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+    import { setDoc }
+      from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+    import { auth } from "./firebase-config.js";
+    import { onAuthStateChanged, signOut }
+      from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+    import {
+      doc,
+      getDoc,
+      collection,
+      getDocs
+    } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+    import { db } from "./firebase-config.js";
+    import { deleteDoc }
+      from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+
+    let vocabData = {};
+    let editingId = null;
+    async function increaseListenCount(uid, unitId) {
+
+      const progressRef = doc(db, "users", uid, "progress", unitId);
+      const progressSnap = await getDoc(progressRef);
+
+      const today = new Date().toISOString().split("T")[0];
+
+
+      if (!progressSnap.exists()) {
+
+        await setDoc(progressRef, {
+          listenCount: 1,
+          learnedAt: new Date(),
+          dailyListen: {
+            [today]: 1
+          }
+        });
+
+      } else {
+
+        const data = progressSnap.data();
+        const currentDaily = data.dailyListen || {};
+        const todayCount = currentDaily[today] || 0;
+
+        await updateDoc(progressRef, {
+          listenCount: increment(1),
+          [`dailyListen.${today}`]: todayCount + 1
+        });
+
+      }
+    }
+
+
+
+    window.increaseListenCount = increaseListenCount;
+
+
+    window.markAsLearned = async function (unitId) {
+      const user = auth.currentUser;
+      if (!user) return;
+
+      await setDoc(doc(db, "users", user.uid, "progress", unitId), {
+        learnedAt: new Date()
+      });
+
+      if (!window.userProgress.includes(unitId)) {
+        window.userProgress.push(unitId);
+      }
+
+      const desktopBtn = document.getElementById("markLearnedBtn");
+      const mobileBtn = document.getElementById("markLearnedBtnMobile");
+
+      desktopBtn.classList.add("learned");
+      mobileBtn.classList.add("learned");
+
+      desktopBtn.style.pointerEvents = "none";
+      mobileBtn.style.pointerEvents = "none";
+    };
+
+    async function saveQuizResult(score, percent) {
+
+      const user = auth.currentUser;
+      if (!user) return;
+
+      await setDoc(
+        doc(db, "users", user.uid, "quizResults", currentUnitId),
+        {
+          score: score,
+          percent: percent,
+          date: new Date()
+        },
+        { merge: true }
+      );
+    }
+
+
+    async function showUserInfo(unitId, unitName) {
+      const user = auth.currentUser;
+      if (!user) return;
+
+      const userDoc = await getDoc(doc(db, "users", user.uid));
+      const progressDoc = await getDoc(doc(db, "users", user.uid, "progress", unitId));
+
+      // ===== TÌM UNIT NGHE NHIỀU NHẤT =====
+      const progressRef = collection(db, "users", user.uid, "progress");
+      const progressSnap = await getDocs(progressRef);
+
+      let mostUnitId = null;
+      let mostCount = 0;
+
+      progressSnap.forEach(docSnap => {
+        const data = docSnap.data();
+        const count = data.listenCount || 0;
+
+        if (count > mostCount) {
+          mostCount = count;
+          mostUnitId = docSnap.id;
+        }
+      });
+
+      let mostUnitName = "None";
+
+      if (mostUnitId) {
+        const found = allUnitsData.find(u => u.id === mostUnitId);
+        if (found) {
+          mostUnitName = found.unit;
+        }
+      }
+
+      const fullname = userDoc.data().fullname || "Không có";
+      const email = userDoc.data().email || user.email;
+
+      const listenCount = progressDoc.exists() ? progressDoc.data().listenCount || 0 : 0;
+
+      const today = new Date().toISOString().split("T")[0];
+      const dailyListen = progressDoc.exists() ? progressDoc.data().dailyListen || {} : {};
+      const todayCount = dailyListen[today] || 0;
+
+      document.getElementById("infoListenCount").textContent =
+        listenCount + " (Today: " + todayCount + ")";
+
+
+      document.getElementById("infoFullname").textContent = fullname;
+      document.getElementById("infoEmail").textContent = email;
+      document.getElementById("infoUnitName").textContent = unitName;
+
+      const totalUnits = window.userProgress ? window.userProgress.length : 0;
+      document.getElementById("infoTotalUnits").textContent = totalUnits;
+      document.getElementById("infoMostUnit").textContent = mostUnitName;
+      document.getElementById("infoMostCount").textContent = mostCount;
+
+      document.getElementById("userInfoBox").classList.remove("d-none");
+    }
+    async function saveNotebook() {
+      if (!auth.currentUser || !currentUnitId) return;
+
+      await setDoc(
+        doc(db, "users", auth.currentUser.uid, "notes", currentUnitId),
+        notesData
+      );
+    }
+
+    async function loadNotebook() {
+      if (!auth.currentUser || !currentUnitId) return;
+
+      const docSnap = await getDoc(
+        doc(db, "users", auth.currentUser.uid, "notes", currentUnitId)
+      );
+
+      notesData = docSnap.exists() ? docSnap.data() : {};
+      currentTabId = Object.keys(notesData)[0] || null;
+
+      renderTabs();
+    }
+
+    window.saveNotebook = saveNotebook;
+    window.loadNotebook = loadNotebook;
+
+
+    window.showUserInfo = showUserInfo;
+    document.getElementById("closeUserInfo").addEventListener("click", () => {
+      document.getElementById("userInfoBox").classList.add("d-none");
+    });
+
+    // Trước đây
+    onAuthStateChanged(auth, async (user) => {
+      if (!user) {
+        window.location.href = "login.html";
+      } else {
+        window.currentUser = user;
+        // Lấy progress của user
+        const progressRef = collection(db, "users", user.uid, "progress");
+        const progressSnap = await getDocs(progressRef);
+
+        window.userProgress = progressSnap.docs.map(doc => doc.id);
+
+
+        console.log("Progress:", window.userProgress);
+
+
+        loadData(); // gọi hàm load data sau khi có progress
+      }
+    });
+
+
+    window.logout = function () {
+      signOut(auth).then(() => {
+        window.location.href = "login.html";
+      });
+    };
+
+    async function saveVocabulary() {
+      if (!auth.currentUser) return;
+
+      const word = document.getElementById("vocabWord").value.trim();
+      const meaning = document.getElementById("vocabMeaning").value.trim();
+      const example = document.getElementById("vocabExample").value.trim();
+
+      if (!word || !meaning) return alert("Please enter word and meaning");
+
+      const id = editingId || "word_" + Date.now();
+
+      await setDoc(
+        doc(db, "users", auth.currentUser.uid, "vocabulary", id),
+        {
+          word,
+          meaning,
+          example,
+          createdAt: new Date()
+        }
+      );
+
+      editingId = null;
+      document.getElementById("vocabWord").value = "";
+      document.getElementById("vocabMeaning").value = "";
+      document.getElementById("vocabExample").value = "";
+
+      loadVocabulary();
+    }
+    async function loadVocabulary() {
+      if (!auth.currentUser) return;
+
+      const snap = await getDocs(
+        collection(db, "users", auth.currentUser.uid, "vocabulary")
+      );
+
+      vocabData = {};
+      snap.forEach(docSnap => {
+        vocabData[docSnap.id] = docSnap.data();
+      });
+
+      renderVocabulary();
+    }
+
+    function renderVocabulary() {
+      const list = document.getElementById("vocabList");
+      list.innerHTML = "";
+
+      Object.keys(vocabData).forEach(id => {
+        const item = vocabData[id];
+
+        const div = document.createElement("div");
+        div.className = "vocab-item";
+
+        div.innerHTML = `
+      <div class="vocab-info">
+        <strong>${item.word}</strong>
+        <p>${item.meaning}</p>
+        <small>${item.example || ""}</small>
+      </div>
+
+      <div class="vocab-actions">
+        <button class="btn-edit">✏</button>
+        <button class="btn-delete">🗑</button>
+      </div>
+    `;
+
+        div.querySelector(".btn-edit").onclick = () => editVocabulary(id);
+        div.querySelector(".btn-delete").onclick = () => deleteVocabulary(id);
+
+        list.appendChild(div);
+      });
+    }
+
+
+    function editVocabulary(id) {
+      const item = vocabData[id];
+
+      document.getElementById("vocabWord").value = item.word;
+      document.getElementById("vocabMeaning").value = item.meaning;
+      document.getElementById("vocabExample").value = item.example || "";
+
+      editingId = id;
+    }
+    async function deleteVocabulary(id) {
+      if (!confirm("Delete this word?")) return;
+
+      await deleteDoc(
+        doc(db, "users", auth.currentUser.uid, "vocabulary", id)
+      );
+
+      loadVocabulary();
+    }
+
+    function shuffleArray(array) {
+      for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+      }
+      return array;
+    }
+
+    let flashIndex = 0;
+    let flashcards = [];
+
+    document.getElementById("startFlashcard").addEventListener("click", () => {
+
+      flashcards = Object.values(vocabData);
+
+      if (flashcards.length === 0) {
+        alert("No vocabulary yet!");
+        return;
+      }
+
+      shuffleArray(flashcards); // ⭐ TRỘN NGẪU NHIÊN
+
+      flashIndex = 0;
+
+      document.getElementById("flashcardBox").classList.remove("d-none");
+
+      showFlashcard();
+    });
+
+
+    function showFlashcard() {
+      const box = document.getElementById("flashcardBox");
+      box.classList.remove("d-none");
+
+      // const word = flashWords[flashIndex];
+      const word = flashcards[flashIndex];
+
+      document.getElementById("flashWord").textContent = word.word;
+      document.getElementById("flashMeaning").textContent = word.meaning;
+
+      // RESET trạng thái lật mỗi khi sang thẻ mới
+      document.getElementById("flashcard").classList.remove("flip");
+    }
+
+    document.getElementById("nextCard").addEventListener("click", () => {
+
+      flashIndex++;
+
+      if (flashIndex >= flashcards.length) {
+        alert("Finished all words!");
+        flashIndex = 0;
+        shuffleArray(flashcards);
+      }
+
+      showFlashcard();
+    });
+
+
+    document.getElementById("vocabIcon").addEventListener("click", () => {
+      document.getElementById("vocabPanel").classList.toggle("d-none");
+      loadVocabulary();
+    });
+
+    document.getElementById("closeVocab").addEventListener("click", () => {
+      document.getElementById("vocabPanel").classList.add("d-none");
+    });
+
+    document.getElementById("saveVocab").addEventListener("click", saveVocabulary);
+
+    document.getElementById("flipCard").addEventListener("click", () => {
+      document.getElementById("flashcard").classList.toggle("flip");
+    });
+  </script>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

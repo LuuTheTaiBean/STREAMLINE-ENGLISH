@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="./img/logo.svg" type="image/x-icon">
+    <title>Đăng nhập</title>
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+    <style>
+        #forgotPassword:hover {
+            color: #198754 !important;
+            transition: 0.3s;
+        }
+    </style>
+</head>
+
+<body class="bg-light d-flex align-items-center vh-100">
+
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-4 p-4 shadow bg-white rounded">
+
+                <form id="loginForm">
+
+                    <h4 class="text-center mb-4">Đăng nhập</h4>
+
+                    <!-- Alert -->
+                    <div id="alertBox" class="alert alert-danger d-none" role="alert">
+                        Sai email hoặc mật khẩu!
+                    </div>
+
+                    <!-- Email -->
+                    <div class="mb-3">
+                        <label class="form-label">Email</label>
+                        <input type="email" class="form-control" id="email" required>
+                    </div>
+
+                    <!-- Password -->
+                    <div class="mb-3">
+                        <label class="form-label">Mật khẩu</label>
+                        <div class="input-group">
+                            <input type="password" class="form-control" id="password" required>
+                            <button class="btn btn-outline-secondary" type="button" onclick="togglePassword()">
+                                <i class="bi bi-eye" id="eyeIcon"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Button -->
+                    <button type="submit" id="loginBtn" class="btn btn-success w-100">
+                        Đăng nhập
+                    </button>
+                    <div class="text-center mt-3">
+                        <button type="button" id="forgotPassword"
+                            class="btn btn-link text-decoration-none text-secondary fw-semibold p-0">
+                            <i class="bi bi-key me-1"></i> Quên mật khẩu?
+                        </button>
+                    </div>
+
+                    <div class="text-center mt-3">
+                        Chưa có tài khoản?
+                        <a href="register.html">Đăng ký</a>
+                    </div>
+
+                </form>
+
+            </div>
+        </div>
+    </div>
+
+    <script type="module">
+        import { sendPasswordResetEmail }
+            from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+
+        import { auth } from "./firebase-config.js";
+
+        import { signInWithEmailAndPassword }
+            from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+        import { getFirestore, doc, getDoc }
+            from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+
+        const db = getFirestore();
+
+        const form = document.getElementById("loginForm");
+        const alertBox = document.getElementById("alertBox");
+        const loginBtn = document.getElementById("loginBtn");
+
+        form.addEventListener("submit", async (e) => {
+            e.preventDefault();
+
+            const email = document.getElementById("email").value.trim();
+            const password = document.getElementById("password").value.trim();
+
+            // Hiện loading
+            loginBtn.innerHTML = "Đang đăng nhập...";
+            loginBtn.disabled = true;
+
+
+
+            try {
+                const userCredential = await signInWithEmailAndPassword(auth, email, password);
+
+                const user = userCredential.user;
+
+                // 🔥 LẤY ROLE TỪ FIRESTORE
+                const userDoc = await getDoc(doc(db, "users", user.uid));
+
+                if (userDoc.exists()) {
+
+                    const role = userDoc.data().role;
+
+                    // 🔥 PHÂN QUYỀN (XEM LẠI)
+                    if (role === "admin") {
+                        window.location.href = "admin.html";
+                    } else if (role === "teacher" || role === "admin" || role === "student") {
+                        window.location.href = "lesson.html";
+                    }
+
+                    else if (role === "teacher" || role === "admin" || role === "student") {
+                        window.location.href = "quiz.html";
+                    }
+                    else if (role === "parent" || role === "admin" || role === "teacher") {
+                        window.location.href = "parent.html";
+                    } else {
+                        window.location.href = "index.html";
+                    }
+
+
+                } else {
+                    alert("Không tìm thấy dữ liệu người dùng!");
+                }
+
+            }
+            catch (error) {
+                alertBox.classList.remove("d-none");
+            }
+
+            // Reset button
+            loginBtn.innerHTML = "Đăng nhập";
+            loginBtn.disabled = false;
+        });
+        // Quên mật khẩu
+        const forgotPassword = document.getElementById("forgotPassword");
+        forgotPassword.addEventListener("click", async (e) => {
+
+            e.preventDefault(); // 🔥 QUAN TRỌNG
+
+            const email = document.getElementById("email").value.trim();
+
+            if (!email) {
+                alert("Vui lòng nhập email trước!");
+                return;
+            }
+
+            try {
+                await sendPasswordResetEmail(auth, email);
+                alert("Đã gửi link đặt lại mật khẩu về email!");
+            } catch (error) {
+                alert(error.message);
+            }
+        });
+
+
+
+        // Ẩn/hiện mật khẩu
+        window.togglePassword = function () {
+            const passwordInput = document.getElementById("password");
+            const eyeIcon = document.getElementById("eyeIcon");
+
+            if (passwordInput.type === "password") {
+                passwordInput.type = "text";
+                eyeIcon.classList.replace("bi-eye", "bi-eye-slash");
+            } else {
+                passwordInput.type = "password";
+                eyeIcon.classList.replace("bi-eye-slash", "bi-eye");
+            }
+        };
+    </script>
+
+</body>
+
+</html>

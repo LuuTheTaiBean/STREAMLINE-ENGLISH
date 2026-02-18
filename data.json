@@ -1,0 +1,26 @@
+[
+  {
+    "id": "book1_unit1",
+    "book": "book1",
+    "unit": "01: Hello",
+    "lyrics": "./00 Lyrics/1_01.lrc",
+    "image": "./img/1_01.svg",
+    "audio": "./00 Audio/1_01.mp3"
+  },
+  {
+    "id": "book1_unit2",
+    "book": "book1",
+    "unit": "02: Excuse me",
+    "lyrics": "./00 Lyrics/1_02.lrc",
+    "image": "./img/1_02.svg",
+    "audio": "./00 Audio/1_02.mp3"
+  },
+  {
+    "id": "book1_unit13",
+    "book": "book1",
+    "unit": "13: Elton Kash",
+    "lyrics": "./00 Lyrics/1_13.lrc",
+    "image": "./img/1_13.svg",
+    "audio": "./00 Audio/1_13.mp3"
+  }
+]

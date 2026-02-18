@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Quiz System</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- XLSX -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+    <style>
+        body {
+            user-select: none;
+        }
+    </style>
+
+</head>
+
+<body class="bg-light">
+
+    <div class="container py-4">
+        <h2 class="text-center mb-4">🎯 Quiz System</h2>
+
+        <!-- ADMIN / TEACHER -->
+        <div id="adminTeacherPanel" class="d-none">
+            <h4>📥 Upload Quiz (Excel)</h4>
+            <input type="file" id="excelFile" class="form-control mb-3">
+            <input type="number" id="quizTime" class="form-control mb-3" placeholder="Nhập thời gian làm bài (phút)"
+                min="1" value="1">
+
+            <button class="btn btn-success mb-3" onclick="downloadTemplate()">
+                📥 Tải file Excel mẫu
+            </button>
+            <h4>📚 Danh sách Quiz</h4>
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Tiêu đề</th>
+                        <th>Chủ đề</th>
+                        <th>Hành động</th>
+                    </tr>
+                </thead>
+                <tbody id="quizTable"></tbody>
+            </table>
+
+            <h4>📊 Danh sách kết quả</h4>
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Học sinh</th>
+                        <th>Quiz</th>
+                        <th>Chủ đề</th>
+                        <th>Điểm</th>
+                        <th>Thời gian bắt đầu</th>
+                        <th>Thời gian nộp</th>
+                        <th>Thời gian làm</th>
+                        <th>Xóa</th>
+                    </tr>
+                </thead>
+
+
+                <tbody id="resultTable"></tbody>
+            </table>
+        </div>
+
+        <!-- STUDENT -->
+        <div id="studentPanel" class="d-none">
+            <h4>📝 Làm Quiz</h4>
+            <select id="quizSelect" class="form-select mb-3"></select>
+            <button class="btn btn-success mb-3" onclick="startQuiz()">
+                ▶ Bắt đầu làm bài
+            </button>
+            <div class="alert alert-warning">
+                ⏳ Thời gian còn lại:
+                <strong id="timer">00:00</strong>
+            </div>
+
+            <div id="quizArea"></div>
+
+            <button class="btn btn-primary mt-3" onclick="submitQuiz()">
+                Nộp bài
+            </button>
+            <hr>
+            <h4>📊 Điểm của tôi</h4>
+            <ul id="myScores"></ul>
+        </div>
+
+        <!-- PARENT -->
+        <div id="parentPanel" class="d-none">
+            <h4>📊 Điểm của con</h4>
+            <ul id="childScores"></ul>
+        </div>
+    </div>
+
+    <script type="module">
+
+        import { auth, db } from "./firebase-config.js";
+        import {
+            collection, addDoc, getDocs, getDoc,
+            doc, query, where, serverTimestamp,
+            deleteDoc
+        } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+
+        import {
+            onAuthStateChanged
+        } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+
+        let currentRole = "";
+        let currentQuizId = "";
+        let currentQuestions = [];
+        let timeLeft = 0;
+        let timerInterval = null;
+        let quizTimeGlobal = 1;
+        let quizStarted = false;
+        let quizStartTime = null;
+
+
+        /* ===============================
+           PHÂN QUYỀN
+        ================================ */
+
+        onAuthStateChanged(auth, async (user) => {
+
+            if (!user) {
+                alert("Bạn chưa đăng nhập!");
+                return;
+            }
+
+            const userSnap = await getDoc(doc(db, "users", user.uid));
+            const userData = userSnap.data();
+            currentRole = userData.role;
+
+            if (currentRole === "admin" || currentRole === "teacher") {
+                document.getElementById("adminTeacherPanel").classList.remove("d-none");
+                loadAllResults();
+                loadAdminQuizList();
+            }
+
+            if (currentRole === "student") {
+                document.getElementById("studentPanel").classList.remove("d-none");
+                loadQuizList();
+                loadMyScores();
+            }
+
+            if (currentRole === "parent") {
+                document.getElementById("parentPanel").classList.remove("d-none");
+                loadChildScores(userData.childId);
+            }
+        });
+
+        /* ===============================
+           UPLOAD EXCEL
+        ================================ */
+
+        document.getElementById("excelFile")
+            .addEventListener("change", handleExcel);
+
+        function handleExcel(e) {
+
+            const file = e.target.files[0];
+            const fileName = file.name.replace(/\.[^/.]+$/, "");
+            const reader = new FileReader();
+
+            reader.onload = async function (event) {
+
+                const data = new Uint8Array(event.target.result);
+                const workbook = XLSX.read(data, { type: "array" });
+                const sheet = workbook.Sheets[workbook.SheetNames[0]];
+                const json = XLSX.utils.sheet_to_json(sheet);
+
+                await createQuiz(json, fileName);
+
+            };
+
+            reader.readAsArrayBuffer(file);
+        }
+
+        async function createQuiz(questions, fileName) {
+
+
+            if (!questions.length) {
+                alert("File Excel rỗng!");
+                return;
+            }
+
+            const quizTimeInput = document.getElementById("quizTime").value;
+            const quizTime = parseInt(quizTimeInput) || 1;
+
+            const quizRef = await addDoc(collection(db, "quizzes"), {
+                title: fileName,
+                topic: questions[0].topic || "General",
+                time: quizTime, // 🔥 LƯU THỜI GIAN
+                createdAt: serverTimestamp()
+            });
+
+
+            const questionsCollection = collection(db, "quizzes", quizRef.id, "questions");
+
+            for (let q of questions) {
+
+                if (!["A", "B", "C", "D"].includes(q.correct)) {
+                    alert("Cột correct phải là A/B/C/D");
+                    return;
+                }
+
+                await addDoc(questionsCollection, {
+                    question: q.question,
+                    A: q.A,
+                    B: q.B,
+                    C: q.C,
+                    D: q.D,
+                    correct: q.correct,
+                    topic: q.topic || "General"
+                });
+            }
+
+            alert("Upload thành công!");
+            await loadAdminQuizList();
+            await loadQuizList();
+        }
+
+
+        /* ===============================
+           STUDENT LOAD QUIZ
+        ================================ */
+
+        async function loadQuizList() {
+
+            const snapshot = await getDocs(collection(db, "quizzes"));
+            const select = document.getElementById("quizSelect");
+            select.innerHTML = "";
+
+            snapshot.forEach(docSnap => {
+                const data = docSnap.data();
+                select.innerHTML += `
+            <option value="${docSnap.id}">
+                ${data.title} - (${data.topic})
+            </option>
+        `;
+            });
+
+            // 👇 QUAN TRỌNG
+            if (select.options.length > 0) {
+                select.value = select.options[0].value;
+                // await loadQuestions();   // gọi luôn để load câu hỏi đầu tiên
+            }
+
+            select.addEventListener("change", () => {
+                document.getElementById("quizArea").innerHTML = "";
+            });
+        }
+
+
+        async function loadQuestions() {
+
+            currentQuizId = document.getElementById("quizSelect").value;
+            console.log("Quiz ID:", currentQuizId);
+
+            currentQuestions = [];
+
+            const questionsRef = collection(db, "quizzes", currentQuizId, "questions");
+            const snapshot = await getDocs(questionsRef);
+
+            console.log("Total docs:", snapshot.size);
+
+            snapshot.forEach(docSnap => {
+                const data = docSnap.data();
+                console.log("Question data:", data);
+                currentQuestions.push({
+                    id: docSnap.id,
+                    ...data
+                });
+            });
+
+            if (currentQuestions.length === 0) {
+                document.getElementById("quizArea").innerHTML =
+                    "<p class='text-danger'>Quiz này chưa có câu hỏi</p>";
+                return;
+            }
+
+            // 🔥 Lấy thời gian từ quiz
+            const quizSnap = await getDoc(doc(db, "quizzes", currentQuizId));
+            const quizData = quizSnap.data();
+            const quizTime = quizData.time || 1;
+
+            shuffle(currentQuestions);
+            renderQuiz();
+
+            if (timerInterval) clearInterval(timerInterval); // reset nếu làm lại
+            // startTimer(1); // 👈 1 phút (bạn có thể đổi)
+
+        }
+
+
+
+        function renderQuiz() {
+
+            const area = document.getElementById("quizArea");
+            area.innerHTML = "";
+
+            currentQuestions.forEach((q, index) => {
+
+                let answers = [
+                    { key: "A", text: q.A },
+                    { key: "B", text: q.B },
+                    { key: "C", text: q.C },
+                    { key: "D", text: q.D }
+                ];
+
+                shuffle(answers); // đảo đáp án
+
+                let html = `
+                    <div class="card p-3 mb-3">
+                        <strong>Câu ${index + 1}: ${q.question}</strong>
+                    `;
+
+                answers.forEach(ans => {
+                    html += `
+                <div>
+                    <input type="radio" name="${q.id}" value="${ans.key}">
+                    ${ans.text}
+                </div>
+            `;
+                });
+
+                html += "</div>";
+                area.innerHTML += html;
+            });
+        }
+
+        window.startQuiz = async function () {
+
+            if (quizStarted) return;
+
+            currentQuizId = document.getElementById("quizSelect").value;
+
+            if (!currentQuizId) {
+                alert("Vui lòng chọn quiz!");
+                return;
+            }
+
+            quizStarted = true;
+            quizStartTime = new Date();
+
+            currentQuestions = [];
+
+            const questionsRef = collection(db, "quizzes", currentQuizId, "questions");
+            const snapshot = await getDocs(questionsRef);
+
+            snapshot.forEach(docSnap => {
+                currentQuestions.push({
+                    id: docSnap.id,
+                    ...docSnap.data()
+                });
+            });
+
+            if (currentQuestions.length === 0) {
+                alert("Quiz chưa có câu hỏi!");
+                quizStarted = false;
+                return;
+            }
+
+            // 🔥 Lấy thời gian admin đã đặt
+            const quizSnap = await getDoc(doc(db, "quizzes", currentQuizId));
+            const quizData = quizSnap.data();
+            quizTimeGlobal = quizData.time || 1;
+
+            shuffle(currentQuestions);
+            renderQuiz();
+
+            startTimer(quizTimeGlobal);
+        };
+
+        /* ===============================
+           SUBMIT QUIZ
+        ================================ */
+
+        window.submitQuiz = async function () {
+
+            if (!quizStarted) {
+                alert("Bạn chưa bắt đầu làm bài!");
+                return;
+            }
+
+            if (timerInterval) clearInterval(timerInterval);
+
+            let score = 0;
+
+            currentQuestions.forEach(q => {
+                const selected = document.querySelector(
+                    `input[name="${q.id}"]:checked`
+                );
+
+                if (selected && selected.value === q.correct) {
+                    score++;
+                }
+            });
+
+            // 🔥 THÊM ĐOẠN NÀY Ở ĐÂY
+            const quizEndTime = new Date();
+            const timeTakenSeconds = Math.floor((quizEndTime - quizStartTime) / 1000);
+
+            await addDoc(collection(db, "results"), {
+                quizId: currentQuizId,
+                studentId: auth.currentUser.uid,
+                score: score,
+                total: currentQuestions.length,
+                timeTaken: timeTakenSeconds,
+                startTime: serverTimestamp(),
+                submittedAt: serverTimestamp()
+            });
+
+
+            alert("Điểm của bạn: " + score);
+
+            quizStarted = false;
+            document.getElementById("quizArea").innerHTML = "";
+        };
+
+
+
+        /* ===============================
+           LOAD KẾT QUẢ
+        ================================ */
+
+        async function loadAllResults() {
+
+            const snapshot = await getDocs(collection(db, "results"));
+            const table = document.getElementById("resultTable");
+
+            table.innerHTML = ""; // reset bảng
+
+            for (let docSnap of snapshot.docs) {
+
+                const r = docSnap.data();
+
+                const userSnap = await getDoc(doc(db, "users", r.studentId));
+                const quizSnap = await getDoc(doc(db, "quizzes", r.quizId));
+
+                const studentName = userSnap.exists() ? userSnap.data().fullname : "Unknown";
+                const quizTitle = quizSnap.exists() ? quizSnap.data().title : "Deleted Quiz";
+                const quizTopic = quizSnap.exists() ? quizSnap.data().topic : "-";
+                const startTime = r.startTime
+                    ? r.startTime.toDate().toLocaleString()
+                    : "N/A";
+
+                const timeTaken = r.timeTaken
+                    ? Math.floor(r.timeTaken / 60) + " phút " + (r.timeTaken % 60) + " giây"
+                    : "N/A";
+                const submitTime = r.submittedAt?.toDate().toLocaleString() || "N/A";
+
+                table.innerHTML += `
+                    <tr>
+                        <td>${studentName}</td>
+                        <td>${quizTitle}</td>
+                        <td>${quizTopic}</td>
+                        <td>${r.score}/${r.total}</td>
+                        <td>${startTime}</td>
+                        <td>${submitTime}</td>
+                        <td>${timeTaken}</td>
+                        <td>
+                            <button onclick="deleteResult('${docSnap.id}')">
+                                ❌
+                            </button>
+                        </td>
+                    </tr>
+                `;
+
+
+
+
+            }
+        }
+
+
+        async function loadAdminQuizList() {
+
+            const snapshot = await getDocs(collection(db, "quizzes"));
+            const table = document.getElementById("quizTable");
+            table.innerHTML = "";
+
+            snapshot.forEach(docSnap => {
+
+                const data = docSnap.data();
+
+                table.innerHTML += `
+            <tr>
+                <td>${data.title}</td>
+                <td>${data.topic}</td>
+                <td>
+                    <button class="btn btn-danger btn-sm"
+                        onclick="deleteQuiz('${docSnap.id}')">
+                        Xóa
+                    </button>
+                </td>
+            </tr>
+           `;
+            });
+        }
+
+
+
+        window.deleteResult = async function (resultId) {
+
+            const confirmDelete = confirm("Bạn có chắc muốn xóa kết quả này?");
+
+            if (!confirmDelete) return;
+
+            await deleteDoc(doc(db, "results", resultId));
+
+            alert("Đã xóa kết quả!");
+
+            loadAllResults(); // reload bảng
+        }
+
+        window.deleteQuiz = async function (quizId) {
+
+            if (!confirm("Bạn có chắc muốn xóa quiz này?")) return;
+
+            // Xóa questions trước
+            const questionsRef = collection(db, "quizzes", quizId, "questions");
+            const questionsSnap = await getDocs(questionsRef);
+
+            for (let docSnap of questionsSnap.docs) {
+                await deleteDoc(doc(db, "quizzes", quizId, "questions", docSnap.id));
+            }
+
+            // Xóa quiz
+            await deleteDoc(doc(db, "quizzes", quizId));
+
+            alert("Đã xóa quiz!");
+            loadAdminQuizList();
+        };
+
+
+        async function loadMyScores() {
+
+            const q = query(
+                collection(db, "results"),
+                where("studentId", "==", auth.currentUser.uid)
+            );
+
+            const snapshot = await getDocs(q);
+            const ul = document.getElementById("myScores");
+
+            snapshot.forEach(docSnap => {
+                const r = docSnap.data();
+                ul.innerHTML += `<li>${r.score}/${r.total}</li>`;
+            });
+        }
+
+        async function loadChildScores(childId) {
+
+            const q = query(
+                collection(db, "results"),
+                where("studentId", "==", childId)
+            );
+
+            const snapshot = await getDocs(q);
+            const ul = document.getElementById("childScores");
+
+            snapshot.forEach(docSnap => {
+                const r = docSnap.data();
+                ul.innerHTML += `<li>${r.score}/${r.total}</li>`;
+            });
+        }
+
+        /* ===============================
+           SHUFFLE
+        ================================ */
+
+        function shuffle(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+        }
+
+
+
+        function startTimer(minutes = 1) {
+
+            timeLeft = minutes * 60;
+
+            updateTimerDisplay();
+
+            timerInterval = setInterval(() => {
+
+                timeLeft--;
+
+                updateTimerDisplay();
+
+                if (timeLeft <= 0) {
+
+                    clearInterval(timerInterval);
+                    alert("Hết giờ! Tự động nộp bài.");
+                    submitQuiz();
+                }
+
+            }, 1000);
+        }
+
+        function updateTimerDisplay() {
+
+            const minutes = Math.floor(timeLeft / 60);
+            const seconds = timeLeft % 60;
+
+            document.getElementById("timer").innerText =
+                `${String(minutes).padStart(2, "0")}:${String(seconds).padStart(2, "0")}`;
+        }
+        let tabWarningCount = 0;
+
+        document.addEventListener("visibilitychange", () => {
+
+            if (document.hidden && quizStarted) {
+
+                tabWarningCount++;
+
+                if (tabWarningCount === 1) {
+                    alert("Cảnh cáo: Không được rời khỏi tab khi đang làm bài!");
+                } else {
+                    alert("Bạn đã rời khỏi tab lần 2. Bài sẽ bị nộp tự động.");
+
+                    if (timerInterval) clearInterval(timerInterval);
+
+                    submitQuiz();
+                }
+            }
+
+        });
+
+
+        /* ===============================
+           DOWNLOAD EXCEL TEMPLATE
+        ================================ */
+
+        window.downloadTemplate = function () {
+
+            // Dữ liệu mẫu
+            const sampleData = [
+                {
+                    question: "What is the capital of France?",
+                    A: "London",
+                    B: "Berlin",
+                    C: "Paris",
+                    D: "Madrid",
+                    correct: "C",
+                    topic: "Geography"
+                },
+                {
+                    question: "2 + 2 = ?",
+                    A: "3",
+                    B: "4",
+                    C: "5",
+                    D: "6",
+                    correct: "B",
+                    topic: "Math"
+                }
+            ];
+
+            // Tạo worksheet
+            const worksheet = XLSX.utils.json_to_sheet(sampleData);
+
+            // Tạo workbook
+            const workbook = XLSX.utils.book_new();
+            XLSX.utils.book_append_sheet(workbook, worksheet, "QuizTemplate");
+
+            // Xuất file
+            XLSX.writeFile(workbook, "quiz_template.xlsx");
+        };
+
+    </script>
+</body>
+
+</html>
