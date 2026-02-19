@@ -241,7 +241,13 @@
                 <tbody id="quizTable"></tbody>
             </table>
 
-            <h4>📊 Danh sách kết quả</h4>
+            <div class="d-flex justify-content-between align-items-center">
+                <h4>📊 Danh sách kết quả</h4>
+                <button class="btn btn-danger btn-sm" onclick="deleteAllResults()">
+                    🗑️ Xóa tất cả
+                </button>
+            </div>
+
             <table class="table table-bordered">
                 <thead>
                     <tr>
@@ -302,6 +308,8 @@
         import {
             onAuthStateChanged
         } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+
+        import { writeBatch } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
         let currentRole = "";
         let currentQuizId = "";
@@ -746,6 +754,25 @@
 
             loadAllResults(); // reload bảng
         }
+
+        window.deleteAllResults = async function () {
+
+            if (!confirm("Bạn có chắc muốn xóa toàn bộ kết quả?")) return;
+
+            const snapshot = await getDocs(collection(db, "results"));
+
+            const batch = writeBatch(db);
+
+            snapshot.docs.forEach(docSnap => {
+                batch.delete(doc(db, "results", docSnap.id));
+            });
+
+            await batch.commit();
+
+            alert("Đã xóa toàn bộ kết quả!");
+            loadAllResults();
+        };
+
 
         window.deleteQuiz = async function (quizId) {
 
