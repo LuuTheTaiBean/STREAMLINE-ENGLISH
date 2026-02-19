@@ -258,6 +258,7 @@
                         <th>Thời gian bắt đầu</th>
                         <th>Thời gian nộp</th>
                         <th>Thời gian làm</th>
+                        <th>Chi tiết</th>
                         <th>Xóa</th>
                     </tr>
                 </thead>
@@ -605,40 +606,65 @@
 
             // Thêm
             let score = 0;
+            let answersDetail = [];
 
             currentQuestions.forEach(q => {
-
-                const options = document.querySelectorAll(
-                    `input[name="${q.id}"]`
-                );
-
-                options.forEach(input => {
-
-                    const label = input.closest(".answer-option");
-
-                    // disable hết để không sửa được
-                    label.classList.add("disabled");
-
-                    // nếu là đáp án đúng
-                    if (input.value === q.correct) {
-                        label.classList.add("correct");
-                    }
-
-                    // nếu học sinh chọn sai
-                    if (input.checked && input.value !== q.correct) {
-                        label.classList.add("wrong");
-                    }
-                });
 
                 const selected = document.querySelector(
                     `input[name="${q.id}"]:checked`
                 );
 
-                if (selected && selected.value === q.correct) {
+                const selectedAnswer = selected ? selected.value : null;
+
+                if (selectedAnswer === q.correct) {
                     score++;
                 }
 
+                answersDetail.push({
+                    question: q.question,
+                    selected: selectedAnswer,
+                    correct: q.correct,
+                    A: q.A,
+                    B: q.B,
+                    C: q.C,
+                    D: q.D
+                });
+
             });
+
+            // currentQuestions.forEach(q => {
+
+            //     const options = document.querySelectorAll(
+            //         `input[name="${q.id}"]`
+            //     );
+
+            //     options.forEach(input => {
+
+            //         const label = input.closest(".answer-option");
+
+            //         // disable hết để không sửa được
+            //         label.classList.add("disabled");
+
+            //         // nếu là đáp án đúng
+            //         if (input.value === q.correct) {
+            //             label.classList.add("correct");
+            //         }
+
+            //         // nếu học sinh chọn sai
+            //         if (input.checked && input.value !== q.correct) {
+            //             label.classList.add("wrong");
+            //         }
+            //     });
+
+            //     const selected = document.querySelector(
+            //         `input[name="${q.id}"]:checked`
+            //     );
+
+            //     if (selected && selected.value === q.correct) {
+            //         score++;
+            //     }
+
+            // });
             const quizEndTime = new Date();
             const timeTakenSeconds = Math.floor((quizEndTime - quizStartTime) / 1000);
 
@@ -648,14 +674,20 @@
                 score: score,
                 total: currentQuestions.length,
                 timeTaken: timeTakenSeconds,
-                startTime: quizStartTime,
-                submittedAt: new Date()
+                startTime: serverTimestamp(),
+                submittedAt: serverTimestamp(),
+                answers: answersDetail   // 🔥 thêm dòng này
             });
+
 
 
             alert("Điểm của bạn: " + score);
 
             quizStarted = false;
+            tabWarningCount = 0;
+            document.getElementById("quizArea").innerHTML = "";
+            updateTimerDisplay();
+
             // document.getElementById("quizArea").innerHTML = "";
         };
 
@@ -692,21 +724,27 @@
                 const submitTime = r.submittedAt?.toDate().toLocaleString() || "N/A";
 
                 table.innerHTML += `
-                    <tr>
-                        <td>${studentName}</td>
-                        <td>${quizTitle}</td>
-                        <td>${quizTopic}</td>
-                        <td>${r.score}/${r.total}</td>
-                        <td>${startTime}</td>
-                        <td>${submitTime}</td>
-                        <td>${timeTaken}</td>
-                        <td>
-                            <button onclick="deleteResult('${docSnap.id}')">
-                                ❌
-                            </button>
-                        </td>
-                    </tr>
-                `;
+<tr>
+    <td>${studentName}</td>
+    <td>${quizTitle}</td>
+    <td>${quizTopic}</td>
+    <td>${r.score}/${r.total}</td>
+    <td>${startTime}</td>
+    <td>${submitTime}</td>
+    <td>${timeTaken}</td>
+    <td>
+        <button onclick="viewResult('${docSnap.id}')">
+            👁
+        </button>
+    </td>
+    <td>
+        <button onclick="deleteResult('${docSnap.id}')">
+            ❌
+        </button>
+    </td>
+</tr>
+`;
+
 
 
 
@@ -754,6 +792,82 @@
 
             loadAllResults(); // reload bảng
         }
+
+        window.viewResult = async function (resultId) {
+
+            const resultSnap = await getDoc(doc(db, "results", resultId));
+
+            if (!resultSnap.exists()) {
+                alert("Không tìm thấy bài làm!");
+                return;
+            }
+
+            const data = resultSnap.data();
+            const answers = data.answers;
+
+            if (!answers || answers.length === 0) {
+                alert("Bài làm cũ chưa lưu chi tiết.");
+                return;
+            }
+
+            const win = window.open("", "_blank");
+
+            win.document.title = "Chi tiết bài làm";
+
+            const style = win.document.createElement("style");
+            style.innerHTML = `
+        body { font-family: Arial; padding:20px; background:#f3f4f6; }
+        .question { background:white; padding:20px; margin-bottom:20px; border-radius:12px; }
+        .answers { display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:12px; margin-top:15px; }
+        .item { padding:12px; border-radius:10px; border:1px solid #ccc; }
+        .correct { background:#dcfce7; border:2px solid #16a34a; }
+        .wrong { background:#fee2e2; border:2px solid #dc2626; }
+    `;
+
+            win.document.head.appendChild(style);
+
+            const title = win.document.createElement("h2");
+            title.innerText = "📄 Chi tiết bài làm";
+            win.document.body.appendChild(title);
+
+            answers.forEach((a, index) => {
+
+                const questionDiv = win.document.createElement("div");
+                questionDiv.className = "question";
+
+                const h4 = win.document.createElement("h4");
+                h4.innerText = "Câu " + (index + 1);
+
+                const p = win.document.createElement("p");
+                p.innerHTML = "<b>" + a.question + "</b>";
+
+                const answersDiv = win.document.createElement("div");
+                answersDiv.className = "answers";
+
+                ["A", "B", "C", "D"].forEach(key => {
+
+                    const item = win.document.createElement("div");
+                    item.className = "item";
+
+                    if (key === a.correct) item.classList.add("correct");
+                    if (key === a.selected && key !== a.correct) item.classList.add("wrong");
+
+                    item.innerHTML = "<b>" + key + ".</b> " + (a[key] || "");
+
+                    answersDiv.appendChild(item);
+                });
+
+                questionDiv.appendChild(h4);
+                questionDiv.appendChild(p);
+                questionDiv.appendChild(answersDiv);
+
+                win.document.body.appendChild(questionDiv);
+            });
+        };
+
+
+
+
 
         window.deleteAllResults = async function () {
 
