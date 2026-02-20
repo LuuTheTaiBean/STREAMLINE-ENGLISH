@@ -234,7 +234,7 @@
                 <thead>
                     <tr>
                         <th>Tiêu đề</th>
-                        <th>Chủ đề</th>
+                        <!-- <th>Chủ đề</th> -->
                         <th>Hành động</th>
                     </tr>
                 </thead>
@@ -253,7 +253,7 @@
                     <tr>
                         <th>Học sinh</th>
                         <th>Quiz</th>
-                        <th>Chủ đề</th>
+                        <!-- <th>Chủ đề</th> -->
                         <th>Điểm</th>
                         <th>Thời gian bắt đầu</th>
                         <th>Thời gian nộp</th>
@@ -395,7 +395,7 @@
 
             const quizRef = await addDoc(collection(db, "quizzes"), {
                 title: fileName,
-                topic: questions[0].topic || "General",
+                // topic: questions[0].topic || "General",
                 time: quizTime, // 🔥 LƯU THỜI GIAN
                 createdAt: serverTimestamp()
             });
@@ -713,7 +713,7 @@
 
                 const studentName = userSnap.exists() ? userSnap.data().fullname : "Unknown";
                 const quizTitle = quizSnap.exists() ? quizSnap.data().title : "Deleted Quiz";
-                const quizTopic = quizSnap.exists() ? quizSnap.data().topic : "-";
+                // const quizTopic = quizSnap.exists() ? quizSnap.data().topic : "-";
                 const startTime = r.startTime
                     ? r.startTime.toDate().toLocaleString()
                     : "N/A";
@@ -727,7 +727,6 @@
 <tr>
     <td>${studentName}</td>
     <td>${quizTitle}</td>
-    <td>${quizTopic}</td>
     <td>${r.score}/${r.total}</td>
     <td>${startTime}</td>
     <td>${submitTime}</td>
@@ -766,7 +765,6 @@
                 table.innerHTML += `
             <tr>
                 <td>${data.title}</td>
-                <td>${data.topic}</td>
                 <td>
                     <button class="btn btn-danger btn-sm"
                         onclick="deleteQuiz('${docSnap.id}')">
