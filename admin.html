@@ -87,6 +87,52 @@
             </thead>
             <tbody id="unitTable"></tbody>
         </table>
+        <!-- ================= REVENUE MANAGEMENT ================= -->
+
+        <hr class="my-5">
+
+        <h5>💰 Thống kê doanh thu</h5>
+
+        <div class="card p-3 mb-4 shadow">
+
+            <div class="row mb-3">
+                <div class="col-md-3">
+                    <input type="date" id="fromDate" class="form-control">
+                </div>
+
+                <div class="col-md-3">
+                    <input type="date" id="toDate" class="form-control">
+                </div>
+
+                <div class="col-md-3">
+                    <button class="btn btn-primary w-100" onclick="loadRevenue()">
+                        Thống kê
+                    </button>
+                </div>
+
+                <div class="col-md-3">
+                    <button class="btn btn-success w-100" onclick="exportExcel()">
+                        Xuất Excel
+                    </button>
+                </div>
+            </div>
+
+            <h6>Tổng doanh thu:
+                <span id="totalRevenue" class="text-danger fw-bold">0</span> VNĐ
+            </h6>
+
+            <table class="table table-bordered mt-3">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Khóa học</th>
+                        <th>Giá</th>
+                        <th>Ngày thanh toán</th>
+                    </tr>
+                </thead>
+                <tbody id="revenueTable"></tbody>
+            </table>
+
+        </div>
 
         <!-- ================= USER MANAGEMENT ================= -->
 
@@ -108,13 +154,23 @@
         </table>
 
     </div>
-
+    <script src="https://cdn.jsdelivr.net/npm/xlsx/dist/xlsx.full.min.js"></script>
     <script type="module">
 
         import { auth } from "./firebase-config.js";
         import { onAuthStateChanged, signOut }
             from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
 
+        // import {
+        //     getFirestore,
+        //     collection,
+        //     addDoc,
+        //     getDocs,
+        //     deleteDoc,
+        //     updateDoc,
+        //     doc,
+        //     getDoc
+        // } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
         import {
             getFirestore,
             collection,
@@ -123,9 +179,11 @@
             deleteDoc,
             updateDoc,
             doc,
-            getDoc
+            getDoc,
+            query,
+            where,
+            Timestamp
         } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
-
         import {
             getStorage,
             ref,
@@ -137,7 +195,89 @@
 
         const db = getFirestore();
         const storage = getStorage();
+        // ===================== REVENUE =====================
 
+        let revenueData = [];
+
+        window.loadRevenue = async function () {
+
+            const from = document.getElementById("fromDate").value;
+            const to = document.getElementById("toDate").value;
+
+            if (!from || !to) {
+                alert("Chọn đầy đủ ngày!");
+                return;
+            }
+
+            const fromDate = Timestamp.fromDate(new Date(from + "T00:00:00"));
+            const toDate = Timestamp.fromDate(new Date(to + "T23:59:59"));
+
+            const q = query(
+                collection(db, "payments"),
+                where("status", "==", "paid"),
+                where("createdAt", ">=", fromDate),
+                where("createdAt", "<=", toDate)
+            );
+
+            const snapshot = await getDocs(q);
+
+            let total = 0;
+            revenueData = [];
+
+            let html = "";
+
+            snapshot.forEach(docSnap => {
+                const data = docSnap.data();
+                const date = data.createdAt.toDate().toLocaleDateString();
+
+                // total += data.price;
+                total += data.totalAmount;
+
+                //         revenueData.push({
+                //             "Khóa học": data.courseName,
+                //             "Giá": data.price,
+                //             "Ngày thanh toán": date
+                //         });
+
+                //         html += `
+                //     <tr>
+                //         <td>${data.courseName}</td>
+                //         <td>${data.price.toLocaleString()} VNĐ</td>
+                //         <td>${date}</td>
+                //     </tr>
+                // `;
+                revenueData.push({
+                    "Khóa học": data.courses.join(", "),
+                    "Giá": data.totalAmount,
+                    "Ngày thanh toán": date
+                });
+
+                html += `
+                        <tr>
+                            <td>${data.courses.join(", ")}</td>
+                            <td>${data.totalAmount.toLocaleString()} VNĐ</td>
+                            <td>${date}</td>
+                        </tr>
+                        `;
+            });
+
+            document.getElementById("revenueTable").innerHTML = html;
+            document.getElementById("totalRevenue").innerText = total.toLocaleString();
+        };
+
+        window.exportExcel = function () {
+
+            if (revenueData.length === 0) {
+                alert("Không có dữ liệu!");
+                return;
+            }
+
+            const worksheet = XLSX.utils.json_to_sheet(revenueData);
+            const workbook = XLSX.utils.book_new();
+            XLSX.utils.book_append_sheet(workbook, worksheet, "DoanhThu");
+
+            XLSX.writeFile(workbook, "ThongKeDoanhThu.xlsx");
+        };
         // 🔐 CHECK ADMIN
         onAuthStateChanged(auth, async (user) => {
             if (!user) location.href = "login.html";

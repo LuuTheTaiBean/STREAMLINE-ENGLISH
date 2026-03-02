@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đăng ký khóa học</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        body {
+            background: linear-gradient(135deg, #e3f2fd, #f8f9fa);
+        }
+
+        .course-card {
+            transition: 0.3s;
+            border: none;
+        }
+
+        .course-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .price-box {
+            font-size: 18px;
+            font-weight: bold;
+            color: #198754;
+        }
+
+        .total-box {
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        .qr-box {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container py-5">
+
+        <h2 class="text-center mb-5 fw-bold text-primary">ĐĂNG KÝ KHÓA HỌC TIẾNG ANH</h2>
+
+        <div class="row">
+
+            <!-- DANH SÁCH KHÓA HỌC -->
+            <div class="col-lg-8">
+
+                <div class="row" id="courseList"></div>
+
+                <div class="mt-4 p-3 bg-white rounded shadow total-box text-end">
+                    Tổng học phí:
+                    <span class="text-danger" id="totalFee">0</span> VNĐ
+                </div>
+
+            </div>
+
+            <!-- THANH TOÁN -->
+            <div class="col-lg-4">
+                <div class="card shadow-lg border-0">
+                    <div class="card-body">
+
+                        <h5 class="mb-3 text-success">Thông tin thanh toán</h5>
+
+                        <p><strong>Ngân hàng:</strong> Techcombank</p>
+                        <p><strong>Số tài khoản:</strong> 982459626789</p>
+                        <p><strong>Chủ tài khoản:</strong> LUU THE TAI</p>
+
+                        <div class="qr-box text-center mt-3">
+                            <img id="qrImage" class="img-fluid" />
+                        </div>
+
+                        <div class="mt-3">
+                            <strong>Nội dung chuyển khoản:</strong>
+                            <div id="transferContent" class="bg-light p-2 rounded mt-2 small"></div>
+                        </div>
+                        <button id="confirmPayment" class="btn btn-success mt-3 w-100">
+                            Tôi đã chuyển khoản
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script type="module">
+        import {
+            getFirestore,
+            collection,
+            addDoc,
+            serverTimestamp
+        } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+        import { auth } from "./firebase-config.js";
+        import { onAuthStateChanged }
+            from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+
+        const db = getFirestore();
+        let userEmail = "";
+
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                userEmail = user.email;
+            } else {
+                alert("Vui lòng đăng nhập trước!");
+                window.location.href = "login.html";
+            }
+        });
+
+        const courses = [
+            {
+                name: "English Communication A1",
+                duration: "3 tháng",
+                teachers: ["Nguyễn Thị Lan", "Trần Minh Hoàng"],
+                price: { Online: 2200000, Offline: 2500000 }
+            },
+            {
+                name: "English Communication B1",
+                duration: "3 tháng",
+                teachers: ["Nguyễn Văn Huy", "Lê Thị Mai"],
+                price: { Online: 2600000, Offline: 2900000 }
+            },
+            {
+                name: "IELTS Foundation",
+                duration: "4 tháng",
+                teachers: ["Trần Minh Hoàng", "Nguyễn Thị Lan", "Lê Thị Mai"],
+                price: { Online: 3200000, Offline: 3500000 }
+            },
+            {
+                name: "IELTS Intensive 6.5+",
+                duration: "5 tháng",
+                teachers: ["Lê Thị Mai"],
+                price: { Online: 4800000, Offline: 5200000 }
+            },
+            {
+                name: "TOEIC 700+",
+                duration: "3 tháng",
+                teachers: ["Nguyễn Văn Nam"],
+                price: { Online: 3000000, Offline: 3300000 }
+            }
+        ];
+
+        const courseList = document.getElementById("courseList");
+        const totalFee = document.getElementById("totalFee");
+        const qrImage = document.getElementById("qrImage");
+        const transferContent = document.getElementById("transferContent");
+
+        let selectedCourses = [];
+        let currentTotal = 0;
+        function renderCourses() {
+            courses.forEach((course, index) => {
+
+                const col = document.createElement("div");
+                col.className = "col-md-6 mb-4";
+
+                col.innerHTML = `
+        <div class="card course-card shadow-sm p-3 h-100">
+            <div class="form-check mb-2">
+                <input class="form-check-input courseCheck" type="checkbox" data-index="${index}">
+                <label class="form-check-label fw-bold">${course.name}</label>
+            </div>
+
+            <p class="small text-muted">Thời lượng: ${course.duration}</p>
+
+            <select class="form-select typeSelect mb-2" data-index="${index}">
+                <option value="Online">Online (${course.price.Online.toLocaleString()} VNĐ)</option>
+                <option value="Offline">Offline (${course.price.Offline.toLocaleString()} VNĐ)</option>
+            </select>
+
+            <select class="form-select mb-2">
+                ${course.teachers.map(t => `<option>${t}</option>`).join("")}
+            </select>
+
+            <div class="price-box">
+                <span class="coursePrice" data-index="${index}">
+                    ${course.price.Online.toLocaleString()}
+                </span> VNĐ
+            </div>
+        </div>
+        `;
+
+                courseList.appendChild(col);
+            });
+        }
+
+        renderCourses();
+
+        document.addEventListener("change", function () {
+
+            selectedCourses = [];
+            let total = 0;
+
+            document.querySelectorAll(".courseCheck").forEach(check => {
+
+                const index = check.dataset.index;
+                const typeSelect = document.querySelector(`.typeSelect[data-index='${index}']`);
+                const priceSpan = document.querySelector(`.coursePrice[data-index='${index}']`);
+
+                const selectedType = typeSelect.value;
+                const price = courses[index].price[selectedType];
+
+                priceSpan.innerText = price.toLocaleString();
+
+                if (check.checked) {
+                    selectedCourses.push(courses[index].name);
+                    total += price;
+                }
+            });
+
+            currentTotal = total;
+            totalFee.innerText = total.toLocaleString();
+            generateQR(total);
+        });
+
+        function generateQR(amount) {
+
+            if (amount === 0) {
+                qrImage.src = "";
+                transferContent.innerText = "";
+                return;
+            }
+
+            const content = userEmail + " thanh toan " + selectedCourses.join(" va ");
+
+            transferContent.innerText = content;
+
+            const qrURL = `https://img.vietqr.io/image/TCB-982459626789-compact.png?amount=${amount}&addInfo=${content}`;
+            qrImage.src = qrURL;
+        }
+        document.getElementById("confirmPayment").addEventListener("click", async () => {
+
+            if (selectedCourses.length === 0) {
+                alert("Chưa chọn khóa học!");
+                return;
+            }
+
+            const total = currentTotal;   // ✅ dùng biến global
+
+            if (total === 0) {
+                alert("Chưa có số tiền!");
+                return;
+            }
+
+            try {
+                await addDoc(collection(db, "payments"), {
+                    userEmail: userEmail,
+                    courses: selectedCourses,
+                    totalAmount: total,
+                    status: "paid",
+                    createdAt: serverTimestamp()
+                });
+
+                alert("Đã ghi nhận thanh toán!");
+                selectedCourses = [];
+                currentTotal = 0;
+                totalFee.innerText = "0";
+                qrImage.src = "";
+                transferContent.innerText = "";
+
+            } catch (error) {
+                console.error(error);
+                alert("Lỗi khi lưu thanh toán!");
+            }
+        });
+    </script>
+
+</body>
+
+</html>
