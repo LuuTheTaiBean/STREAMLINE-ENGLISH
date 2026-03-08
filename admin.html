@@ -87,6 +87,26 @@
             </thead>
             <tbody id="unitTable"></tbody>
         </table>
+
+
+        <!-- ================= USER MANAGEMENT ================= -->
+
+        <hr class="my-5">
+
+        <h5>👥 Quản lý người dùng</h5>
+        <table class="table table-bordered bg-white shadow">
+            <thead class="table-dark">
+                <tr>
+                    <th>Họ và tên</th>
+                    <th>Email</th>
+                    <th>Role</th>
+                    <th>Đổi Role</th>
+                    <th>Xóa</th>
+                </tr>
+            </thead>
+
+            <tbody id="userTable"></tbody>
+        </table>
         <!-- ================= REVENUE MANAGEMENT ================= -->
 
         <hr class="my-5">
@@ -121,7 +141,8 @@
                 <span id="totalRevenue" class="text-danger fw-bold">0</span> VNĐ
             </h6>
 
-            <table class="table table-bordered mt-3">
+            <canvas id="revenueChart" height="100"></canvas>
+            <!-- <table class="table table-bordered mt-3">
                 <thead class="table-dark">
                     <tr>
                         <th>Khóa học</th>
@@ -130,47 +151,17 @@
                     </tr>
                 </thead>
                 <tbody id="revenueTable"></tbody>
-            </table>
+            </table> -->
 
         </div>
-
-        <!-- ================= USER MANAGEMENT ================= -->
-
-        <hr class="my-5">
-
-        <h5>👥 Quản lý người dùng</h5>
-        <table class="table table-bordered bg-white shadow">
-            <thead class="table-dark">
-                <tr>
-                    <th>Họ và tên</th>
-                    <th>Email</th>
-                    <th>Role</th>
-                    <th>Đổi Role</th>
-                    <th>Xóa</th>
-                </tr>
-            </thead>
-
-            <tbody id="userTable"></tbody>
-        </table>
-
     </div>
     <script src="https://cdn.jsdelivr.net/npm/xlsx/dist/xlsx.full.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script type="module">
-
+        let revenueChart;
         import { auth } from "./firebase-config.js";
         import { onAuthStateChanged, signOut }
             from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
-
-        // import {
-        //     getFirestore,
-        //     collection,
-        //     addDoc,
-        //     getDocs,
-        //     deleteDoc,
-        //     updateDoc,
-        //     doc,
-        //     getDoc
-        // } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
         import {
             getFirestore,
             collection,
@@ -220,49 +211,83 @@
             );
 
             const snapshot = await getDocs(q);
-
+            // đây
             let total = 0;
-            revenueData = [];
-
-            let html = "";
+            let revenueByDate = {};
+            revenueData = []; // reset lại
 
             snapshot.forEach(docSnap => {
                 const data = docSnap.data();
                 const date = data.createdAt.toDate().toLocaleDateString();
 
-                // total += data.price;
                 total += data.totalAmount;
 
-                //         revenueData.push({
-                //             "Khóa học": data.courseName,
-                //             "Giá": data.price,
-                //             "Ngày thanh toán": date
-                //         });
+                // ====== dùng cho biểu đồ ======
+                if (!revenueByDate[date]) {
+                    revenueByDate[date] = 0;
+                }
+                revenueByDate[date] += data.totalAmount;
 
-                //         html += `
-                //     <tr>
-                //         <td>${data.courseName}</td>
-                //         <td>${data.price.toLocaleString()} VNĐ</td>
-                //         <td>${date}</td>
-                //     </tr>
-                // `;
+                // ====== dùng cho Excel ======
                 revenueData.push({
-                    "Khóa học": data.courses.join(", "),
-                    "Giá": data.totalAmount,
+                    "Khóa học": data.courses?.join(", ") || "",
+                    "Tổng tiền": data.totalAmount,
                     "Ngày thanh toán": date
                 });
-
-                html += `
-                        <tr>
-                            <td>${data.courses.join(", ")}</td>
-                            <td>${data.totalAmount.toLocaleString()} VNĐ</td>
-                            <td>${date}</td>
-                        </tr>
-                        `;
             });
+            // đây
 
-            document.getElementById("revenueTable").innerHTML = html;
+            // let total = 0;
+            // let revenueByDate = {};
+
+            // snapshot.forEach(docSnap => {
+            //     const data = docSnap.data();
+            //     const date = data.createdAt.toDate().toLocaleDateString();
+
+            //     total += data.totalAmount;
+
+            //     if (!revenueByDate[date]) {
+            //         revenueByDate[date] = 0;
+            //     }
+
+            //     revenueByDate[date] += data.totalAmount;
+            // });
+
             document.getElementById("totalRevenue").innerText = total.toLocaleString();
+
+            const labels = Object.keys(revenueByDate);
+            const values = Object.values(revenueByDate);
+
+            if (revenueChart) {
+                revenueChart.destroy();
+            }
+
+            const ctx = document.getElementById("revenueChart").getContext("2d");
+
+            revenueChart = new Chart(ctx, {
+                type: "bar",
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: "Doanh thu (VNĐ)",
+                        data: values,
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            display: true
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
         };
 
         window.exportExcel = function () {
