@@ -329,7 +329,32 @@
     let currentUnitId = null;
     let allUnitsData = [];
 
+    let imageVisible = true;
+    let textVisible = true;
 
+    function toggleImage() {
+      const img = document.getElementById("unitImage");
+
+      imageVisible = !imageVisible;
+
+      if (imageVisible) {
+        img.style.opacity = "1";
+      } else {
+        img.style.opacity = "0";
+      }
+    }
+
+    function toggleText() {
+      const text = document.getElementById("lyrics-container");
+
+      textVisible = !textVisible;
+
+      if (textVisible) {
+        text.style.opacity = "1";
+      } else {
+        text.style.opacity = "0";
+      }
+    }
     // Thêm biến này để theo dõi số lần lặp lại
     // let repeatCount = 0; // 0: không lặp, 1: lặp 1 lần, 2: lặp 2 lần, v.v.
     let repeatTimes = 0;
@@ -619,18 +644,21 @@
 
             fetchLyrics(item.lyrics).then((lyricsData) => {
               document.getElementById("units-container").innerHTML = `
-                  <div class="container">
-                      <h2 class="text-center fw-bold">${item.unit}</h2>
-                      <div class="row">
-                          <div class="col-md-6 mb-4 mb-md-0 d-flex align-items-center">
-                              <div id="lyrics-container" class="lyrics-box"></div>
+                          <div class="container">
+                              <h2 class="text-center fw-bold" onclick="toggleText()" style="cursor:pointer">
+                                  ${item.unit}
+                              </h2>
+                              <div class="row">
+                                  <!-- TEXT -->
+                                  <div class="col-md-6 mb-4 mb-md-0 d-flex align-items-center">
+                                      <div id="lyrics-container" class="lyrics-box"></div>
+                                  </div>
+                                  <!-- IMAGE -->
+                                  <div class="col-md-6 mb-2 image-box text-center">
+                                      <img id="unitImage" src="${item.image}" class="img-fluid" onclick="toggleImage()" style="cursor:pointer" />
+                                  </div>
+                              </div>
                           </div>
-           
-<div class="col-md-6 mb-2 image-box">
-    <img src="${item.image}" class="img-fluid" />
-</div>
-                      </div>
-                  </div>
                     `;
               const desktopBtn = document.getElementById("markLearnedBtn");
               const mobileBtn = document.getElementById("markLearnedBtnMobile");
