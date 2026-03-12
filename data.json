@@ -18,7 +18,7 @@
   {
     "id": "book1_unit13",
     "book": "book1",
-    "unit": "13: Elton Kash",
+    "unit": "----13: Elton Kash",
     "lyrics": "./00 Lyrics/1_13.lrc",
     "image": "./img/1_13.svg",
     "audio": "./00 Audio/1_13.mp3"
@@ -329,7 +329,6 @@
     "audio": "./00 Audio/2_42.mp3"
   },
   {
-    
     "book": "book5",
     "unit": "Ukraine wants to keep its land",
     "lyrics": "./00 Lyrics/Ukraine wants to keep its land 1.lrc",

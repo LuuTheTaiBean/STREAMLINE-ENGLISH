@@ -1,6 +1,6 @@
 body {
   font-family: "Delius", sans-serif;
-  background-color: #2e7eff;
+  background-color: #ff5b5b;
 
   user-select: none; /* Ngăn chọn văn bản */
   -webkit-user-select: none;
@@ -33,7 +33,7 @@ ul {
 }
 
 .icon:hover {
-  color: #fff;
+  color: #2e7eff;
 }
 
 .fa-solid {
@@ -682,4 +682,29 @@ input[type="color"] {
 .icon a {
   color: inherit;
   text-decoration: none;
+}
+.image-box {
+  max-height: 85vh;
+  overflow-y: auto;
+}
+
+.image-box img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Ẩn scrollbar Chrome, Edge, Safari */
+.image-box::-webkit-scrollbar {
+  display: none;
+}
+
+/* Ẩn scrollbar Firefox */
+.image-box {
+  scrollbar-width: none;
+}
+
+/* Ẩn scrollbar IE */
+.image-box {
+  -ms-overflow-style: none;
 }
