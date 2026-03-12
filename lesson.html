@@ -328,6 +328,37 @@
     let isManualPlay = false;
     let currentUnitId = null;
     let allUnitsData = [];
+    let currentLineIndex = -1;
+
+    function playLine(index, lyricsData) {
+
+      if (index < 0 || index >= lyricsData.length) return;
+
+      const container = document.getElementById("lyrics-container");
+      const lines = container.querySelectorAll("p");
+
+      const start = lyricsData[index].time;
+      const nextLine = lyricsData[index + 1];
+
+      stopAt = nextLine ? nextLine.time : null;
+
+      currentAudio.currentTime = start;
+      currentAudio.play();
+
+      updatePlayPauseIcon(true);
+
+      lines.forEach(el => el.classList.remove("active"));
+
+      if (lines[index]) {
+        lines[index].classList.add("active");
+        lines[index].scrollIntoView({
+          behavior: "smooth",
+          block: "center"
+        });
+      }
+
+      currentLineIndex = index;
+    }
 
     let imageVisible = true;
     let textVisible = true;
@@ -714,7 +745,7 @@
             }).filter(line => line !== null);
           }
           function displayLyrics(lyricsData) {
-
+            window.currentLyrics = lyricsData;
             const container = document.getElementById("lyrics-container");
 
             if (!container) return;
@@ -785,7 +816,7 @@
 
             container.querySelectorAll("p").forEach((p, index) => {
               p.addEventListener("click", () => {
-
+                currentLineIndex = index;
                 const start = parseFloat(p.dataset.time);
                 const nextLine = lyricsData[index + 1];
 
@@ -816,6 +847,38 @@
         .catch(err => console.error("Lỗi tải dữ liệu:", err));
     }
 
+    document.addEventListener("keydown", function (e) {
+
+      // Nếu đang gõ trong input hoặc textarea thì bỏ qua
+      if (
+        e.target.tagName === "INPUT" ||
+        e.target.tagName === "TEXTAREA" ||
+        e.target.isContentEditable
+      ) {
+        return;
+      }
+
+      if (!window.currentLyrics) return;
+
+      // ← câu trước
+      if (e.key === "ArrowLeft") {
+        playLine(currentLineIndex - 1, currentLyrics);
+      }
+
+      // → câu sau
+      if (e.key === "ArrowRight") {
+        playLine(currentLineIndex + 1, currentLyrics);
+      }
+
+      // Space nghe lại
+      if (e.code === "Space") {
+
+        e.preventDefault();
+
+        playLine(currentLineIndex, currentLyrics);
+      }
+
+    });
     // Icon folder (desktop + mobile)
     const folderIcons = document.querySelectorAll(".fa-gear");
     const settingsPanel = document.getElementById("settingsPanel");
