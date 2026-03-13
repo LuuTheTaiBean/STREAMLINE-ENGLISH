@@ -2,7 +2,7 @@
   {
     "id": "book1_unit1",
     "book": "book1",
-    "unit": "-01: Hello",
+    "unit": "01: Hello",
     "lyrics": "./00 Lyrics/1_01.lrc",
     "image": "./img/1_01.svg",
     "audio": "./00 Audio/1_01.mp3"
@@ -75,7 +75,7 @@
   {
     "id": "book1_unit29",
     "book": "book1",
-    "unit": "-29: Computer dating",
+    "unit": "29: Computer dating",
     "lyrics": "./00 Lyrics/1_29.lrc",
     "image": "./img/1_29.svg",
     "audio": "./00 Audio/1_29.mp3"
@@ -83,7 +83,7 @@
   {
     "id": "book1_unit32",
     "book": "book1",
-    "unit": "-32: An interview",
+    "unit": "32: An interview",
     "lyrics": "./00 Lyrics/1_32.lrc",
     "image": "./img/1_32.svg",
     "audio": "./00 Audio/1_32.mp3"
@@ -99,7 +99,7 @@
   {
     "id": "book1_unit35",
     "book": "book1",
-    "unit": "-35: Never on a Sunday",
+    "unit": "35: Never on a Sunday",
     "lyrics": "./00 Lyrics/1_35.lrc",
     "image": "./img/1_35.svg",
     "audio": "./00 Audio/1_35.mp3"
@@ -131,7 +131,7 @@
   {
     "id": "book1_unit42",
     "book": "book1",
-    "unit": "-42: Holidays",
+    "unit": "42: Holidays",
     "lyrics": "./00 Lyrics/1_42.lrc",
     "image": "./img/1_42.svg",
     "audio": "./00 Audio/1_42.mp3"
@@ -155,7 +155,7 @@
   {
     "id": "book1_unit46",
     "book": "book1",
-    "unit": "-46: In the office",
+    "unit": "46: In the office",
     "lyrics": "./00 Lyrics/1_46.lrc",
     "image": "./img/1_46.svg",
     "audio": "./00 Audio/1_46.mp3"
@@ -171,7 +171,7 @@
   {
     "id": "book1_unit48",
     "book": "book1",
-    "unit": "-48: Foreign holidays",
+    "unit": "48: Foreign holidays",
     "lyrics": "./00 Lyrics/1_48.lrc",
     "image": "./img/1_48.svg",
     "audio": "./00 Audio/1_48.mp3"
@@ -179,7 +179,7 @@
   {
     "id": "book1_unit49",
     "book": "book1",
-    "unit": "--49: Survivors",
+    "unit": "49: Survivors",
     "lyrics": "./00 Lyrics/1_49.lrc",
     "image": "./img/1_49.svg",
     "audio": "./00 Audio/1_49.mp3"
@@ -203,7 +203,7 @@
   {
     "id": "book1_unit56",
     "book": "book1",
-    "unit": "-56: An investigation",
+    "unit": "56: An investigation",
     "lyrics": "./00 Lyrics/1_56.lrc",
     "image": "./img/1_56.svg",
     "audio": "./00 Audio/1_56.mp3"
@@ -211,7 +211,7 @@
   {
     "id": "book1_unit61",
     "book": "book1",
-    "unit": "-61: On the moon",
+    "unit": "61: On the moon",
     "lyrics": "./00 Lyrics/1_61.lrc",
     "image": "./img/1_61.svg",
     "audio": "./00 Audio/1_61.mp3"
@@ -227,7 +227,7 @@
   {
     "id": "book1_unit64",
     "book": "book1",
-    "unit": "-64: Town and Country",
+    "unit": "64: Town and Country",
     "lyrics": "./00 Lyrics/1_64.lrc",
     "image": "./img/1_64.svg",
     "audio": "./00 Audio/1_64.mp3"
@@ -235,7 +235,7 @@
   {
     "id": "book1_unit69",
     "book": "book1",
-    "unit": "-69: A hard life",
+    "unit": "69: A hard life",
     "lyrics": "./00 Lyrics/1_69.lrc",
     "image": "./img/1_69.svg",
     "audio": "./00 Audio/1_69.mp3"
@@ -243,7 +243,7 @@
   {
     "id": "book1_unit71",
     "book": "book1",
-    "unit": "-71: Brutus Cray - the Greatest",
+    "unit": "71: Brutus Cray - the Greatest",
     "lyrics": "./00 Lyrics/1_71.lrc",
     "image": "./img/1_71.svg",
     "audio": "./00 Audio/1_71.mp3"
@@ -259,7 +259,7 @@
   {
     "id": "book1_unit75",
     "book": "book1",
-    "unit": "-75: Four lives",
+    "unit": "75: Four lives",
     "lyrics": "./00 Lyrics/1_75.lrc",
     "image": "./img/1_75.svg",
     "audio": "./00 Audio/1_75.mp3"
@@ -267,7 +267,7 @@
   {
     "id": "book1_unit77",
     "book": "book1",
-    "unit": "-77: The election result",
+    "unit": "77: The election result",
     "lyrics": "./00 Lyrics/1_77.lrc",
     "image": "./img/1_77.svg",
     "audio": "./00 Audio/1_77.mp3"

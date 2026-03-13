@@ -12,6 +12,10 @@ ul {
   list-style-type: none;
 }
 
+.main-content {
+  background-color: #ffffff; /* Thay ở đây*/
+}
+
 .sidebar {
   overflow-y: scroll;
   scrollbar-width: none;
@@ -69,10 +73,6 @@ ul {
 
 .logo {
   width: 80px;
-}
-
-b {
-  color: #ffffffff;
 }
 
 .settings-panel {
