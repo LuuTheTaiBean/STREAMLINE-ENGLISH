@@ -107,7 +107,7 @@
   {
     "id": "book1_unit37",
     "book": "book1",
-    "unit": "-37: What does he do every day?",
+    "unit": "37: What does he do every day?",
     "lyrics": "./00 Lyrics/1_37.lrc",
     "image": "./img/1_37.svg",
     "audio": "./00 Audio/1_37.mp3"
@@ -115,7 +115,7 @@
   {
     "id": "book1_unit38",
     "book": "book1",
-    "unit": "-38: Well or badly?",
+    "unit": "38: Well or badly?",
     "lyrics": "./00 Lyrics/1_38.lrc",
     "image": "./img/1_38.svg",
     "audio": "./00 Audio/1_38.mp3"
@@ -219,7 +219,7 @@
   {
     "id": "book1_unit62",
     "book": "book1",
-    "unit": "-62: Where's he gone?",
+    "unit": "62: Where's he gone?",
     "lyrics": "./00 Lyrics/1_62.lrc",
     "image": "./img/1_62.svg",
     "audio": "./00 Audio/1_62.mp3"
@@ -251,7 +251,7 @@
   {
     "id": "book1_unit72",
     "book": "book1",
-    "unit": "-72: George and Brenda",
+    "unit": "72: George and Brenda",
     "lyrics": "./00 Lyrics/1_72.lrc",
     "image": "./img/1_72.svg",
     "audio": "./00 Audio/1_72.mp3"
@@ -272,6 +272,7 @@
     "image": "./img/1_77.svg",
     "audio": "./00 Audio/1_77.mp3"
   },
+
   {
     "id": "book2_unit1",
     "book": "book2",
@@ -281,12 +282,44 @@
     "audio": "./00 Audio/2_01.mp3"
   },
   {
+    "id": "book2_unit2",
+    "book": "book2",
+    "unit": "-02: Telephoning",
+    "lyrics": "./00 Lyrics/2_02.lrc",
+    "image": "./img/2_02.svg",
+    "audio": "./00 Audio/2_02.mp3"
+  },
+  {
+    "id": "book2_unit3",
+    "book": "book2",
+    "unit": "-03: Fizz is fantastic!",
+    "lyrics": "./00 Lyrics/2_03.lrc",
+    "image": "./img/2_03.svg",
+    "audio": "./00 Audio/2_03.mp3"
+  },
+  {
     "id": "book2_unit4",
     "book": "book2",
-    "unit": "-04: Olympic Report ",
+    "unit": "-04: Olympic Report",
     "lyrics": "./00 Lyrics/2_04.lrc",
     "image": "./img/2_04.svg",
     "audio": "./00 Audio/2_04.mp3"
+  },
+  {
+    "id": "book2_unit5",
+    "book": "book2",
+    "unit": "-05: I'll be there",
+    "lyrics": "./00 Lyrics/2_05.lrc",
+    "image": "./img/2_05.svg",
+    "audio": "./00 Audio/2_05.mp3"
+  },
+  {
+    "id": "book2_unit6",
+    "book": "book2",
+    "unit": "-06: Monday morning",
+    "lyrics": "./00 Lyrics/2_06.lrc",
+    "image": "./img/2_06.svg",
+    "audio": "./00 Audio/2_06.mp3"
   },
   {
     "id": "book2_unit7",
@@ -297,12 +330,180 @@
     "audio": "./00 Audio/2_07.mp3"
   },
   {
+    "id": "book2_unit8",
+    "book": "book2",
+    "unit": "-08: Sleep and Dreams",
+    "lyrics": "./00 Lyrics/2_08.lrc",
+    "image": "./img/2_08.svg",
+    "audio": "./00 Audio/2_08.mp3"
+  },
+  {
+    "id": "book2_unit9",
+    "book": "book2",
+    "unit": "-09: At the chemist's",
+    "lyrics": "./00 Lyrics/2_09.lrc",
+    "image": "./img/2_09.svg",
+    "audio": "./00 Audio/2_09.mp3"
+  },
+  {
     "id": "book2_unit10",
     "book": "book2",
     "unit": "-10: Lord Worth",
     "lyrics": "./00 Lyrics/2_10.lrc",
     "image": "./img/2_10.svg",
     "audio": "./00 Audio/2_10.mp3"
+  },
+  {
+    "id": "book2_unit11",
+    "book": "book2",
+    "unit": "-11: Look, feel, taste, sound, smell",
+    "lyrics": "./00 Lyrics/2_11.lrc",
+    "image": "./img/2_11.svg",
+    "audio": "./00 Audio/2_11.mp3"
+  },
+  {
+    "id": "book2_unit12",
+    "book": "book2",
+    "unit": "-12: A science fiction story",
+    "lyrics": "./00 Lyrics/2_12.lrc",
+    "image": "./img/2_12.svg",
+    "audio": "./00 Audio/2_12.mp3"
+  },
+  {
+    "id": "book2_unit13",
+    "book": "book2",
+    "unit": "-13: It's much too hot!",
+    "lyrics": "./00 Lyrics/2_13.lrc",
+    "image": "./img/2_13.svg",
+    "audio": "./00 Audio/2_13.mp3"
+  },
+  {
+    "id": "book2_unit14",
+    "book": "book2",
+    "unit": "-14: A phone call",
+    "lyrics": "./00 Lyrics/2_14.lrc",
+    "image": "./img/2_14.svg",
+    "audio": "./00 Audio/2_14.mp3"
+  },
+  {
+    "id": "book2_unit15",
+    "book": "book2",
+    "unit": "-15: Army Careers Office",
+    "lyrics": "./00 Lyrics/2_15.lrc",
+    "image": "./img/2_15.svg",
+    "audio": "./00 Audio/2_15.mp3"
+  },
+  {
+    "id": "book2_unit16",
+    "book": "book2",
+    "unit": "-16: A traffic survey",
+    "lyrics": "./00 Lyrics/2_16.lrc",
+    "image": "./img/2_16.svg",
+    "audio": "./00 Audio/2_16.mp3"
+  },
+  {
+    "id": "book2_unit17",
+    "book": "book2",
+    "unit": "-17: Australia House",
+    "lyrics": "./00 Lyrics/2_17.lrc",
+    "image": "./img/2_17.svg",
+    "audio": "./00 Audio/2_17.mp3"
+  },
+  {
+    "id": "book2_unit18",
+    "book": "book2",
+    "unit": "-18: Cheques and credit",
+    "lyrics": "./00 Lyrics/2_18.lrc",
+    "image": "./img/2_18.svg",
+    "audio": "./00 Audio/2_18.mp3"
+  },
+  {
+    "id": "book2_unit19",
+    "book": "book2",
+    "unit": "-19: A holiday in Egypt",
+    "lyrics": "./00 Lyrics/2_19.lrc",
+    "image": "./img/2_19.svg",
+    "audio": "./00 Audio/2_19.mp3"
+  },
+  {
+    "id": "book2_unit20",
+    "book": "book2",
+    "unit": "-20: Comparisons",
+    "lyrics": "./00 Lyrics/2_20.lrc",
+    "image": "./img/2_20.svg",
+    "audio": "./00 Audio/2_20.mp3"
+  },
+  {
+    "id": "book2_unit21",
+    "book": "book2",
+    "unit": "-21: A day off work",
+    "lyrics": "./00 Lyrics/2_21.lrc",
+    "image": "./img/2_21.svg",
+    "audio": "./00 Audio/2_21.mp3"
+  },
+  {
+    "id": "book2_unit22",
+    "book": "book2",
+    "unit": "-22: Applying for a job",
+    "lyrics": "./00 Lyrics/2_22.lrc",
+    "image": "./img/2_22.svg",
+    "audio": "./00 Audio/2_22.mp3"
+  },
+  {
+    "id": "book2_unit23",
+    "book": "book2",
+    "unit": "-23: Four disasters",
+    "lyrics": "./00 Lyrics/2_23.lrc",
+    "image": "./img/2_23.svg",
+    "audio": "./00 Audio/2_23.mp3"
+  },
+  {
+    "id": "book2_unit24",
+    "book": "book2",
+    "unit": "-24: A letter from Paris",
+    "lyrics": "./00 Lyrics/2_24.lrc",
+    "image": "./img/2_24.svg",
+    "audio": "./00 Audio/2_24.mp3"
+  },
+  {
+    "id": "book2_unit25",
+    "book": "book2",
+    "unit": "-25: Travelling by air",
+    "lyrics": "./00 Lyrics/2_25.lrc",
+    "image": "./img/2_25.svg",
+    "audio": "./00 Audio/2_25.mp3"
+  },
+  {
+    "id": "book2_unit26",
+    "book": "book2",
+    "unit": "-26: I've cut my self!",
+    "lyrics": "./00 Lyrics/2_26.lrc",
+    "image": "./img/2_26.svg",
+    "audio": "./00 Audio/2_26.mp3"
+  },
+  {
+    "id": "book2_unit27",
+    "book": "book2",
+    "unit": "-27: Choosing a pet",
+    "lyrics": "./00 Lyrics/2_27.lrc",
+    "image": "./img/2_27.svg",
+    "audio": "./00 Audio/2_27.mp3"
+  },
+  {
+    "id": "book2_unit28",
+    "book": "book2",
+    "unit": "-28: Checking an alibi",
+    "lyrics": "./00 Lyrics/2_28.lrc",
+    "image": "./img/2_28.svg",
+    "audio": "./00 Audio/2_28.mp3"
+  },
+  {
+    "id": "book2_unit29",
+    "book": "book2",
+    "unit": "-29: Dinner with friends",
+    "lyrics": "./00 Lyrics/2_29.lrc",
+    "image": "./img/2_29.svg",
+    "audio": "./00 Audio/2_29.mp3"
   },
   {
     "id": "book2_unit30",
@@ -313,6 +514,46 @@
     "audio": "./00 Audio/2_30.mp3"
   },
   {
+    "id": "book2_unit31",
+    "book": "book2",
+    "unit": "-31: So am I!",
+    "lyrics": "./00 Lyrics/2_31.lrc",
+    "image": "./img/2_31.svg",
+    "audio": "./00 Audio/2_31.mp3"
+  },
+  {
+    "id": "book2_unit32",
+    "book": "book2",
+    "unit": "-32: A family problem",
+    "lyrics": "./00 Lyrics/2_32.lrc",
+    "image": "./img/2_32.svg",
+    "audio": "./00 Audio/2_32.mp3"
+  },
+  {
+    "id": "book2_unit33",
+    "book": "book2",
+    "unit": "-33: The Yes/No Contest",
+    "lyrics": "./00 Lyrics/2_33.lrc",
+    "image": "./img/2_33.svg",
+    "audio": "./00 Audio/2_33.mp3"
+  },
+  {
+    "id": "book2_unit34",
+    "book": "book2",
+    "unit": "-34: I used to…",
+    "lyrics": "./00 Lyrics/2_34.lrc",
+    "image": "./img/2_34.svg",
+    "audio": "./00 Audio/2_34.mp3"
+  },
+  {
+    "id": "book2_unit35",
+    "book": "book2",
+    "unit": "-35: A busy office",
+    "lyrics": "./00 Lyrics/2_35.lrc",
+    "image": "./img/2_35.svg",
+    "audio": "./00 Audio/2_35.mp3"
+  },
+  {
     "id": "book2_unit36",
     "book": "book2",
     "unit": "-36: The smuggler",
@@ -321,12 +562,1483 @@
     "audio": "./00 Audio/2_36.mp3"
   },
   {
+    "id": "book2_unit37",
+    "book": "book2",
+    "unit": "-37: I'm bored",
+    "lyrics": "./00 Lyrics/2_37.lrc",
+    "image": "./img/2_37.svg",
+    "audio": "./00 Audio/2_37.mp3"
+  },
+  {
+    "id": "book2_unit38",
+    "book": "book2",
+    "unit": "-38: Advice",
+    "lyrics": "./00 Lyrics/2_38.lrc",
+    "image": "./img/2_38.svg",
+    "audio": "./00 Audio/2_38.mp3"
+  },
+  {
+    "id": "book2_unit39",
+    "book": "book2",
+    "unit": "-39: An evening out",
+    "lyrics": "./00 Lyrics/2_39.lrc",
+    "image": "./img/2_39.svg",
+    "audio": "./00 Audio/2_39.mp3"
+  },
+  {
+    "id": "book2_unit40",
+    "book": "book2",
+    "unit": "-40: I've been waiting…",
+    "lyrics": "./00 Lyrics/2_40.lrc",
+    "image": "./img/2_40.svg",
+    "audio": "./00 Audio/2_40.mp3"
+  },
+  {
+    "id": "book2_unit41",
+    "book": "book2",
+    "unit": "-41: A court case",
+    "lyrics": "./00 Lyrics/2_41.lrc",
+    "image": "./img/2_41.svg",
+    "audio": "./00 Audio/2_41.mp3"
+  },
+  {
     "id": "book2_unit42",
     "book": "book2",
-    "unit": "-42: The empty chair",
+    "unit": "-42: The Empty Chair",
     "lyrics": "./00 Lyrics/2_42.lrc",
     "image": "./img/2_42.svg",
     "audio": "./00 Audio/2_42.mp3"
+  },
+  {
+    "id": "book2_unit43",
+    "book": "book2",
+    "unit": "-43: How long? How much?",
+    "lyrics": "./00 Lyrics/2_43.lrc",
+    "image": "./img/2_43.svg",
+    "audio": "./00 Audio/2_43.mp3"
+  },
+  {
+    "id": "book2_unit44",
+    "book": "book2",
+    "unit": "-44: Look!",
+    "lyrics": "./00 Lyrics/2_44.lrc",
+    "image": "./img/2_44.svg",
+    "audio": "./00 Audio/2_44.mp3"
+  },
+  {
+    "id": "book2_unit45",
+    "book": "book2",
+    "unit": "-45: Another letter from Mary",
+    "lyrics": "./00 Lyrics/2_45.lrc",
+    "image": "./img/2_45.svg",
+    "audio": "./00 Audio/2_45.mp3"
+  },
+  {
+    "id": "book2_unit46",
+    "book": "book2",
+    "unit": "-46: Booking in advance",
+    "lyrics": "./00 Lyrics/2_46.lrc",
+    "image": "./img/2_46.svg",
+    "audio": "./00 Audio/2_46.mp3"
+  },
+  {
+    "id": "book2_unit47",
+    "book": "book2",
+    "unit": "-47: A new job",
+    "lyrics": "./00 Lyrics/2_47.lrc",
+    "image": "./img/2_47.svg",
+    "audio": "./00 Audio/2_47.mp3"
+  },
+  {
+    "id": "book2_unit48",
+    "book": "book2",
+    "unit": "-48: The weather forecast",
+    "lyrics": "./00 Lyrics/2_48.lrc",
+    "image": "./img/2_48.svg",
+    "audio": "./00 Audio/2_48.mp3"
+  },
+  {
+    "id": "book2_unit49",
+    "book": "book2",
+    "unit": "-49: A restaurant kitchen",
+    "lyrics": "./00 Lyrics/2_49.lrc",
+    "image": "./img/2_49.svg",
+    "audio": "./00 Audio/2_49.mp3"
+  },
+  {
+    "id": "book2_unit50",
+    "book": "book2",
+    "unit": "-50: Asking for directions",
+    "lyrics": "./00 Lyrics/2_50.lrc",
+    "image": "./img/2_50.svg",
+    "audio": "./00 Audio/2_50.mp3"
+  },
+  {
+    "id": "book2_unit51",
+    "book": "book2",
+    "unit": "-51: Air-sea rescue",
+    "lyrics": "./00 Lyrics/2_51.lrc",
+    "image": "./img/2_51.svg",
+    "audio": "./00 Audio/2_51.mp3"
+  },
+  {
+    "id": "book2_unit52",
+    "book": "book2",
+    "unit": "-52: UFO",
+    "lyrics": "./00 Lyrics/2_52.lrc",
+    "image": "./img/2_52.svg",
+    "audio": "./00 Audio/2_52.mp3"
+  },
+  {
+    "id": "book2_unit53",
+    "book": "book2",
+    "unit": "-53: The Daily News",
+    "lyrics": "./00 Lyrics/2_53.lrc",
+    "image": "./img/2_53.svg",
+    "audio": "./00 Audio/2_53.mp3"
+  },
+  {
+    "id": "book2_unit54",
+    "book": "book2",
+    "unit": "-54: A mugging",
+    "lyrics": "./00 Lyrics/2_54.lrc",
+    "image": "./img/2_54.svg",
+    "audio": "./00 Audio/2_54.mp3"
+  },
+  {
+    "id": "book2_unit55",
+    "book": "book2",
+    "unit": "-55: An important visitor",
+    "lyrics": "./00 Lyrics/2_55.lrc",
+    "image": "./img/2_55.svg",
+    "audio": "./00 Audio/2_55.mp3"
+  },
+  {
+    "id": "book2_unit56",
+    "book": "book2",
+    "unit": "-56: General Hospital",
+    "lyrics": "./00 Lyrics/2_56.lrc",
+    "image": "./img/2_56.svg",
+    "audio": "./00 Audio/2_56.mp3"
+  },
+  {
+    "id": "book2_unit57",
+    "book": "book2",
+    "unit": "-57: At the races",
+    "lyrics": "./00 Lyrics/2_57.lrc",
+    "image": "./img/2_57.svg",
+    "audio": "./00 Audio/2_57.mp3"
+  },
+  {
+    "id": "book2_unit58",
+    "book": "book2",
+    "unit": "-58: On the road",
+    "lyrics": "./00 Lyrics/2_58.lrc",
+    "image": "./img/2_58.svg",
+    "audio": "./00 Audio/2_58.mp3"
+  },
+  {
+    "id": "book2_unit59",
+    "book": "book2",
+    "unit": "-59: A trip to Paris",
+    "lyrics": "./00 Lyrics/2_59.lrc",
+    "image": "./img/2_59.svg",
+    "audio": "./00 Audio/2_59.mp3"
+  },
+  {
+    "id": "book2_unit60",
+    "book": "book2",
+    "unit": "-60: Emergency…999",
+    "lyrics": "./00 Lyrics/2_60.lrc",
+    "image": "./img/2_60.svg",
+    "audio": "./00 Audio/2_60.mp3"
+  },
+  {
+    "id": "book2_unit61",
+    "book": "book2",
+    "unit": "-61: Reader's Letters",
+    "lyrics": "./00 Lyrics/2_61.lrc",
+    "image": "./img/2_61.svg",
+    "audio": "./00 Audio/2_61.mp3"
+  },
+  {
+    "id": "book2_unit62",
+    "book": "book2",
+    "unit": "-62: A ghost story",
+    "lyrics": "./00 Lyrics/2_62.lrc",
+    "image": "./img/2_62.svg",
+    "audio": "./00 Audio/2_62.mp3"
+  },
+  {
+    "id": "book2_unit63",
+    "book": "book2",
+    "unit": "-63: Buying a present",
+    "lyrics": "./00 Lyrics/2_63.lrc",
+    "image": "./img/2_63.svg",
+    "audio": "./00 Audio/2_63.mp3"
+  },
+  {
+    "id": "book2_unit64",
+    "book": "book2",
+    "unit": "-64: Made in England",
+    "lyrics": "./00 Lyrics/2_64.lrc",
+    "image": "./img/2_64.svg",
+    "audio": "./00 Audio/2_64.mp3"
+  },
+  {
+    "id": "book2_unit65",
+    "book": "book2",
+    "unit": "-65: A real bargain",
+    "lyrics": "./00 Lyrics/2_65.lrc",
+    "image": "./img/2_65.svg",
+    "audio": "./00 Audio/2_65.mp3"
+  },
+  {
+    "id": "book2_unit66",
+    "book": "book2",
+    "unit": "-66: The Eight O'Clock News",
+    "lyrics": "./00 Lyrics/2_66.lrc",
+    "image": "./img/2_66.svg",
+    "audio": "./00 Audio/2_66.mp3"
+  },
+  {
+    "id": "book2_unit67",
+    "book": "book2",
+    "unit": "-67: The Saturday Magazine",
+    "lyrics": "./00 Lyrics/2_67.lrc",
+    "image": "./img/2_67.svg",
+    "audio": "./00 Audio/2_67.mp3"
+  },
+  {
+    "id": "book2_unit68",
+    "book": "book2",
+    "unit": "-68: Elvis Presley-Story of a Superstar",
+    "lyrics": "./00 Lyrics/2_68.lrc",
+    "image": "./img/2_68.svg",
+    "audio": "./00 Audio/2_68.mp3"
+  },
+  {
+    "id": "book2_unit69",
+    "book": "book2",
+    "unit": "-69: If I had enough money…",
+    "lyrics": "./00 Lyrics/2_69.lrc",
+    "image": "./img/2_69.svg",
+    "audio": "./00 Audio/2_69.mp3"
+  },
+  {
+    "id": "book2_unit70",
+    "book": "book2",
+    "unit": "-70: In a restaurant",
+    "lyrics": "./00 Lyrics/2_70.lrc",
+    "image": "./img/2_70.svg",
+    "audio": "./00 Audio/2_70.mp3"
+  },
+  {
+    "id": "book2_unit71",
+    "book": "book2",
+    "unit": "-71: North Sea Oil",
+    "lyrics": "./00 Lyrics/2_71.lrc",
+    "image": "./img/2_71.svg",
+    "audio": "./00 Audio/2_71.mp3"
+  },
+  {
+    "id": "book2_unit72",
+    "book": "book2",
+    "unit": "-72: What would you do?",
+    "lyrics": "./00 Lyrics/2_72.lrc",
+    "image": "./img/2_72.svg",
+    "audio": "./00 Audio/2_72.mp3"
+  },
+  {
+    "id": "book2_unit73",
+    "book": "book2",
+    "unit": "-73: Mad killer strikes again!",
+    "lyrics": "./00 Lyrics/2_73.lrc",
+    "image": "./img/2_73.svg",
+    "audio": "./00 Audio/2_73.mp3"
+  },
+  {
+    "id": "book2_unit74",
+    "book": "book2",
+    "unit": "-74: Four reports",
+    "lyrics": "./00 Lyrics/2_74.lrc",
+    "image": "./img/2_74.svg",
+    "audio": "./00 Audio/2_74.mp3"
+  },
+  {
+    "id": "book2_unit75",
+    "book": "book2",
+    "unit": "-75: Examination day",
+    "lyrics": "./00 Lyrics/2_75.lrc",
+    "image": "./img/2_75.svg",
+    "audio": "./00 Audio/2_75.mp3"
+  },
+  {
+    "id": "book2_unit76",
+    "book": "book2",
+    "unit": "-76: But you said…",
+    "lyrics": "./00 Lyrics/2_76.lrc",
+    "image": "./img/2_76.svg",
+    "audio": "./00 Audio/2_76.mp3"
+  },
+  {
+    "id": "book2_unit77",
+    "book": "book2",
+    "unit": "-77: Having things done",
+    "lyrics": "./00 Lyrics/2_77.lrc",
+    "image": "./img/2_77.svg",
+    "audio": "./00 Audio/2_77.mp3"
+  },
+  {
+    "id": "book2_unit78",
+    "book": "book2",
+    "unit": "-78: Trouble at the supermarket",
+    "lyrics": "./00 Lyrics/2_78.lrc",
+    "image": "./img/2_78.svg",
+    "audio": "./00 Audio/2_78.mp3"
+  },
+  {
+    "id": "book2_unit79",
+    "book": "book2",
+    "unit": "-79: The Appointment",
+    "lyrics": "./00 Lyrics/2_79.lrc",
+    "image": "./img/2_79.svg",
+    "audio": "./00 Audio/2_79.mp3"
+  },
+  {
+    "id": "book2_unit80",
+    "book": "book2",
+    "unit": "-80: The last letter from Paris",
+    "lyrics": "./00 Lyrics/2_80.lrc",
+    "image": "./img/2_80.svg",
+    "audio": "./00 Audio/2_80.mp3"
+  },
+
+  {
+    "id": "book3_unit1",
+    "book": "book3",
+    "unit": "-01: Arrivals",
+    "lyrics": "./00 Lyrics/3_01.lrc",
+    "image": "./img/3_01.svg",
+    "audio": "./00 Audio/3_01.mp3"
+  },
+  {
+    "id": "book3_unit2",
+    "book": "book3",
+    "unit": "-02: Is everything ready?",
+    "lyrics": "./00 Lyrics/3_02.lrc",
+    "image": "./img/3_02.svg",
+    "audio": "./00 Audio/3_02.mp3"
+  },
+  {
+    "id": "book3_unit3",
+    "book": "book3",
+    "unit": "-03: This is your life!",
+    "lyrics": "./00 Lyrics/3_03.lrc",
+    "image": "./img/3_03.svg",
+    "audio": "./00 Audio/3_03.mp3"
+  },
+  {
+    "id": "book3_unit4",
+    "book": "book3",
+    "unit": "-04: The Monte Carlo Rally",
+    "lyrics": "./00 Lyrics/3_04.lrc",
+    "image": "./img/3_04.svg",
+    "audio": "./00 Audio/3_04.mp3"
+  },
+  {
+    "id": "book3_unit5",
+    "book": "book3",
+    "unit": "-05: Out of work",
+    "lyrics": "./00 Lyrics/3_05.lrc",
+    "image": "./img/3_05.svg",
+    "audio": "./00 Audio/3_05.mp3"
+  },
+  {
+    "id": "book3_unit6",
+    "book": "book3",
+    "unit": "-06: Getting a job",
+    "lyrics": "./00 Lyrics/3_06.lrc",
+    "image": "./img/3_06.svg",
+    "audio": "./00 Audio/3_06.mp3"
+  },
+  {
+    "id": "book3_unit7",
+    "book": "book3",
+    "unit": "-07: Battle of Trafalgar Street",
+    "lyrics": "./00 Lyrics/3_07.lrc",
+    "image": "./img/3_07.svg",
+    "audio": "./00 Audio/3_07.mp3"
+  },
+  {
+    "id": "book3_unit8",
+    "book": "book3",
+    "unit": "-08: Sending a card",
+    "lyrics": "./00 Lyrics/3_08.lrc",
+    "image": "./img/3_08.svg",
+    "audio": "./00 Audio/3_08.mp3"
+  },
+  {
+    "id": "book3_unit9",
+    "book": "book3",
+    "unit": "-09: Marriage Guidance Council",
+    "lyrics": "./00 Lyrics/3_09.lrc",
+    "image": "./img/3_09.svg",
+    "audio": "./00 Audio/3_09.mp3"
+  },
+  {
+    "id": "book3_unit10",
+    "book": "book3",
+    "unit": "-10: A funny thing happened to me…",
+    "lyrics": "./00 Lyrics/3_10.lrc",
+    "image": "./img/3_10.svg",
+    "audio": "./00 Audio/3_10.mp3"
+  },
+  {
+    "id": "book3_unit11",
+    "book": "book3",
+    "unit": "-11: Polite requests",
+    "lyrics": "./00 Lyrics/3_11.lrc",
+    "image": "./img/3_11.svg",
+    "audio": "./00 Audio/3_11.mp3"
+  },
+  {
+    "id": "book3_unit12",
+    "book": "book3",
+    "unit": "-12: A trip to Spain",
+    "lyrics": "./00 Lyrics/3_12.lrc",
+    "image": "./img/3_12.svg",
+    "audio": "./00 Audio/3_12.mp3"
+  },
+  {
+    "id": "book3_unit13",
+    "book": "book3",
+    "unit": "-13: Flying to Spain",
+    "lyrics": "./00 Lyrics/3_13.lrc",
+    "image": "./img/3_13.svg",
+    "audio": "./00 Audio/3_13.mp3"
+  },
+  {
+    "id": "book3_unit14",
+    "book": "book3",
+    "unit": "-14: Money",
+    "lyrics": "./00 Lyrics/3_14.lrc",
+    "image": "./img/3_14.svg",
+    "audio": "./00 Audio/3_14.mp3"
+  },
+  {
+    "id": "book3_unit15",
+    "book": "book3",
+    "unit": "-15: Money, money, money",
+    "lyrics": "./00 Lyrics/3_15.lrc",
+    "image": "./img/3_15.svg",
+    "audio": "./00 Audio/3_15.mp3"
+  },
+  {
+    "id": "book3_unit16",
+    "book": "book3",
+    "unit": "-16: Inside story",
+    "lyrics": "./00 Lyrics/3_16.lrc",
+    "image": "./img/3_16.svg",
+    "audio": "./00 Audio/3_16.mp3"
+  },
+  {
+    "id": "book3_unit17",
+    "book": "book3",
+    "unit": "-17: Preferences",
+    "lyrics": "./00 Lyrics/3_17.lrc",
+    "image": "./img/3_17.svg",
+    "audio": "./00 Audio/3_17.mp3"
+  },
+  {
+    "id": "book3_unit18",
+    "book": "book3",
+    "unit": "-18: Where have all the fans gone?",
+    "lyrics": "./00 Lyrics/3_18.lrc",
+    "image": "./img/3_18.svg",
+    "audio": "./00 Audio/3_18.mp3"
+  },
+  {
+    "id": "book3_unit19",
+    "book": "book3",
+    "unit": "-19: Night flight",
+    "lyrics": "./00 Lyrics/3_19.lrc",
+    "image": "./img/3_19.svg",
+    "audio": "./00 Audio/3_19.mp3"
+  },
+  {
+    "id": "book3_unit20",
+    "book": "book3",
+    "unit": "-20: The junk-shop",
+    "lyrics": "./00 Lyrics/3_20.lrc",
+    "image": "./img/3_20.svg",
+    "audio": "./00 Audio/3_20.mp3"
+  },
+  {
+    "id": "book3_unit21",
+    "book": "book3",
+    "unit": "-21: Noisy neighbours",
+    "lyrics": "./00 Lyrics/3_21.lrc",
+    "image": "./img/3_21.svg",
+    "audio": "./00 Audio/3_21.mp3"
+  },
+  {
+    "id": "book3_unit22",
+    "book": "book3",
+    "unit": "-22: You 're in the army now!",
+    "lyrics": "./00 Lyrics/3_22.lrc",
+    "image": "./img/3_22.svg",
+    "audio": "./00 Audio/3_22.mp3"
+  },
+  {
+    "id": "book3_unit23",
+    "book": "book3",
+    "unit": "-23: Migration",
+    "lyrics": "./00 Lyrics/3_23.lrc",
+    "image": "./00 Audio/3_23.svg",
+    "audio": "./00 Audio/3_23.mp3"
+  },
+  {
+    "id": "book3_unit24",
+    "book": "book3",
+    "unit": "-24: Murder at Gurney Manor (1)",
+    "lyrics": "./00 Lyrics/3_24.lrc",
+    "image": "./img/3_24.svg",
+    "audio": "./00 Audio/3_24.mp3"
+  },
+  {
+    "id": "book3_unit25",
+    "book": "book3",
+    "unit": "-25: Murder at Gurney Manor (2)",
+    "lyrics": "./00 Lyrics/3_25.lrc",
+    "image": "./img/3_25.svg",
+    "audio": "./00 Audio/3_25.mp3"
+  },
+  {
+    "id": "book3_unit26",
+    "book": "book3",
+    "unit": "-26: Know your rights",
+    "lyrics": "./00 Lyrics/3_26.lrc",
+    "image": "./img/3_26.svg",
+    "audio": "./00 Audio/3_26.mp3"
+  },
+  {
+    "id": "book3_unit27",
+    "book": "book3",
+    "unit": "-27: Making a complaint",
+    "lyrics": "./00 Lyrics/3_27.lrc",
+    "image": "./img/3_27.svg",
+    "audio": "./00 Audio/3_27.mp3"
+  },
+  {
+    "id": "book3_unit28",
+    "book": "book3",
+    "unit": "-28: The 'Mary Celeste' (1)",
+    "lyrics": "./00 Lyrics/3_28.lrc",
+    "image": "./img/3_28.svg",
+    "audio": "./00 Audio/3_28.mp3"
+  },
+  {
+    "id": "book3_unit29",
+    "book": "book3",
+    "unit": "-29: The 'Mary Celeste' (2)",
+    "lyrics": "./00 Lyrics/3_29.lrc",
+    "image": "./img/3_29.svg",
+    "audio": "./00 Audio/3_29.mp3"
+  },
+  {
+    "id": "book3_unit30",
+    "book": "book3",
+    "unit": "-30: Speculation",
+    "lyrics": "./00 Lyrics/3_30.lrc",
+    "image": "./img/3_30.svg",
+    "audio": "./00 Audio/3_30.mp3"
+  },
+  {
+    "id": "book3_unit31",
+    "book": "book3",
+    "unit": "-31: Apologies",
+    "lyrics": "./00 Lyrics/3_31.lrc",
+    "image": "./img/3_31.svg",
+    "audio": "./00 Audio/3_31.mp3"
+  },
+  {
+    "id": "book3_unit32",
+    "book": "book3",
+    "unit": "-32: They didn't stop to tell me!",
+    "lyrics": "./00 Lyrics/3_32.lrc",
+    "image": "./img/3_32.svg",
+    "audio": "./00 Audio/3_32.mp3"
+  },
+  {
+    "id": "book3_unit33",
+    "book": "book3",
+    "unit": "-33: John Lennon, 1940-1980",
+    "lyrics": "./00 Lyrics/3_33.lrc",
+    "image": "./img/3_33.svg",
+    "audio": "./00 Audio/3_33.mp3"
+  },
+  {
+    "id": "book3_unit34",
+    "book": "book3",
+    "unit": "-34: Kidnapped",
+    "lyrics": "./00 Lyrics/3_34.lrc",
+    "image": "./img/3_34.svg",
+    "audio": "./00 Audio/3_34.mp3"
+  },
+  {
+    "id": "book3_unit35",
+    "book": "book3",
+    "unit": "-35: Have you seen this advert?",
+    "lyrics": "./00 Lyrics/3_35.lrc",
+    "image": "./img/3_35.svg",
+    "audio": "./00 Audio/3_35.mp3"
+  },
+  {
+    "id": "book3_unit36",
+    "book": "book3",
+    "unit": "-36: Energy crisis",
+    "lyrics": "./00 Lyrics/3_36.lrc",
+    "image": "./img/3_36.svg",
+    "audio": "./00 Audio/3_36.mp3"
+  },
+  {
+    "id": "book3_unit37",
+    "book": "book3",
+    "unit": "-37: What would you have done?",
+    "lyrics": "./00 Lyrics/3_37.lrc",
+    "image": "./img/3_37.svg",
+    "audio": "./00 Audio/3_37.mp3"
+  },
+  {
+    "id": "book3_unit38",
+    "book": "book3",
+    "unit": "-38: A bad day at the office",
+    "lyrics": "./00 Lyrics/3_38.lrc",
+    "image": "./img/3_38.svg",
+    "audio": "./00 Audio/3_38.mp3"
+  },
+  {
+    "id": "book3_unit39",
+    "book": "book3",
+    "unit": "-39: A Saturday afternoon",
+    "lyrics": "./00 Lyrics/3_39.lrc",
+    "image": "./img/3_39.svg",
+    "audio": "./00 Audio/3_39.mp3"
+  },
+  {
+    "id": "book3_unit40",
+    "book": "book3",
+    "unit": "-40: Holiday USA",
+    "lyrics": "./00 Lyrics/3_40.lrc",
+    "image": "./img/3_40.svg",
+    "audio": "./00 Audio/3_40.mp3"
+  },
+  {
+    "id": "book3_unit41",
+    "book": "book3",
+    "unit": "-41: Food for thought",
+    "lyrics": "./00 Lyrics/3_41.lrc",
+    "image": "./img/3_41.svg",
+    "audio": "./00 Audio/3_41.mp3"
+  },
+  {
+    "id": "book3_unit42",
+    "book": "book3",
+    "unit": "-42: I wish…",
+    "lyrics": "./00 Lyrics/3_42.lrc",
+    "image": "./img/3_42.svg",
+    "audio": "./00 Audio/3_42.mp3"
+  },
+  {
+    "id": "book3_unit43",
+    "book": "book3",
+    "unit": "-43: The happiest days of your life?",
+    "lyrics": "./00 Lyrics/3_43.lrc",
+    "image": "./img/3_43.svg",
+    "audio": "./00 Audio/3_43.mp3"
+  },
+  {
+    "id": "book3_unit44",
+    "book": "book3",
+    "unit": "-44: Miss Britain",
+    "lyrics": "./00 Lyrics/3_44.lrc",
+    "image": "./img/3_44.svg",
+    "audio": "./00 Audio/3_44.mp3"
+  },
+  {
+    "id": "book3_unit45",
+    "book": "book3",
+    "unit": "-45: Operation impossible",
+    "lyrics": "./00 Lyrics/3_45.lrc",
+    "image": "./img/3_45.svg",
+    "audio": "./00 Audio/3_45.mp3"
+  },
+  {
+    "id": "book3_unit46",
+    "book": "book3",
+    "unit": "-46: Operation accomplished",
+    "lyrics": "./00 Lyrics/3_46.lrc",
+    "image": "./img/3_46.svg",
+    "audio": "./00 Audio/3_46.mp3"
+  },
+  {
+    "id": "book3_unit47",
+    "book": "book3",
+    "unit": "-47: Student Mastermind",
+    "lyrics": "./00 Lyrics/3_47.lrc",
+    "image": "./img/3_47.svg",
+    "audio": "./00 Audio/3_47.mp3"
+  },
+  {
+    "id": "book3_unit48",
+    "book": "book3",
+    "unit": "-48: The Daily Gazette",
+    "lyrics": "./00 Lyrics/3_48.lrc",
+    "image": "./img/3_48.svg",
+    "audio": "./00 Audio/3_48.mp3"
+  },
+  {
+    "id": "book3_unit49",
+    "book": "book3",
+    "unit": "-49: Formal correspondence",
+    "lyrics": "./00 Lyrics/3_49.lrc",
+    "image": "./img/3_49.svg",
+    "audio": "./00 Audio/3_49.mp3"
+  },
+  {
+    "id": "book3_unit50",
+    "book": "book3",
+    "unit": "-50: Who, which, that, whose, whom",
+    "lyrics": "./00 Lyrics/3_50.lrc",
+    "image": "./img/3_50.svg",
+    "audio": "./00 Audio/3_50.mp3"
+  },
+  {
+    "id": "book3_unit51",
+    "book": "book3",
+    "unit": "-51: Describing things",
+    "lyrics": "./00 Lyrics/3_51.lrc",
+    "image": "./img/3_51.svg",
+    "audio": "./00 Audio/3_51.mp3"
+  },
+  {
+    "id": "book3_unit52",
+    "book": "book3",
+    "unit": "-52: Describing people",
+    "lyrics": "./00 Lyrics/3_52.lrc",
+    "image": "./img/3_52.svg",
+    "audio": "./00 Audio/3_52.mp3"
+  },
+  {
+    "id": "book3_unit53",
+    "book": "book3",
+    "unit": "-53: Budget Day",
+    "lyrics": "./00 Lyrics/3_53.lrc",
+    "image": "./img/3_53.svg",
+    "audio": "./00 Audio/3_53.mp3"
+  },
+  {
+    "id": "book3_unit54",
+    "book": "book3",
+    "unit": "-54: Do-it-yourself",
+    "lyrics": "./00 Lyrics/3_54.lrc",
+    "image": "./img/3_54.svg",
+    "audio": "./00 Audio/3_54.mp3"
+  },
+  {
+    "id": "book3_unit55",
+    "book": "book3",
+    "unit": "-55: Take care!",
+    "lyrics": "./00 Lyrics/3_55.lrc",
+    "image": "./img/3_55.svg",
+    "audio": "./00 Audio/3_55.mp3"
+  },
+  {
+    "id": "book3_unit56",
+    "book": "book3",
+    "unit": "-56: A new way of life",
+    "lyrics": "./00 Lyrics/3_56.lrc",
+    "image": "./img/3_56.svg",
+    "audio": "./00 Audio/3_56.mp3"
+  },
+  {
+    "id": "book3_unit57",
+    "book": "book3",
+    "unit": "-57: Last of the airships?",
+    "lyrics": "./00 Lyrics/3_57.lrc",
+    "image": "./img/3_57.svg",
+    "audio": "./00 Audio/3_57.mp3"
+  },
+  {
+    "id": "book3_unit58",
+    "book": "book3",
+    "unit": "-58: Eating out",
+    "lyrics": "./00 Lyrics/3_58.lrc",
+    "image": "./img/3_58.svg",
+    "audio": "./00 Audio/3_58.mp3"
+  },
+  {
+    "id": "book3_unit59",
+    "book": "book3",
+    "unit": "-59: Finding your way around",
+    "lyrics": "./00 Lyrics/3_59.lrc",
+    "image": "./img/3_59.svg",
+    "audio": "./00 Audio/3_59.mp3"
+  },
+  {
+    "id": "book3_unit60",
+    "book": "book3",
+    "unit": "-60: The Eight O'Clock News",
+    "lyrics": "./00 Lyrics/3_60.lrc",
+    "image": "./img/3_60.svg",
+    "audio": "./00 Audio/3_60.mp3"
+  },
+  {
+    "id": "book3_unit61",
+    "book": "book3",
+    "unit": "-61: All the good news",
+    "lyrics": "./00 Lyrics/3_61.lrc",
+    "image": "./img/3_61.svg",
+    "audio": "./00 Audio/3_61.mp3"
+  },
+  {
+    "id": "book3_unit62",
+    "book": "book3",
+    "unit": "-62: The annual dinner and dance",
+    "lyrics": "./00 Lyrics/3_62.lrc",
+    "image": "./img/3_62.svg",
+    "audio": "./00 Audio/3_62.mp3"
+  },
+  {
+    "id": "book3_unit63",
+    "book": "book3",
+    "unit": "-63: The apprentice",
+    "lyrics": "./00 Lyrics/3_63.lrc",
+    "image": "./img/3_63.svg",
+    "audio": "./00 Audio/3_63.mp3"
+  },
+  {
+    "id": "book3_unit64",
+    "book": "book3",
+    "unit": "-64: A change for the better?",
+    "lyrics": "./00 Lyrics/3_64.lrc",
+    "image": "./img/3_64.svg",
+    "audio": "./00 Audio/3_64.mp3"
+  },
+  {
+    "id": "book3_unit65",
+    "book": "book3",
+    "unit": "-65: Going to the doctor's",
+    "lyrics": "./00 Lyrics/3_65.lrc",
+    "image": "./img/3_65.svg",
+    "audio": "./00 Audio/3_65.mp3"
+  },
+  {
+    "id": "book3_unit66",
+    "book": "book3",
+    "unit": "-66: A message to the stars",
+    "lyrics": "./00 Lyrics/3_66.lrc",
+    "image": "./img/3_66.svg",
+    "audio": "./00 Audio/3_66.mp3"
+  },
+  {
+    "id": "book3_unit67",
+    "book": "book3",
+    "unit": "-67: It's about time",
+    "lyrics": "./00 Lyrics/3_67.lrc",
+    "image": "./img/3_67.svg",
+    "audio": "./00 Audio/3_67.mp3"
+  },
+  {
+    "id": "book3_unit68",
+    "book": "book3",
+    "unit": "-68: The police",
+    "lyrics": "./00 Lyrics/3_68.lrc",
+    "image": "./img/3_68.svg",
+    "audio": "./00 Audio/3_68.mp3"
+  },
+  {
+    "id": "book3_unit69",
+    "book": "book3",
+    "unit": "-69: Gold",
+    "lyrics": "./00 Lyrics/3_69.lrc",
+    "image": "./img/3_69.svg",
+    "audio": "./00 Audio/3_69.mp3"
+  },
+  {
+    "id": "book3_unit70",
+    "book": "book3",
+    "unit": "-70: Gold-rush!",
+    "lyrics": "./00 Lyrics/3_70.lrc",
+    "image": "./img/3_70.svg",
+    "audio": "./00 Audio/3_70.mp3"
+  },
+  {
+    "id": "book3_unit71",
+    "book": "book3",
+    "unit": "-71: The circus is coming",
+    "lyrics": "./00 Lyrics/3_71.lrc",
+    "image": "./img/3_71.svg",
+    "audio": "./00 Audio/3_71.mp3"
+  },
+  {
+    "id": "book3_unit72",
+    "book": "book3",
+    "unit": "-72: Getting things done",
+    "lyrics": "./00 Lyrics/3_72.lrc",
+    "image": "./img/3_72.svg",
+    "audio": "./00 Audio/3_72.mp3"
+  },
+  {
+    "id": "book3_unit73",
+    "book": "book3",
+    "unit": "-73: Keeping fit",
+    "lyrics": "./00 Lyrics/3_73.lrc",
+    "image": "./img/3_73.svg",
+    "audio": "./00 Audio/3_73.mp3"
+  },
+  {
+    "id": "book3_unit74",
+    "book": "book3",
+    "unit": "-74: Don't panic!",
+    "lyrics": "./00 Lyrics/3_74.lrc",
+    "image": "./img/3_74.svg",
+    "audio": "./00 Audio/3_74.mp3"
+  },
+  {
+    "id": "book3_unit75",
+    "book": "book3",
+    "unit": "-75: Messages",
+    "lyrics": "./00 Lyrics/3_75.lrc",
+    "image": "./img/3_75.svg",
+    "audio": "./00 Audio/3_75.mp3"
+  },
+  {
+    "id": "book3_unit76",
+    "book": "book3",
+    "unit": "-76: A few questions",
+    "lyrics": "./00 Lyrics/3_76.lrc",
+    "image": "./img/3_76.svg",
+    "audio": "./00 Audio/3_76.mp3"
+  },
+  {
+    "id": "book3_unit77",
+    "book": "book3",
+    "unit": "-77: Trust the heart",
+    "lyrics": "./00 Lyrics/3_77.lrc",
+    "image": "./img/3_77.svg",
+    "audio": "./00 Audio/3_77.mp3"
+  },
+  {
+    "id": "book3_unit78",
+    "book": "book3",
+    "unit": "-78: Weddings",
+    "lyrics": "./00 Lyrics/3_78.lrc",
+    "image": "./img/3_78.svg",
+    "audio": "./00 Audio/3_78.mp3"
+  },
+  {
+    "id": "book3_unit79",
+    "book": "book3",
+    "unit": "-79: The English language",
+    "lyrics": "./00 Lyrics/3_79.lrc",
+    "image": "./img/3_79.svg",
+    "audio": "./00 Audio/3_79.mp3"
+  },
+  {
+    "id": "book3_unit80",
+    "book": "book3",
+    "unit": "-80: Departures",
+    "lyrics": "./00 Lyrics/3_80.lrc",
+    "image": "./img/3_80.svg",
+    "audio": "./00 Audio/3_80.mp3"
+  },
+
+  {
+    "id": "book4_unit1",
+    "book": "book4",
+    "unit": "-01: Learning languages",
+    "lyrics": "./00 Lyrics/4_01.lrc",
+    "image": "./img/4_01.svg",
+    "audio": "./00 Audio/4_01.mp3"
+  },
+  {
+    "id": "book4_unit2",
+    "book": "book4",
+    "unit": "-02: Shark attack!",
+    "lyrics": "./00 Lyrics/4_02.lrc",
+    "image": "./img/4_02.svg",
+    "audio": "./00 Audio/4_02.mp3"
+  },
+  {
+    "id": "book4_unit3",
+    "book": "book4",
+    "unit": "-03: The yellow bulldozer",
+    "lyrics": "./00 Lyrics/4_03.lrc",
+    "image": "./img/4_03.svg",
+    "audio": "./00 Audio/4_03.mp3"
+  },
+  {
+    "id": "book4_unit4",
+    "book": "book4",
+    "unit": "-04: The rumour",
+    "lyrics": "./00 Lyrics/4_04.lrc",
+    "image": "./img/4_04.svg",
+    "audio": "./00 Audio/4_04.mp3"
+  },
+  {
+    "id": "book4_unit5",
+    "book": "book4",
+    "unit": "-05: Two-word verbs",
+    "lyrics": "./00 Lyrics/4_05.lrc",
+    "image": "./img/4_05.svg",
+    "audio": "./00 Audio/4_05.mp3"
+  },
+  {
+    "id": "book4_unit6",
+    "book": "book4",
+    "unit": "-06: The explorer",
+    "lyrics": "./00 Lyrics/4_06.lrc",
+    "image": "./img/4_06.svg",
+    "audio": "./00 Audio/4_06.mp3"
+  },
+  {
+    "id": "book4_unit7",
+    "book": "book4",
+    "unit": "-07: Describing a picture",
+    "lyrics": "./00 Lyrics/4_07.lrc",
+    "image": "./img/4_07.svg",
+    "audio": "./00 Audio/4_07.mp3"
+  },
+  {
+    "id": "book4_unit8",
+    "book": "book4",
+    "unit": "-08: The British royal family",
+    "lyrics": "./00 Lyrics/4_08.lrc",
+    "image": "./img/4_08.svg",
+    "audio": "./00 Audio/4_08.mp3"
+  },
+  {
+    "id": "book4_unit9",
+    "book": "book4",
+    "unit": "-09: Expressing your feelings",
+    "lyrics": "./00 Lyrics/4_09.lrc",
+    "image": "./img/4_09.svg",
+    "audio": "./00 Audio/4_09.mp3"
+  },
+  {
+    "id": "book4_unit10",
+    "book": "book4",
+    "unit": "-10: How do I get to...?",
+    "lyrics": "./00 Lyrics/4_10.lrc",
+    "image": "./img/4_10.svg",
+    "audio": "./00 Audio/4_10.mp3"
+  },
+
+  {
+    "id": "book4_unit11",
+    "book": "book4",
+    "unit": "-11: Raging inferno",
+    "lyrics": "./00 Lyrics/4_11.lrc",
+    "image": "./img/4_11.svg",
+    "audio": "./00 Audio/4_11.mp3"
+  },
+  {
+    "id": "book4_unit12",
+    "book": "book4",
+    "unit": "-12: Access yourself",
+    "lyrics": "./00 Lyrics/4_12.lrc",
+    "image": "./img/4_12.svg",
+    "audio": "./00 Audio/4_12.mp3"
+  },
+  {
+    "id": "book4_unit13",
+    "book": "book4",
+    "unit": "-13: The language of advertising",
+    "lyrics": "./00 Lyrics/4_13.lrc",
+    "image": "./img/4_13.svg",
+    "audio": "./00 Audio/4_13.mp3"
+  },
+  {
+    "id": "book4_unit14",
+    "book": "book4",
+    "unit": "-14: Subscribe",
+    "lyrics": "./00 Lyrics/4_14.lrc",
+    "image": "./img/4_14.svg",
+    "audio": "./00 Audio/4_14.mp3"
+  },
+  {
+    "id": "book4_unit15",
+    "book": "book4",
+    "unit": "-15: Britain from the air",
+    "lyrics": "./00 Lyrics/4_15.lrc",
+    "image": "./img/4_15.svg",
+    "audio": "./00 Audio/4_15.mp3"
+  },
+  {
+    "id": "book4_unit16",
+    "book": "book4",
+    "unit": "-16: The town that's going to die",
+    "lyrics": "./00 Lyrics/4_16.lrc",
+    "image": "./img/4_16.svg",
+    "audio": "./00 Audio/4_16.mp3"
+  },
+  {
+    "id": "book4_unit17",
+    "book": "book4",
+    "unit": "-17: Collector's corner",
+    "lyrics": "./00 Lyrics/4_17.lrc",
+    "image": "./img/4_17.svg",
+    "audio": "./00 Audio/4_17.mp3"
+  },
+  {
+    "id": "book4_unit18",
+    "book": "book4",
+    "unit": "-18: Life in zero",
+    "lyrics": "./00 Lyrics/4_18.lrc",
+    "image": "./img/4_18.svg",
+    "audio": "./00 Audio/4_18.mp3"
+  },
+  {
+    "id": "book4_unit19",
+    "book": "book4",
+    "unit": "-19: Sequences",
+    "lyrics": "./00 Lyrics/4_19.lrc",
+    "image": "./img/4_19.svg",
+    "audio": "./00 Audio/4_19.mp3"
+  },
+  {
+    "id": "book4_unit20",
+    "book": "book4",
+    "unit": "-20: Urban legends",
+    "lyrics": "./00 Lyrics/4_20.lrc",
+    "image": "./img/4_20.svg",
+    "audio": "./00 Audio/4_20.mp3"
+  },
+
+  {
+    "id": "book4_unit21",
+    "book": "book4",
+    "unit": "-21: Prejudice",
+    "lyrics": "./00 Lyrics/4_21.lrc",
+    "image": "./img/4_21.svg",
+    "audio": "./00 Audio/4_21.mp3"
+  },
+  {
+    "id": "book4_unit22",
+    "book": "book4",
+    "unit": "-22: Making your point",
+    "lyrics": "./00 Lyrics/4_22.lrc",
+    "image": "./img/4_22.svg",
+    "audio": "./00 Audio/4_22.mp3"
+  },
+  {
+    "id": "book4_unit23",
+    "book": "book4",
+    "unit": "-23: Teletext",
+    "lyrics": "./00 Lyrics/4_23.lrc",
+    "image": "./img/4_23.svg",
+    "audio": "./00 Audio/4_23.mp3"
+  },
+  {
+    "id": "book4_unit24",
+    "book": "book4",
+    "unit": "-24: The Parkhurst Talkabout",
+    "lyrics": "./00 Lyrics/4_24.lrc",
+    "image": "./img/4_24.svg",
+    "audio": "./00 Audio/4_24.mp3"
+  },
+  {
+    "id": "book4_unit25",
+    "book": "book4",
+    "unit": "-25: Rules and regulations",
+    "lyrics": "./00 Lyrics/4_25.lrc",
+    "image": "./img/4_25.svg",
+    "audio": "./00 Audio/4_25.mp3"
+  },
+  {
+    "id": "book4_unit26",
+    "book": "book4",
+    "unit": "-26: Alas!",
+    "lyrics": "./00 Lyrics/4_26.lrc",
+    "image": "./img/4_26.svg",
+    "audio": "./00 Audio/4_26.mp3"
+  },
+  {
+    "id": "book4_unit27",
+    "book": "book4",
+    "unit": "-27: Hairdresser!",
+    "lyrics": "./00 Lyrics/4_27.lrc",
+    "image": "./img/4_27.svg",
+    "audio": "./00 Audio/4_27.mp3"
+  },
+  {
+    "id": "book4_unit28",
+    "book": "book4",
+    "unit": "-28: Relay",
+    "lyrics": "./00 Lyrics/4_28.lrc",
+    "image": "./img/4_28.svg",
+    "audio": "./00 Audio/4_28.mp3"
+  },
+  {
+    "id": "book4_unit29",
+    "book": "book4",
+    "unit": "-29: Design",
+    "lyrics": "./00 Lyrics/4_29.lrc",
+    "image": "./img/4_29.svg",
+    "audio": "./00 Audio/4_29.mp3"
+  },
+  {
+    "id": "book4_unit30",
+    "book": "book4",
+    "unit": "-30: Gadgets",
+    "lyrics": "./00 Lyrics/4_30.lrc",
+    "image": "./img/4_30.svg",
+    "audio": "./00 Audio/4_30.mp3"
+  },
+
+  {
+    "id": "book4_unit31",
+    "book": "book4",
+    "unit": "-31: Ghost plane crash",
+    "lyrics": "./00 Lyrics/4_31.lrc",
+    "image": "./img/4_31.svg",
+    "audio": "./00 Audio/4_31.mp3"
+  },
+  {
+    "id": "book4_unit32",
+    "book": "book4",
+    "unit": "-32: The language of newspapers",
+    "lyrics": "./00 Lyrics/4_32.lrc",
+    "image": "./img/4_32.svg",
+    "audio": "./00 Audio/4_32.mp3"
+  },
+  {
+    "id": "book4_unit33",
+    "book": "book4",
+    "unit": "-33: Belief, doubt and certainty",
+    "lyrics": "./00 Lyrics/4_33.lrc",
+    "image": "./img/4_33.svg",
+    "audio": "./00 Audio/4_33.mp3"
+  },
+  {
+    "id": "book4_unit34",
+    "book": "book4",
+    "unit": "-34: Harry",
+    "lyrics": "./00 Lyrics/4_34.lrc",
+    "image": "./img/4_34.svg",
+    "audio": "./00 Audio/4_34.mp3"
+  },
+  {
+    "id": "book4_unit35",
+    "book": "book4",
+    "unit": "-35: Video games",
+    "lyrics": "./00 Lyrics/4_35.lrc",
+    "image": "./img/4_35.svg",
+    "audio": "./00 Audio/4_35.mp3"
+  },
+  {
+    "id": "book4_unit36",
+    "book": "book4",
+    "unit": "-36: Medical advice",
+    "lyrics": "./00 Lyrics/4_36.lrc",
+    "image": "./img/4_36.svg",
+    "audio": "./00 Audio/4_36.mp3"
+  },
+  {
+    "id": "book4_unit37",
+    "book": "book4",
+    "unit": "-37: Close encounters",
+    "lyrics": "./00 Lyrics/4_37.lrc",
+    "image": "./img/4_37.svg",
+    "audio": "./00 Audio/4_37.mp3"
+  },
+  {
+    "id": "book4_unit38",
+    "book": "book4",
+    "unit": "-38: Chinese horoscopes",
+    "lyrics": "./00 Lyrics/4_38.lrc",
+    "image": "./img/4_38.svg",
+    "audio": "./00 Audio/4_38.mp3"
+  },
+  {
+    "id": "book4_unit39",
+    "book": "book4",
+    "unit": "-39: Artificial intelligence",
+    "lyrics": "./00 Lyrics/4_39.lrc",
+    "image": "./img/4_39.svg",
+    "audio": "./00 Audio/4_39.mp3"
+  },
+  {
+    "id": "book4_unit40",
+    "book": "book4",
+    "unit": "-40: Youth culture",
+    "lyrics": "./00 Lyrics/4_40.lrc",
+    "image": "./img/4_40.svg",
+    "audio": "./00 Audio/4_40.mp3"
+  },
+
+  {
+    "id": "book4_unit41",
+    "book": "book4",
+    "unit": "-41: Animal rights and wrongs",
+    "lyrics": "./00 Lyrics/4_41.lrc",
+    "image": "./img/4_41.svg",
+    "audio": "./00 Audio/4_41.mp3"
+  },
+  {
+    "id": "book4_unit42",
+    "book": "book4",
+    "unit": "-42: Strong language",
+    "lyrics": "./00 Lyrics/4_42.lrc",
+    "image": "./img/4_42.svg",
+    "audio": "./00 Audio/4_42.mp3"
+  },
+  {
+    "id": "book4_unit43",
+    "book": "book4",
+    "unit": "-43: Typewriter types",
+    "lyrics": "./00 Lyrics/4_43.lrc",
+    "image": "./img/4_43.svg",
+    "audio": "./00 Audio/4_43.mp3"
+  },
+  {
+    "id": "book4_unit44",
+    "book": "book4",
+    "unit": "-44: New hospital",
+    "lyrics": "./00 Lyrics/4_44.lrc",
+    "image": "./img/4_44.svg",
+    "audio": "./00 Audio/4_44.mp3"
+  },
+  {
+    "id": "book4_unit45",
+    "book": "book4",
+    "unit": "-45: Precautions",
+    "lyrics": "./00 Lyrics/4_45.lrc",
+    "image": "./img/4_45.svg",
+    "audio": "./00 Audio/4_45.mp3"
+  },
+  {
+    "id": "book4_unit46",
+    "book": "book4",
+    "unit": "-46: The crime of the century?",
+    "lyrics": "./00 Lyrics/4_46.lrc",
+    "image": "./img/4_46.svg",
+    "audio": "./00 Audio/4_46.mp3"
+  },
+  {
+    "id": "book4_unit47",
+    "book": "book4",
+    "unit": "-47: Advice and suggestions",
+    "lyrics": "./00 Lyrics/4_47.lrc",
+    "image": "./img/4_47.svg",
+    "audio": "./00 Audio/4_47.mp3"
+  },
+  {
+    "id": "book4_unit48",
+    "book": "book4",
+    "unit": "-48: Sleep",
+    "lyrics": "./00 Lyrics/4_48.lrc",
+    "image": "./img/4_48.svg",
+    "audio": "./00 Audio/4_48.mp3"
+  },
+  {
+    "id": "book4_unit49",
+    "book": "book4",
+    "unit": "-49: The Importance of Being Earnest",
+    "lyrics": "./00 Lyrics/4_49.lrc",
+    "image": "./img/4_49.svg",
+    "audio": "./00 Audio/4_49.mp3"
+  },
+  {
+    "id": "book4_unit50",
+    "book": "book4",
+    "unit": "-50: Away from it all?",
+    "lyrics": "./00 Lyrics/4_50.lrc",
+    "image": "./img/4_50.svg",
+    "audio": "./00 Audio/4_50.mp3"
+  },
+
+  {
+    "id": "book4_unit51",
+    "book": "book4",
+    "unit": "-51: Dear Sir",
+    "lyrics": "./00 Lyrics/4_51.lrc",
+    "image": "./img/4_51.svg",
+    "audio": "./00 Audio/4_51.mp3"
+  },
+  {
+    "id": "book4_unit52",
+    "book": "book4",
+    "unit": "-52: You the jury",
+    "lyrics": "./00 Lyrics/4_52.lrc",
+    "image": "./img/4_52.svg",
+    "audio": "./00 Audio/4_52.mp3"
+  },
+  {
+    "id": "book4_unit53",
+    "book": "book4",
+    "unit": "-53: Justice?",
+    "lyrics": "./00 Lyrics/4_53.lrc",
+    "image": "./img/4_53.svg",
+    "audio": "./00 Audio/4_53.mp3"
+  },
+  {
+    "id": "book4_unit54",
+    "book": "book4",
+    "unit": "-54: Where's Mr Greyson?",
+    "lyrics": "./00 Lyrics/4_54.lrc",
+    "image": "./img/4_54.svg",
+    "audio": "./00 Audio/4_54.mp3"
+  },
+  {
+    "id": "book4_unit55",
+    "book": "book4",
+    "unit": "-55: The language of rock",
+    "lyrics": "./00 Lyrics/4_55.lrc",
+    "image": "./img/4_55.svg",
+    "audio": "./00 Audio/4_55.mp3"
+  },
+  {
+    "id": "book4_unit56",
+    "book": "book4",
+    "unit": "-56: William Shakespear (1564-1616)",
+    "lyrics": "./00 Lyrics/4_56.lrc",
+    "image": "./img/4_56.svg",
+    "audio": "./00 Audio/4_56.mp3"
+  },
+  {
+    "id": "book4_unit57",
+    "book": "book4",
+    "unit": "-57: The Frankenstein robot",
+    "lyrics": "./00 Lyrics/4_57.lrc",
+    "image": "./img/4_57.svg",
+    "audio": "./00 Audio/4_57.mp3"
+  },
+  {
+    "id": "book4_unit58",
+    "book": "book4",
+    "unit": "-58: Anything to declare?",
+    "lyrics": "./00 Lyrics/4_58.lrc",
+    "image": "./img/4_58.svg",
+    "audio": "./00 Audio/4_58.mp3"
+  },
+  {
+    "id": "book4_unit59",
+    "book": "book4",
+    "unit": "-59: Doorstep salesmen",
+    "lyrics": "./00 Lyrics/4_59.lrc",
+    "image": "./img/4_59.svg",
+    "audio": "./00 Audio/4_59.mp3"
+  },
+  {
+    "id": "book4_unit60",
+    "book": "book4",
+    "unit": "-60: The driving test",
+    "lyrics": "./00 Lyrics/4_60.lrc",
+    "image": "./img/4_60.svg",
+    "audio": "./00 Audio/4_60.mp3"
   },
   {
     "book": "book5",
