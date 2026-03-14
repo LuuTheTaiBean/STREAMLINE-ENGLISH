@@ -4,7 +4,7 @@
     "book": "book1",
     "unit": "01: Hello",
     "lyrics": "./00 Lyrics/1_01.lrc",
-    "image": "./img/1_01.svg",
+    "image": "./img/1_01.webp",
     "audio": "./00 Audio/1_01.mp3"
   },
   {
@@ -45,7 +45,7 @@
     "book": "book1",
     "unit": "22: Can you help me?",
     "lyrics": "./00 Lyrics/1_22.lrc",
-    "image": "./img/1_22.svg",
+    "image": "./img/1_22.webp",
     "audio": "./00 Audio/1_22.mp3"
   },
   {
