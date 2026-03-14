@@ -12,7 +12,7 @@
     "book": "book1",
     "unit": "-02: Excuse me",
     "lyrics": "./00 Lyrics/1_02.lrc",
-    "image": "./img/1_02.svg",
+    "image": "./img/1_02.webp",
     "audio": "./00 Audio/1_02.mp3"
   },
   {
@@ -20,7 +20,7 @@
     "book": "book1",
     "unit": "13: Elton Kash",
     "lyrics": "./00 Lyrics/1_13.lrc",
-    "image": "./img/1_13.svg",
+    "image": "./img/1_13.webp",
     "audio": "./00 Audio/1_13.mp3"
   },
   {
@@ -28,7 +28,7 @@
     "book": "book1",
     "unit": "16: Gloria Gusto, Tom Atkins and Terry Archer",
     "lyrics": "./00 Lyrics/1_16.lrc",
-    "image": "./img/1_16.svg",
+    "image": "./img/1_16.webp",
     "audio": "./00 Audio/1_16.mp3"
   },
   {
@@ -36,7 +36,7 @@
     "book": "book1",
     "unit": "17: At the customs",
     "lyrics": "./00 Lyrics/1_17.lrc",
-    "image": "./img/1_17.svg",
+    "image": "./img/1_17.webp",
     "audio": "./00 Audio/1_17.mp3"
   },
 
@@ -53,7 +53,7 @@
     "book": "book1",
     "unit": "-25: At the cinema",
     "lyrics": "./00 Lyrics/1_25.lrc",
-    "image": "./img/1_25.svg",
+    "image": "./img/1_25.webp",
     "audio": "./00 Audio/1_25.mp3"
   },
   {
@@ -61,7 +61,7 @@
     "book": "book1",
     "unit": "27: In prison",
     "lyrics": "./00 Lyrics/1_27.lrc",
-    "image": "./img/1_27.svg",
+    "image": "./img/1_27.webp",
     "audio": "./00 Audio/1_27.mp3"
   },
   {
@@ -69,7 +69,7 @@
     "book": "book1",
     "unit": "28: An English Wedding",
     "lyrics": "./00 Lyrics/1_28.lrc",
-    "image": "./img/1_28.svg",
+    "image": "./img/1_28.webp",
     "audio": "./00 Audio/1_28.mp3"
   },
   {
@@ -77,7 +77,7 @@
     "book": "book1",
     "unit": "29: Computer dating",
     "lyrics": "./00 Lyrics/1_29.lrc",
-    "image": "./img/1_29.svg",
+    "image": "./img/1_29.webp",
     "audio": "./00 Audio/1_29.mp3"
   },
   {
@@ -85,7 +85,7 @@
     "book": "book1",
     "unit": "32: An interview",
     "lyrics": "./00 Lyrics/1_32.lrc",
-    "image": "./img/1_32.svg",
+    "image": "./img/1_32.webp",
     "audio": "./00 Audio/1_32.mp3"
   },
   {
@@ -93,7 +93,7 @@
     "book": "book1",
     "unit": "33: Every day",
     "lyrics": "./00 Lyrics/1_33.lrc",
-    "image": "./img/1_33.svg",
+    "image": "./img/1_33.webp",
     "audio": "./00 Audio/1_33.mp3"
   },
   {
@@ -101,7 +101,7 @@
     "book": "book1",
     "unit": "35: Never on a Sunday",
     "lyrics": "./00 Lyrics/1_35.lrc",
-    "image": "./img/1_35.svg",
+    "image": "./img/1_35.webp",
     "audio": "./00 Audio/1_35.mp3"
   },
   {
@@ -109,7 +109,7 @@
     "book": "book1",
     "unit": "37: What does he do every day?",
     "lyrics": "./00 Lyrics/1_37.lrc",
-    "image": "./img/1_37.svg",
+    "image": "./img/1_37.webp",
     "audio": "./00 Audio/1_37.mp3"
   },
   {
@@ -117,7 +117,7 @@
     "book": "book1",
     "unit": "38: Well or badly?",
     "lyrics": "./00 Lyrics/1_38.lrc",
-    "image": "./img/1_38.svg",
+    "image": "./img/1_38.webp",
     "audio": "./00 Audio/1_38.mp3"
   },
   {
@@ -125,7 +125,7 @@
     "book": "book1",
     "unit": "41: Where were you yesterday?",
     "lyrics": "./00 Lyrics/1_41.lrc",
-    "image": "./img/1_41.svg",
+    "image": "./img/1_41.webp",
     "audio": "./00 Audio/1_41.mp3"
   },
   {
@@ -133,7 +133,7 @@
     "book": "book1",
     "unit": "42: Holidays",
     "lyrics": "./00 Lyrics/1_42.lrc",
-    "image": "./img/1_42.svg",
+    "image": "./img/1_42.webp",
     "audio": "./00 Audio/1_42.mp3"
   },
   {
@@ -141,7 +141,7 @@
     "book": "book1",
     "unit": "44: Return from Space",
     "lyrics": "./00 Lyrics/1_44.lrc",
-    "image": "./img/1_44.svg",
+    "image": "./img/1_44.webp",
     "audio": "./00 Audio/1_44.mp3"
   },
   {
@@ -149,7 +149,7 @@
     "book": "book1",
     "unit": "45: Yes, dear!",
     "lyrics": "./00 Lyrics/1_45.lrc",
-    "image": "./img/1_45.svg",
+    "image": "./img/1_45.webp",
     "audio": "./00 Audio/1_45.mp3"
   },
   {
@@ -157,7 +157,7 @@
     "book": "book1",
     "unit": "46: In the office",
     "lyrics": "./00 Lyrics/1_46.lrc",
-    "image": "./img/1_46.svg",
+    "image": "./img/1_46.webp",
     "audio": "./00 Audio/1_46.mp3"
   },
   {
@@ -165,7 +165,7 @@
     "book": "book1",
     "unit": "-47: The Story of Willy The Kid",
     "lyrics": "./00 Lyrics/1_47.lrc",
-    "image": "./img/1_47.svg",
+    "image": "./img/1_47.webp",
     "audio": "./00 Audio/1_47.mp3"
   },
   {
@@ -173,7 +173,7 @@
     "book": "book1",
     "unit": "48: Foreign holidays",
     "lyrics": "./00 Lyrics/1_48.lrc",
-    "image": "./img/1_48.svg",
+    "image": "./img/1_48.webp",
     "audio": "./00 Audio/1_48.mp3"
   },
   {
@@ -181,7 +181,7 @@
     "book": "book1",
     "unit": "49: Survivors",
     "lyrics": "./00 Lyrics/1_49.lrc",
-    "image": "./img/1_49.svg",
+    "image": "./img/1_49.webp",
     "audio": "./00 Audio/1_49.mp3"
   },
   {
@@ -189,7 +189,7 @@
     "book": "book1",
     "unit": "-52: The Eight O'Clock News",
     "lyrics": "./00 Lyrics/1_52.lrc",
-    "image": "./img/1_52.svg",
+    "image": "./img/1_52.webp",
     "audio": "./00 Audio/1_52.mp3"
   },
   {
@@ -197,7 +197,7 @@
     "book": "book1",
     "unit": "-55: An accident",
     "lyrics": "./00 Lyrics/1_55.lrc",
-    "image": "./img/1_55.svg",
+    "image": "./img/1_55.webp",
     "audio": "./00 Audio/1_55.mp3"
   },
   {
@@ -205,7 +205,7 @@
     "book": "book1",
     "unit": "56: An investigation",
     "lyrics": "./00 Lyrics/1_56.lrc",
-    "image": "./img/1_56.svg",
+    "image": "./img/1_56.webp",
     "audio": "./00 Audio/1_56.mp3"
   },
   {
@@ -213,7 +213,7 @@
     "book": "book1",
     "unit": "61: On the moon",
     "lyrics": "./00 Lyrics/1_61.lrc",
-    "image": "./img/1_61.svg",
+    "image": "./img/1_61.webp",
     "audio": "./00 Audio/1_61.mp3"
   },
   {
@@ -221,7 +221,7 @@
     "book": "book1",
     "unit": "62: Where's he gone?",
     "lyrics": "./00 Lyrics/1_62.lrc",
-    "image": "./img/1_62.svg",
+    "image": "./img/1_62.webp",
     "audio": "./00 Audio/1_62.mp3"
   },
   {
@@ -229,7 +229,7 @@
     "book": "book1",
     "unit": "64: Town and Country",
     "lyrics": "./00 Lyrics/1_64.lrc",
-    "image": "./img/1_64.svg",
+    "image": "./img/1_64.webp",
     "audio": "./00 Audio/1_64.mp3"
   },
   {
@@ -237,7 +237,7 @@
     "book": "book1",
     "unit": "69: A hard life",
     "lyrics": "./00 Lyrics/1_69.lrc",
-    "image": "./img/1_69.svg",
+    "image": "./img/1_69.webp",
     "audio": "./00 Audio/1_69.mp3"
   },
   {
@@ -245,7 +245,7 @@
     "book": "book1",
     "unit": "71: Brutus Cray - the Greatest",
     "lyrics": "./00 Lyrics/1_71.lrc",
-    "image": "./img/1_71.svg",
+    "image": "./img/1_71.webp",
     "audio": "./00 Audio/1_71.mp3"
   },
   {
@@ -253,7 +253,7 @@
     "book": "book1",
     "unit": "72: George and Brenda",
     "lyrics": "./00 Lyrics/1_72.lrc",
-    "image": "./img/1_72.svg",
+    "image": "./img/1_72.webp",
     "audio": "./00 Audio/1_72.mp3"
   },
   {
@@ -261,7 +261,7 @@
     "book": "book1",
     "unit": "75: Four lives",
     "lyrics": "./00 Lyrics/1_75.lrc",
-    "image": "./img/1_75.svg",
+    "image": "./img/1_75.webp",
     "audio": "./00 Audio/1_75.mp3"
   },
   {
@@ -269,7 +269,7 @@
     "book": "book1",
     "unit": "77: The election result",
     "lyrics": "./00 Lyrics/1_77.lrc",
-    "image": "./img/1_77.svg",
+    "image": "./img/1_77.webp",
     "audio": "./00 Audio/1_77.mp3"
   },
 
