@@ -163,7 +163,7 @@
   {
     "id": "book1_unit47",
     "book": "book1",
-    "unit": "-47: The Story of Willy The Kid",
+    "unit": "47: The Story of Willy The Kid",
     "lyrics": "./00 Lyrics/1_47.lrc",
     "image": "./img/1_47.webp",
     "audio": "./00 Audio/1_47.mp3"
@@ -195,7 +195,7 @@
   {
     "id": "book1_unit55",
     "book": "book1",
-    "unit": "-55: An accident",
+    "unit": "55: An accident",
     "lyrics": "./00 Lyrics/1_55.lrc",
     "image": "./img/1_55.webp",
     "audio": "./00 Audio/1_55.mp3"
