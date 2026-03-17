@@ -678,24 +678,24 @@
 
             fetchLyrics(item.lyrics).then((lyricsData) => {
               document.getElementById("units-container").innerHTML = `
-    <div class="container">
-    <h2 class="text-center fw-bold" onclick="toggleText()" style="cursor:pointer">
-      ${item.unit}
-    </h2>
-    <div class="row align-items-center">
-      <!-- TEXT -->
-      <div class="col-md-6 p-0 mb-4 mb-md-0 d-flex align-items-center">
-        <div id="lyrics-container" class="lyrics-box"></div>
-      </div>
-      <!-- IMAGE -->
-      <div class="col-md-6 p-0 mb-2 image-box text-center ">
-        <div class="image-slider text-center">
-          <img id="unitImage" src="${(item.images && item.images[0]) || item.image}" class="img-fluid" loading="lazy" onclick="toggleImage()"
-            style="cursor:pointer" />
-        </div>
-      </div>
-    </div>
-  </div>
+                        <div class="container">
+                        <h2 class="text-center fw-bold" onclick="toggleText()" style="cursor:pointer">
+                          ${item.unit}
+                        </h2>
+                        <div class="row align-items-center">
+                          <!-- TEXT -->
+                          <div class="col-md-6 p-0 mb-4 mb-md-0 d-flex align-items-center">
+                            <div id="lyrics-container" class="lyrics-box"></div>
+                          </div>
+                          <!-- IMAGE -->
+                          <div class="col-md-6 p-0 mb-2 image-box text-center ">
+                            <div class="image-slider text-center">
+                              <img id="unitImage" src="${(item.images && item.images[0]) || item.image}" class="img-fluid" loading="lazy" onclick="toggleImage()"
+                                style="cursor:pointer" />
+                            </div>
+                          </div>
+                        </div>
+                      </div>
                     `;
               let currentImgIndex = 0;
               const images = item.images || [item.image];

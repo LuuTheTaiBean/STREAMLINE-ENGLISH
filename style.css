@@ -687,16 +687,15 @@ input[type="color"] {
 /* Sửa */
 .image-box {
   max-height: 89vh;
+  overflow: auto;
   display: flex;
   justify-content: center;
-  align-items: center;
-  overflow: hidden;
+  align-items: flex-start; /* ✅ FIX */
 }
 
 .image-box img {
   max-width: 100%;
-  max-height: 100%;
-  object-fit: contain;
+  height: auto;
 }
 
 /* Ẩn scrollbar Chrome, Edge, Safari */
