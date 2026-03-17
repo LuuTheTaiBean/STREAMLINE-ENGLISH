@@ -87,6 +87,7 @@
       <div class="icon play-pause-btn"><i class="fa-solid fa-play"></i></div>
       <div class="icon"><i class="fa-solid fa-repeat"></i></div>
       <div class="icon"><i class="fa-brands fa-quinscape"></i></div>
+      <div class="icon"><i class="fa-solid fa-images changeImageBtn"></i></div>
       <div class="icon"><i class="fa-solid fa-folder-closed"></i></div>
       <div class="icon">
         <i class="fa-solid fa-book" id="vocabIcon"></i>
@@ -118,6 +119,7 @@
       </div>
       <div class="icon"><i class="fa-solid fa-repeat"></i></div>
       <div class="icon"><i class="fa-brands fa-quinscape"></i></div>
+      <div class="icon"><i class="fa-solid fa-images changeImageBtn"></i></div>
       <div class="icon"><i class="fa-solid fa-folder-closed"></i></div>
       <div class="icon">
         <i class="fa-solid fa-book" id="vocabIcon"></i>
@@ -676,22 +678,82 @@
 
             fetchLyrics(item.lyrics).then((lyricsData) => {
               document.getElementById("units-container").innerHTML = `
-                          <div class="container">
-                              <h2 class="text-center fw-bold" onclick="toggleText()" style="cursor:pointer">
-                                  ${item.unit}
-                              </h2>
-                              <div class="row align-items-center">
-                                  <!-- TEXT -->
-                                  <div class="col-md-6 mb-4 mb-md-0 d-flex align-items-center">
-                                      <div id="lyrics-container" class="lyrics-box"></div>
-                                  </div>
-                                  <!-- IMAGE -->
-                                  <div class="col-md-6 mb-2 image-box text-center ">
-                                      <img id="unitImage" src="${item.image}" class="img-fluid" loading="lazy" onclick="toggleImage()" style="cursor:pointer" />
-                                  </div>
-                              </div>
-                          </div>
+    <div class="container">
+    <h2 class="text-center fw-bold" onclick="toggleText()" style="cursor:pointer">
+      ${item.unit}
+    </h2>
+    <div class="row align-items-center">
+      <!-- TEXT -->
+      <div class="col-md-6 mb-4 mb-md-0 d-flex align-items-center">
+        <div id="lyrics-container" class="lyrics-box"></div>
+      </div>
+      <!-- IMAGE -->
+      <div class="col-md-6 mb-2 image-box text-center ">
+        <div class="image-slider text-center">
+          <img id="unitImage" src="${(item.images && item.images[0]) || item.image}" class="img-fluid" loading="lazy" onclick="toggleImage()"
+            style="cursor:pointer" />
+        </div>
+      </div>
+    </div>
+  </div>
                     `;
+              let currentImgIndex = 0;
+              const images = item.images || [item.image];
+              const imgElement = document.getElementById("unitImage");
+              const changeBtns = document.querySelectorAll(".changeImageBtn");
+
+              changeBtns.forEach(btn => {
+                btn.onclick = () => {
+                  currentImgIndex++;
+                  if (currentImgIndex >= images.length) {
+                    currentImgIndex = 0;
+                  }
+                  imgElement.src = images[currentImgIndex];
+                };
+              });
+              // const prevBtn = document.getElementById("prevImg");
+              // const nextBtn = document.getElementById("nextImg");
+              // if (images.length <= 1) {
+              //   prevBtn.style.display = "none";
+              //   nextBtn.style.display = "none";
+              // } else {
+              //   prevBtn.style.display = "inline-block";
+              //   nextBtn.style.display = "inline-block";
+              // }
+
+              // document.getElementById("prevImg").onclick = () => {
+              //   currentImgIndex--;
+              //   if (currentImgIndex < 0) {
+              //     currentImgIndex = images.length - 1;
+              //   }
+              //   imgElement.src = images[currentImgIndex];
+              // };
+
+              // document.getElementById("nextImg").onclick = () => {
+              //   currentImgIndex++;
+              //   if (currentImgIndex >= images.length) {
+              //     currentImgIndex = 0;
+              //   }
+              //   imgElement.src = images[currentImgIndex];
+              // };
+              let startX = 0;
+
+              imgElement.addEventListener("touchstart", e => {
+                startX = e.touches[0].clientX;
+              });
+
+              imgElement.addEventListener("touchend", e => {
+                let endX = e.changedTouches[0].clientX;
+
+                if (endX - startX > 50) {
+                  // swipe right
+                  document.getElementById("prevImg").click();
+                } else if (startX - endX > 50) {
+                  // swipe left
+                  document.getElementById("nextImg").click();
+                }
+              });
+
               const desktopBtn = document.getElementById("markLearnedBtn");
               const mobileBtn = document.getElementById("markLearnedBtnMobile");
               desktopBtn.onclick = () => window.showUserInfo(item.id, item.unit);
