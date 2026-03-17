@@ -715,7 +715,7 @@
   {
     "id": "book2_unit10",
     "book": "book2",
-    "unit": "+10: Lord Worth",
+    "unit": "-10: Lord Worth",
     "lyrics": "./00 Lyrics/2_10.lrc",
     "image": "./img/2_10.webp",
     "audio": "./00 Audio/2_10.mp3"
@@ -731,7 +731,7 @@
   {
     "id": "book2_unit12",
     "book": "book2",
-    "unit": "+12: A science fiction story",
+    "unit": "-12: A science fiction story",
     "lyrics": "./00 Lyrics/2_12.lrc",
     "image": "./img/2_12.webp",
     "audio": "./00 Audio/2_12.mp3"
@@ -763,7 +763,7 @@
   {
     "id": "book2_unit16",
     "book": "book2",
-    "unit": "thiếu ảnh +16: A traffic survey",
+    "unit": "thiếu ảnh -16: A traffic survey",
     "lyrics": "./00 Lyrics/2_16.lrc",
     "image": "./img/2_16.webp",
     "audio": "./00 Audio/2_16.mp3"
@@ -2469,5 +2469,13 @@
     "lyrics": "./00 Lyrics/Japanese government sells cheap rice 3.lrc",
     "image": "./img/Japanese government sells cheap rice.svg",
     "audio": "00 Audio/Japanese government sells cheap rice 3.mp3"
+  },
+  {
+    "id": "book8_unit01",
+    "book": "book8",
+    "unit": "01: My new school",
+    "lyrics": "",
+    "image": "./img/8_01.webp",
+    "audio": ""
   }
 ]
