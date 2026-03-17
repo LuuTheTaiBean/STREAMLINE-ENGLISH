@@ -2475,7 +2475,95 @@
     "book": "book8",
     "unit": "01: My new school",
     "lyrics": "",
-    "image": "./img/8_01.webp",
+    "images": ["./img/8_01-1.webp", "./img/8_01-2.webp"],
+    "audio": ""
+  },
+  {
+    "id": "book8_unit02",
+    "book": "book8",
+    "unit": "02: My house",
+    "lyrics": "",
+    "images": ["./img/8_02-1.webp", "./img/8_02-2.webp"],
+    "audio": ""
+  },
+  {
+    "id": "book8_unit03",
+    "book": "book8",
+    "unit": "03: My friends",
+    "lyrics": "",
+    "images": ["./img/8_03-1.webp"],
+    "audio": ""
+  },
+  {
+    "id": "book8_unit04",
+    "book": "book8",
+    "unit": "04: My neighborhood",
+    "lyrics": "",
+    "images": ["./img/8_04-1.webp"],
+    "audio": ""
+  },
+  {
+    "id": "book8_unit05",
+    "book": "book8",
+    "unit": "05: Natural wonders of Viet Nam",
+    "lyrics": "",
+    "images": ["./img/8_05-1.webp"],
+    "audio": ""
+  },
+  {
+    "id": "book8_unit06",
+    "book": "book8",
+    "unit": "06: Our Tet Holiday",
+    "lyrics": "",
+    "images": ["./img/8_06-1.webp"],
+    "audio": ""
+  },
+  {
+    "id": "book8_unit07",
+    "book": "book8",
+    "unit": "07: Television",
+    "lyrics": "",
+    "images": ["./img/8_07-1.webp"],
+    "audio": ""
+  },
+  {
+    "id": "book8_unit08",
+    "book": "book8",
+    "unit": "08: Sports and Games",
+    "lyrics": "",
+    "images": ["./img/8_08-1.webp"],
+    "audio": ""
+  },
+  {
+    "id": "book8_unit09",
+    "book": "book8",
+    "unit": "09: Cities of the World",
+    "lyrics": "",
+    "images": ["./img/8_09-1.webp"],
+    "audio": ""
+  },
+  {
+    "id": "book8_unit10",
+    "book": "book8",
+    "unit": "10: Our houses in the future",
+    "lyrics": "",
+    "images": ["./img/8_10-1.webp"],
+    "audio": ""
+  },
+  {
+    "id": "book8_unit11",
+    "book": "book8",
+    "unit": "11: Our greener world",
+    "lyrics": "",
+    "images": ["./img/8_11-1.webp"],
+    "audio": ""
+  },
+  {
+    "id": "book8_unit12",
+    "book": "book8",
+    "unit": "12: Robots",
+    "lyrics": "",
+    "images": ["./img/8_12-1.webp"],
     "audio": ""
   }
 ]
