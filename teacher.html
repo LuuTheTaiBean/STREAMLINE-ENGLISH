@@ -43,7 +43,39 @@
         collection,
         getDocs,
     } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+    import { auth } from "./firebase-config.js";
+    import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+    import { doc, getDoc } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
+    onAuthStateChanged(auth, async (user) => {
+        if (!user) {
+            alert("Bạn chưa đăng nhập!");
+            window.location.href = "login.html";
+            return;
+        }
+
+        // Lấy role từ Firestore
+        const userRef = doc(db, "users", user.uid);
+        const userSnap = await getDoc(userRef);
+
+        if (!userSnap.exists()) {
+            alert("Không tìm thấy user!");
+            window.location.href = "login.html";
+            return;
+        }
+
+        const userData = userSnap.data();
+
+        // ❌ Nếu không phải teacher/admin → chặn
+        if (userData.role !== "teacher" && userData.role !== "admin") {
+            alert("Bạn không có quyền truy cập!");
+            window.location.href = "index.html";
+            return;
+        }
+
+        // ✅ Có quyền → load dữ liệu
+        loadSubmissions();
+    });
     // 👉 EXPORT WORD
     function exportToWord(data) {
         let content = `
@@ -119,7 +151,7 @@
         });
     }
 
-    loadSubmissions();
+    // loadSubmissions();
 
     function formatTime(timestamp) {
         if (!timestamp) return "Unknown";
