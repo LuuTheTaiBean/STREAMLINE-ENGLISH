@@ -643,7 +643,7 @@
   {
     "id": "book2_unit1",
     "book": "book2",
-    "unit": "01: All Aboard",
+    "unit": "+01: All Aboard",
     "lyrics": "./00 Lyrics/2_01.lrc",
     "image": "./img/2_01.webp",
     "audio": "./00 Audio/2_01.mp3"
@@ -667,9 +667,14 @@
   {
     "id": "book2_unit4",
     "book": "book2",
-    "unit": "04: Olympic Report",
+    "unit": "+04: Olympic Report",
     "lyrics": "./00 Lyrics/2_04.lrc",
-    "image": "./img/2_04.webp",
+    "images": [
+      "./img/2_04-1.webp",
+      "./img/2_04-2.webp",
+      "./img/2_04-3.webp",
+      "./img/2_04-4.webp"
+    ],
     "audio": "./00 Audio/2_04.mp3"
   },
   {
@@ -691,7 +696,7 @@
   {
     "id": "book2_unit7",
     "book": "book2",
-    "unit": "07: Doctor Sowanso",
+    "unit": "+07: Doctor Sowanso",
     "lyrics": "./00 Lyrics/2_07.lrc",
     "image": "./img/2_07.webp",
     "audio": "./00 Audio/2_07.mp3"
@@ -763,9 +768,15 @@
   {
     "id": "book2_unit16",
     "book": "book2",
-    "unit": "thiếu ảnh -16: A traffic survey",
+    "unit": "-16: A traffic survey",
     "lyrics": "./00 Lyrics/2_16.lrc",
-    "image": "./img/2_16.webp",
+    "images": [
+      "./img/2_16-1.webp",
+      "./img/2_16-2.webp",
+      "./img/2_16-3.webp",
+      "./img/2_16-4.webp",
+      "./img/2_16-5.webp"
+    ],
     "audio": "./00 Audio/2_16.mp3"
   },
   {
@@ -787,7 +798,7 @@
   {
     "id": "book2_unit19",
     "book": "book2",
-    "unit": "19: A holiday in Egypt",
+    "unit": "*19: A holiday in Egypt",
     "lyrics": "./00 Lyrics/2_19.lrc",
     "image": "./img/2_19.webp",
     "audio": "./00 Audio/2_19.mp3"
@@ -795,7 +806,7 @@
   {
     "id": "book2_unit20",
     "book": "book2",
-    "unit": "20: Comparisons",
+    "unit": "*20: Comparisons",
     "lyrics": "./00 Lyrics/2_20.lrc",
     "image": "./img/2_20.webp",
     "audio": "./00 Audio/2_20.mp3"
@@ -803,7 +814,7 @@
   {
     "id": "book2_unit21",
     "book": "book2",
-    "unit": "21: A day off work",
+    "unit": "*21: A day off work",
     "lyrics": "./00 Lyrics/2_21.lrc",
     "image": "./img/2_21.webp",
     "audio": "./00 Audio/2_21.mp3"
@@ -819,7 +830,7 @@
   {
     "id": "book2_unit23",
     "book": "book2",
-    "unit": "23: Four disasters",
+    "unit": "*23: Four disasters",
     "lyrics": "./00 Lyrics/2_23.lrc",
     "image": "./img/2_23.webp",
     "audio": "./00 Audio/2_23.mp3"
@@ -875,7 +886,7 @@
   {
     "id": "book2_unit30",
     "book": "book2",
-    "unit": "30: The bad boy of British football",
+    "unit": "thiếu ảnh +30: The bad boy of British football",
     "lyrics": "./00 Lyrics/2_30.lrc",
     "image": "./img/2_30.webp",
     "audio": "./00 Audio/2_30.mp3"
@@ -923,7 +934,7 @@
   {
     "id": "book2_unit36",
     "book": "book2",
-    "unit": "36: The smuggler",
+    "unit": "+36: The smuggler",
     "lyrics": "./00 Lyrics/2_36.lrc",
     "image": "./img/2_36.webp",
     "audio": "./00 Audio/2_36.mp3"
@@ -971,7 +982,7 @@
   {
     "id": "book2_unit42",
     "book": "book2",
-    "unit": "42: The Empty Chair",
+    "unit": "+42: The Empty Chair",
     "lyrics": "./00 Lyrics/2_42.lrc",
     "image": "./img/2_42.webp",
     "audio": "./00 Audio/2_42.mp3"
@@ -1051,7 +1062,7 @@
   {
     "id": "book2_unit52",
     "book": "book2",
-    "unit": "52: UFO",
+    "unit": "*52: UFO",
     "lyrics": "./00 Lyrics/2_52.lrc",
     "image": "./img/2_52.webp",
     "audio": "./00 Audio/2_52.mp3"
@@ -1163,7 +1174,7 @@
   {
     "id": "book2_unit66",
     "book": "book2",
-    "unit": "66: The Eight O'Clock News",
+    "unit": "*66: The Eight O'Clock News",
     "lyrics": "./00 Lyrics/2_66.lrc",
     "image": "./img/2_66.webp",
     "audio": "./00 Audio/2_66.mp3"
@@ -1203,7 +1214,7 @@
   {
     "id": "book2_unit71",
     "book": "book2",
-    "unit": "71: North Sea Oil",
+    "unit": "*71: North Sea Oil",
     "lyrics": "./00 Lyrics/2_71.lrc",
     "image": "./img/2_71.webp",
     "audio": "./00 Audio/2_71.mp3"
