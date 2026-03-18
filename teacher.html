@@ -36,100 +36,98 @@
 
     <div id="submissionList" class="mt-4"></div>
 
-    <script type="module" src="teacher.js"></script>
-</body>
-<script type="module">import { db } from "./firebase-config.js";
-    import {
-        collection,
-        getDocs,
-    } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
-    import { auth } from "./firebase-config.js";
-    import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
-    import { doc, getDoc } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+    <script type="module">import { db } from "./firebase-config.js";
+        import {
+            collection,
+            getDocs,
+        } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+        import { auth } from "./firebase-config.js";
+        import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+        import { doc, getDoc } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
-    onAuthStateChanged(auth, async (user) => {
-        if (!user) {
-            alert("Bạn chưa đăng nhập!");
-            window.location.href = "login.html";
-            return;
-        }
+        onAuthStateChanged(auth, async (user) => {
+            if (!user) {
+                alert("Bạn chưa đăng nhập!");
+                window.location.href = "login.html";
+                return;
+            }
 
-        // Lấy role từ Firestore
-        const userRef = doc(db, "users", user.uid);
-        const userSnap = await getDoc(userRef);
+            // Lấy role từ Firestore
+            const userRef = doc(db, "users", user.uid);
+            const userSnap = await getDoc(userRef);
 
-        if (!userSnap.exists()) {
-            alert("Không tìm thấy user!");
-            window.location.href = "login.html";
-            return;
-        }
+            if (!userSnap.exists()) {
+                alert("Không tìm thấy user!");
+                window.location.href = "login.html";
+                return;
+            }
 
-        const userData = userSnap.data();
+            const userData = userSnap.data();
 
-        // ❌ Nếu không phải teacher/admin → chặn
-        if (userData.role !== "teacher" && userData.role !== "admin") {
-            alert("Bạn không có quyền truy cập!");
-            window.location.href = "index.html";
-            return;
-        }
+            // ❌ Nếu không phải teacher/admin → chặn
+            if (userData.role !== "teacher" && userData.role !== "admin") {
+                alert("Bạn không có quyền truy cập!");
+                window.location.href = "index.html";
+                return;
+            }
 
-        // ✅ Có quyền → load dữ liệu
-        loadSubmissions();
-    });
-    // 👉 EXPORT WORD
-    function exportToWord(data) {
-        let content = `
+            // ✅ Có quyền → load dữ liệu
+            loadSubmissions();
+        });
+        // 👉 EXPORT WORD
+        function exportToWord(data) {
+            let content = `
                         <h2>Student Submission</h2>
                         <p><strong>User:</strong> ${data.userId}</p>
                         <p><strong>Unit:</strong> ${data.unitId}</p>
                     `;
 
-        Object.values(data.notes).forEach((tab) => {
-            content += `
+            Object.values(data.notes).forEach((tab) => {
+                content += `
                         <h3>${tab.name}</h3>
                         <p>${tab.content}</p>
                         `;
-        });
-        const blob = new Blob(["\ufeff", content], { type: "application/msword" });
+            });
+            const blob = new Blob(["\ufeff", content], { type: "application/msword" });
 
-        const url = URL.createObjectURL(blob);
+            const url = URL.createObjectURL(blob);
 
-        const a = document.createElement("a");
-        a.href = url;
-        const fileName = `${data.userName || "Unknown"}-${data.unitId}-${formatFileTime(data.submittedAt)}.doc`;
-        a.download = fileName;
+            const a = document.createElement("a");
+            a.href = url;
+            const fileName = `${data.userName || "Unknown"}-${data.unitId}-${formatFileTime(data.submittedAt)}.doc`;
+            a.download = fileName;
 
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
-    }
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+        }
 
-    // 👉 LOAD DATA
-    async function loadSubmissions() {
-        const container = document.getElementById("submissionList");
-        container.innerHTML = "";
-        container.className = "row";
-        const snap = await getDocs(collection(db, "submissions"));
+        // 👉 LOAD DATA
+        async function loadSubmissions() {
+            const container = document.getElementById("submissionList");
+            container.innerHTML = "";
+            container.className = "row";
+            const snap = await getDocs(collection(db, "submissions"));
 
-        snap.forEach((docSnap) => {
-            const data = docSnap.data();
+            snap.forEach((docSnap) => {
+                const data = docSnap.data();
 
-            const div = document.createElement("div");
-            div.className = "col-md-4 mb-3"; // ✅ 3 cột / hàng
+                const div = document.createElement("div");
+                div.className = "col-md-4 mb-3"; // ✅ 3 cột / hàng
 
-            const card = document.createElement("div");
-            card.className = "card p-3 h-100"; // h-100 cho đều chiều cao
+                const card = document.createElement("div");
+                card.className = "card p-3 h-100"; // h-100 cho đều chiều cao
 
-            let contentHTML = "";
+                let contentHTML = "";
 
-            Object.values(data.notes).forEach((tab) => {
-                contentHTML += `
+                Object.values(data.notes).forEach((tab) => {
+                    contentHTML += `
         <h5>${tab.name}</h5>
         <p>${tab.content}</p>
       `;
-            });
+                });
 
-            card.innerHTML = `
+                card.innerHTML = `
                 <div class="mb-2">
                     <p><strong>Name:</strong> ${data.userName || "Unknown"}</p>
                     <p><strong>Email:</strong> ${data.userEmail}</p>
@@ -142,43 +140,44 @@
 
                 <button class="btn btn-success w-100 mt-2 exportBtn">Export Word</button>
                 `;
-            div.appendChild(card);
-            container.appendChild(div);
+                div.appendChild(card);
+                container.appendChild(div);
 
-            div.querySelector(".exportBtn").addEventListener("click", () => {
-                exportToWord(data);
+                div.querySelector(".exportBtn").addEventListener("click", () => {
+                    exportToWord(data);
+                });
             });
-        });
-    }
+        }
 
-    // loadSubmissions();
+        // loadSubmissions();
 
-    function formatTime(timestamp) {
-        if (!timestamp) return "Unknown";
+        function formatTime(timestamp) {
+            if (!timestamp) return "Unknown";
 
-        // Firestore Timestamp → Date
-        const date = timestamp.seconds
-            ? new Date(timestamp.seconds * 1000)
-            : new Date(timestamp);
+            // Firestore Timestamp → Date
+            const date = timestamp.seconds
+                ? new Date(timestamp.seconds * 1000)
+                : new Date(timestamp);
 
-        return date.toLocaleString("vi-VN");
-    }
-    function formatFileTime(timestamp) {
-        if (!timestamp) return "unknown-time";
+            return date.toLocaleString("vi-VN");
+        }
+        function formatFileTime(timestamp) {
+            if (!timestamp) return "unknown-time";
 
-        const date = timestamp.seconds
-            ? new Date(timestamp.seconds * 1000)
-            : new Date(timestamp);
+            const date = timestamp.seconds
+                ? new Date(timestamp.seconds * 1000)
+                : new Date(timestamp);
 
-        const yyyy = date.getFullYear();
-        const mm = String(date.getMonth() + 1).padStart(2, "0");
-        const dd = String(date.getDate()).padStart(2, "0");
+            const yyyy = date.getFullYear();
+            const mm = String(date.getMonth() + 1).padStart(2, "0");
+            const dd = String(date.getDate()).padStart(2, "0");
 
-        const hh = String(date.getHours()).padStart(2, "0");
-        const min = String(date.getMinutes()).padStart(2, "0");
+            const hh = String(date.getHours()).padStart(2, "0");
+            const min = String(date.getMinutes()).padStart(2, "0");
 
-        return `${yyyy}-${mm}-${dd}_${hh}-${min}`;
-    }
-</script>
+            return `${yyyy}-${mm}-${dd}_${hh}-${min}`;
+        }
+    </script>
+</body>
 
 </html>
