@@ -241,6 +241,7 @@
       <h5>My Notebooks</h5>
       <div>
         <button id="addTabBtn" class="btn btn-sm btn-success">+ Tab</button>
+        <button id="submitNotebook" class="btn btn-sm btn-primary">Send</button>
         <button id="closeNotebook" class="btn btn-sm btn-danger">Close</button>
       </div>
     </div>
@@ -1375,6 +1376,32 @@
     window.saveNotebook = saveNotebook;
     window.loadNotebook = loadNotebook;
 
+    document.getElementById("submitNotebook").addEventListener("click", async () => {
+      if (!auth.currentUser || !currentUnitId) {
+        alert("Missing user or unit!");
+        return;
+      }
+
+      const confirmSubmit = confirm("Submit your notes?");
+      if (!confirmSubmit) return;
+
+      const userDoc = await getDoc(doc(db, "users", auth.currentUser.uid));
+      const fullname = userDoc.data()?.fullname || "Unknown";
+
+      await setDoc(
+        doc(db, "submissions", auth.currentUser.uid + "_" + currentUnitId),
+        {
+          userId: auth.currentUser.uid,
+          userEmail: auth.currentUser.email,
+          userName: fullname, // 🔥 FIX TẠI ĐÂY
+          unitId: currentUnitId,
+          notes: notesData,
+          submittedAt: new Date()
+        }
+      );
+
+      alert("Submitted successfully!");
+    });
 
     window.showUserInfo = showUserInfo;
     document.getElementById("closeUserInfo").addEventListener("click", () => {

@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Teacher Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .content-scroll {
+            max-height: 200px;
+            /* 👈 chiều cao phần nội dung */
+            overflow-y: auto;
+            padding-right: 5px;
+        }
+
+        .content-scroll::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .content-scroll::-webkit-scrollbar-thumb {
+            background: #ccc;
+            border-radius: 3px;
+        }
+
+        .content-scroll p {
+            display: -webkit-box;
+            -webkit-line-clamp: 5;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+    </style>
+</head>
+
+<body class="p-4">
+    <h2>Student Notebooks</h2>
+
+    <div id="submissionList" class="mt-4"></div>
+
+    <script type="module" src="teacher.js"></script>
+</body>
+<script type="module">import { db } from "./firebase-config.js";
+    import {
+        collection,
+        getDocs,
+    } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+
+    // 👉 EXPORT WORD
+    function exportToWord(data) {
+        let content = `
+                        <h2>Student Submission</h2>
+                        <p><strong>User:</strong> ${data.userId}</p>
+                        <p><strong>Unit:</strong> ${data.unitId}</p>
+                    `;
+
+        Object.values(data.notes).forEach((tab) => {
+            content += `
+                        <h3>${tab.name}</h3>
+                        <p>${tab.content}</p>
+                        `;
+        });
+        const blob = new Blob(["\ufeff", content], { type: "application/msword" });
+
+        const url = URL.createObjectURL(blob);
+
+        const a = document.createElement("a");
+        a.href = url;
+        const fileName = `${data.userName || "Unknown"}-${data.unitId}-${formatFileTime(data.submittedAt)}.doc`;
+        a.download = fileName;
+
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+    }
+
+    // 👉 LOAD DATA
+    async function loadSubmissions() {
+        const container = document.getElementById("submissionList");
+        container.innerHTML = "";
+        container.className = "row";
+        const snap = await getDocs(collection(db, "submissions"));
+
+        snap.forEach((docSnap) => {
+            const data = docSnap.data();
+
+            const div = document.createElement("div");
+            div.className = "col-md-4 mb-3"; // ✅ 3 cột / hàng
+
+            const card = document.createElement("div");
+            card.className = "card p-3 h-100"; // h-100 cho đều chiều cao
+
+            let contentHTML = "";
+
+            Object.values(data.notes).forEach((tab) => {
+                contentHTML += `
+        <h5>${tab.name}</h5>
+        <p>${tab.content}</p>
+      `;
+            });
+
+            card.innerHTML = `
+                <div class="mb-2">
+                    <p><strong>Name:</strong> ${data.userName || "Unknown"}</p>
+                    <p><strong>Email:</strong> ${data.userEmail}</p>
+                    <p><strong>Submitted:</strong> ${formatTime(data.submittedAt)}</p>
+                </div>
+
+                <div class="content-scroll">
+                    ${contentHTML}
+                </div>
+
+                <button class="btn btn-success w-100 mt-2 exportBtn">Export Word</button>
+                `;
+            div.appendChild(card);
+            container.appendChild(div);
+
+            div.querySelector(".exportBtn").addEventListener("click", () => {
+                exportToWord(data);
+            });
+        });
+    }
+
+    loadSubmissions();
+
+    function formatTime(timestamp) {
+        if (!timestamp) return "Unknown";
+
+        // Firestore Timestamp → Date
+        const date = timestamp.seconds
+            ? new Date(timestamp.seconds * 1000)
+            : new Date(timestamp);
+
+        return date.toLocaleString("vi-VN");
+    }
+    function formatFileTime(timestamp) {
+        if (!timestamp) return "unknown-time";
+
+        const date = timestamp.seconds
+            ? new Date(timestamp.seconds * 1000)
+            : new Date(timestamp);
+
+        const yyyy = date.getFullYear();
+        const mm = String(date.getMonth() + 1).padStart(2, "0");
+        const dd = String(date.getDate()).padStart(2, "0");
+
+        const hh = String(date.getHours()).padStart(2, "0");
+        const min = String(date.getMinutes()).padStart(2, "0");
+
+        return `${yyyy}-${mm}-${dd}_${hh}-${min}`;
+    }
+</script>
+
+</html>
