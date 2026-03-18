@@ -191,14 +191,14 @@
                 ? new Date(timestamp.seconds * 1000)
                 : new Date(timestamp);
 
-            const yyyy = date.getFullYear();
-            const mm = String(date.getMonth() + 1).padStart(2, "0");
             const dd = String(date.getDate()).padStart(2, "0");
+            const mm = String(date.getMonth() + 1).padStart(2, "0");
+            const yyyy = date.getFullYear();
 
             const hh = String(date.getHours()).padStart(2, "0");
             const min = String(date.getMinutes()).padStart(2, "0");
 
-            return `${yyyy}-${mm}-${dd}_${hh}-${min}`;
+            return `${hh}-${min} ${dd}-${mm}-${yyyy}`;
         }
         function formatFileName(data) {
             const name = (data.userName || "Unknown").replace(/[\\/:*?"<>|]/g, "");
@@ -216,7 +216,7 @@
 
             const time = formatFileTime(data.submittedAt);
 
-            return `${name} - ${book} - ${unitPart} - ${time}.docx`;
+            return `${book}-${unitPart} ${name} ${time}.docx`;
         }
     </script>
 </body>
