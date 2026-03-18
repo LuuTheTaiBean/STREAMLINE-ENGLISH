@@ -76,17 +76,10 @@
         });
         // 👉 EXPORT WORD
         function exportToWord(data) {
-            let content = `
-                        <h2>Student Submission</h2>
-                        <p><strong>User:</strong> ${data.userId}</p>
-                        <p><strong>Unit:</strong> ${data.unitId}</p>
-                    `;
+            let content = "";
 
             Object.values(data.notes).forEach((tab) => {
-                content += `
-                        <h3>${tab.name}</h3>
-                        <p>${tab.content}</p>
-                        `;
+                content += `${tab.content}`;
             });
             const blob = new Blob(["\ufeff", content], { type: "application/msword" });
 
