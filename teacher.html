@@ -44,7 +44,58 @@
         import { auth } from "./firebase-config.js";
         import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
         import { doc, getDoc } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+        // import { Document, Packer, Paragraph, TextRun } from "docx";
+        import {
+            Document,
+            Packer,
+            Paragraph,
+            TextRun
+        } from "https://cdn.jsdelivr.net/npm/docx@8.5.0/+esm";
+        async function exportToWord(data) {
+            const paragraphs = [];
+            Object.values(data.notes).forEach((tab) => {
+                // 1. Convert HTML -> text có xuống dòng
+                const textWithBreaks = tab.content
+                    .replace(/<\/p>/g, "\n")   // </p> -> xuống dòng
+                    .replace(/<br\s*\/?>/g, "\n") // <br> -> xuống dòng
+                    .replace(/<[^>]+>/g, "");  // remove tag còn lại
 
+                // 2. Split thành từng dòng
+                const lines = textWithBreaks.split("\n");
+
+                // 3. Mỗi dòng = 1 paragraph
+                lines.forEach(line => {
+                    if (line.trim() !== "") {
+                        paragraphs.push(
+                            new Paragraph({
+                                children: [
+                                    new TextRun({
+                                        text: line,
+                                        font: "Times New Roman",
+                                        size: 24
+                                    })
+                                ]
+                            })
+                        );
+                    }
+                });
+            });
+
+
+            const doc = new Document({
+                sections: [{ children: paragraphs }]
+            });
+
+            const blob = await Packer.toBlob(doc);
+
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement("a");
+
+            a.href = url;
+            const fileName = formatFileName(data);
+            a.download = fileName;
+            a.click();
+        }
         onAuthStateChanged(auth, async (user) => {
             if (!user) {
                 alert("Bạn chưa đăng nhập!");
@@ -74,27 +125,6 @@
             // ✅ Có quyền → load dữ liệu
             loadSubmissions();
         });
-        // 👉 EXPORT WORD
-        function exportToWord(data) {
-            let content = "";
-
-            Object.values(data.notes).forEach((tab) => {
-                content += `${tab.content}`;
-            });
-            const blob = new Blob(["\ufeff", content], { type: "application/msword" });
-
-            const url = URL.createObjectURL(blob);
-
-            const a = document.createElement("a");
-            a.href = url;
-            const fileName = `${data.userName || "Unknown"}-${data.unitId}-${formatFileTime(data.submittedAt)}.doc`;
-            a.download = fileName;
-
-            document.body.appendChild(a);
-            a.click();
-            document.body.removeChild(a);
-        }
-
         // 👉 LOAD DATA
         async function loadSubmissions() {
             const container = document.getElementById("submissionList");
@@ -169,6 +199,24 @@
             const min = String(date.getMinutes()).padStart(2, "0");
 
             return `${yyyy}-${mm}-${dd}_${hh}-${min}`;
+        }
+        function formatFileName(data) {
+            const name = (data.userName || "Unknown").replace(/[\\/:*?"<>|]/g, "");
+            const unit = (data.unitId || "").replace(/[\\/:*?"<>|]/g, "");
+
+            // Giả sử unit dạng: book1_unit1
+            let book = "UnknownBook";
+            let unitPart = unit;
+
+            if (unit.includes("_")) {
+                const parts = unit.split("_");
+                book = parts[0] || "UnknownBook";
+                unitPart = parts.slice(1).join("_") || "UnknownUnit";
+            }
+
+            const time = formatFileTime(data.submittedAt);
+
+            return `${name} - ${book} - ${unitPart} - ${time}.docx`;
         }
     </script>
 </body>
