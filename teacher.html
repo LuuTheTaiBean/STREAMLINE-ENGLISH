@@ -53,6 +53,10 @@
         } from "https://cdn.jsdelivr.net/npm/docx@8.5.0/+esm";
         import { query, orderBy } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
         import { updateDoc, increment } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+        import { getStorage, ref, uploadBytes, getDownloadURL }
+            from "https://www.gstatic.com/firebasejs/10.12.0/firebase-storage.js";
+
+        const storage = getStorage();
         async function exportToWord(data) {
             const paragraphs = [];
             Object.values(data.notes).forEach((tab) => {
@@ -179,6 +183,14 @@
 
     <button class="btn btn-success w-100 mt-2 exportBtn">Export Word</button>
 
+    <button class="btn btn-primary w-100 mt-2 uploadBtn">Upload File</button>
+
+    <input type="file" class="fileInput d-none" accept=".doc,.docx,.pdf">
+        ${data.uploadedFile ? `
+            <a href="${data.uploadedFile}" target="_blank" class="btn btn-outline-secondary w-100 mt-2">
+                Xem file đã upload
+            </a>
+        ` : ""}
 </div>
 `;
                 div.appendChild(card);
@@ -196,6 +208,54 @@
                     const countEl = div.querySelector(".export-count");
                     let current = parseInt(countEl.innerText) || 0;
                     countEl.innerText = current + 1;
+                });
+                const fileInput = div.querySelector(".fileInput");
+                const uploadBtn = div.querySelector(".uploadBtn");
+
+                // bấm nút → mở chọn file
+                uploadBtn.addEventListener("click", () => {
+                    fileInput.click();
+                });
+
+                // chọn file xong
+                fileInput.addEventListener("change", async (e) => {
+                    const file = e.target.files[0];
+                    if (!file) return;
+
+                    // kiểm tra file
+                    const allowedTypes = [
+                        "application/pdf",
+                        "application/msword",
+                        "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+                    ];
+
+                    if (!allowedTypes.includes(file.type)) {
+                        alert("Chỉ được upload file Word hoặc PDF!");
+                        return;
+                    }
+
+                    try {
+                        // 📁 tạo đường dẫn lưu file
+                        const fileRef = ref(storage, `submissions/${docSnap.id}/${file.name}`);
+
+                        // 🚀 upload file
+                        await uploadBytes(fileRef, file);
+
+                        // 🔗 lấy link download
+                        const downloadURL = await getDownloadURL(fileRef);
+
+                        // 💾 lưu vào Firestore
+                        await updateDoc(doc(db, "submissions", docSnap.id), {
+                            uploadedFile: downloadURL
+                        });
+
+                        alert("Upload thành công!");
+                        console.log("File URL:", downloadURL);
+
+                    } catch (err) {
+                        console.error(err);
+                        alert("Upload lỗi!");
+                    }
                 });
             });
         }
