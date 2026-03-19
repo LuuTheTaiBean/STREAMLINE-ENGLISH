@@ -51,6 +51,7 @@
             Paragraph,
             TextRun
         } from "https://cdn.jsdelivr.net/npm/docx@8.5.0/+esm";
+        import { query, orderBy } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
         async function exportToWord(data) {
             const paragraphs = [];
             Object.values(data.notes).forEach((tab) => {
@@ -130,7 +131,14 @@
             const container = document.getElementById("submissionList");
             container.innerHTML = "";
             container.className = "row";
-            const snap = await getDocs(collection(db, "submissions"));
+
+
+            const q = query(
+                collection(db, "submissions"),
+                orderBy("submittedAt", "desc")
+            );
+
+            const snap = await getDocs(q);
 
             snap.forEach((docSnap) => {
                 const data = docSnap.data();
