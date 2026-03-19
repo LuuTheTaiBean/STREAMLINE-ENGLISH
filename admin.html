@@ -183,7 +183,13 @@
             deleteObject
         } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-storage.js";
 
-
+        const roleOrder = {
+            admin: 1,
+            teacher: 2,
+            student: 3,
+            parent: 4,
+            user: 5
+        };
         const db = getFirestore();
         const storage = getStorage();
         // ===================== REVENUE =====================
@@ -443,37 +449,51 @@
 
         async function loadUsers() {
             userTable.innerHTML = "";
+
             const snapshot = await getDocs(collection(db, "users"));
 
-            snapshot.forEach((docSnap) => {
-                const data = docSnap.data();
+            // 👉 chuyển sang array
+            const users = [];
 
+            snapshot.forEach(docSnap => {
+                users.push({
+                    id: docSnap.id,
+                    ...docSnap.data()
+                });
+            });
+
+            // 👉 SORT theo role
+            users.sort((a, b) => {
+                return (roleOrder[a.role] || 999) - (roleOrder[b.role] || 999);
+            });
+
+            // 👉 render lại
+            users.forEach(data => {
                 userTable.innerHTML += `
-                    <tr>
-                        <td>${data.fullname || "Chưa cập nhật"}</td>
-                        <td>${data.email}</td>
-                        <td>${data.role}</td>
-                        <td>
-                            <select onchange="changeRole('${docSnap.id}', this.value)"
-                                class="form-select form-select-sm">
+            <tr>
+                <td>${data.fullname || "Chưa cập nhật"}</td>
+                <td>${data.email}</td>
+                <td>${data.role}</td>
+                <td>
+                    <select onchange="changeRole('${data.id}', this.value)"
+                        class="form-select form-select-sm">
 
-                                <option value="student" ${data.role === "student" ? "selected" : ""}>Student</option>
-                                <option value="teacher" ${data.role === "teacher" ? "selected" : ""}>Teacher</option>
-                                <option value="admin" ${data.role === "admin" ? "selected" : ""}>Admin</option>
-                                <option value="parent" ${data.role === "parent" ? "selected" : ""}>Parent</option>
-                                <option value="user" ${data.role === "user" ? "selected" : ""}>User</option>
+                        <option value="admin" ${data.role === "admin" ? "selected" : ""}>Admin</option>
+                        <option value="teacher" ${data.role === "teacher" ? "selected" : ""}>Teacher</option>
+                        <option value="student" ${data.role === "student" ? "selected" : ""}>Student</option>
+                        <option value="parent" ${data.role === "parent" ? "selected" : ""}>Parent</option>
+                        <option value="user" ${data.role === "user" ? "selected" : ""}>User</option>
 
-                            </select>
-
-                        </td>
-                        <td>
-                            <button onclick="deleteUser('${docSnap.id}')"
-                                class="btn btn-danger btn-sm">
-                                Xóa
-                            </button>
-                        </td>
-                    </tr>
-                `;
+                    </select>
+                </td>
+                <td>
+                    <button onclick="deleteUser('${data.id}')"
+                        class="btn btn-danger btn-sm">
+                        Xóa
+                    </button>
+                </td>
+            </tr>
+        `;
             });
         }
 
