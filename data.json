@@ -720,7 +720,7 @@
   {
     "id": "book2_unit10",
     "book": "book2",
-    "unit": "AI 10: Lord Worth",
+    "unit": "+10: Lord Worth",
     "lyrics": "./00 Lyrics/2_10.lrc",
     "image": "./img/2_10.webp",
     "audio": "./00 Audio/2_10.mp3"
@@ -736,7 +736,7 @@
   {
     "id": "book2_unit12",
     "book": "book2",
-    "unit": "AI 12: A science fiction story",
+    "unit": " 12: A science fiction story",
     "lyrics": "./00 Lyrics/2_12.lrc",
     "images": ["./img/2_12.webp"],
     "audio": "./00 Audio/2_12.mp3"
@@ -768,7 +768,7 @@
   {
     "id": "book2_unit16",
     "book": "book2",
-    "unit": "AI 16: A traffic survey",
+    "unit": " 16: A traffic survey",
     "lyrics": "./00 Lyrics/2_16.lrc",
     "images": [
       "./img/2_16-1.webp",
@@ -798,7 +798,7 @@
   {
     "id": "book2_unit19",
     "book": "book2",
-    "unit": "AI 19: A holiday in Egypt",
+    "unit": "A 19: A holiday in Egypt",
     "lyrics": "./00 Lyrics/2_19.lrc",
     "image": "./img/2_19.webp",
     "audio": "./00 Audio/2_19.mp3"
@@ -806,7 +806,7 @@
   {
     "id": "book2_unit20",
     "book": "book2",
-    "unit": "AI 20: Comparisons",
+    "unit": "A 20: Comparisons",
     "lyrics": "./00 Lyrics/2_20.lrc",
     "image": "./img/2_20.webp",
     "audio": "./00 Audio/2_20.mp3"
@@ -814,7 +814,7 @@
   {
     "id": "book2_unit21",
     "book": "book2",
-    "unit": "AI 21: A day off work",
+    "unit": "A 21: A day off work",
     "lyrics": "./00 Lyrics/2_21.lrc",
     "image": "./img/2_21.webp",
     "audio": "./00 Audio/2_21.mp3"
@@ -830,7 +830,7 @@
   {
     "id": "book2_unit23",
     "book": "book2",
-    "unit": "AI 23: Four disasters",
+    "unit": " 23: Four disasters",
     "lyrics": "./00 Lyrics/2_23.lrc",
     "image": "./img/2_23.webp",
     "audio": "./00 Audio/2_23.mp3"
@@ -1062,7 +1062,7 @@
   {
     "id": "book2_unit52",
     "book": "book2",
-    "unit": "AI 52: UFO",
+    "unit": "A 52: UFO",
     "lyrics": "./00 Lyrics/2_52.lrc",
     "image": "./img/2_52.webp",
     "audio": "./00 Audio/2_52.mp3"
@@ -1174,7 +1174,7 @@
   {
     "id": "book2_unit66",
     "book": "book2",
-    "unit": "AI 66: The Eight O'Clock News",
+    "unit": "A 66: The Eight O'Clock News",
     "lyrics": "./00 Lyrics/2_66.lrc",
     "image": "./img/2_66.webp",
     "audio": "./00 Audio/2_66.mp3"
@@ -1214,7 +1214,7 @@
   {
     "id": "book2_unit71",
     "book": "book2",
-    "unit": "AI 71: North Sea Oil",
+    "unit": "A 71: North Sea Oil",
     "lyrics": "./00 Lyrics/2_71.lrc",
     "image": "./img/2_71.webp",
     "audio": "./00 Audio/2_71.mp3"
