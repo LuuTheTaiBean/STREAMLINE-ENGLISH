@@ -768,7 +768,7 @@
   {
     "id": "book2_unit16",
     "book": "book2",
-    "unit": " 16: A traffic survey",
+    "unit": "+16: A traffic survey",
     "lyrics": "./00 Lyrics/2_16.lrc",
     "images": [
       "./img/2_16-1.webp",
@@ -806,7 +806,7 @@
   {
     "id": "book2_unit20",
     "book": "book2",
-    "unit": "A 20: Comparisons",
+    "unit": " 20: Comparisons",
     "lyrics": "./00 Lyrics/2_20.lrc",
     "image": "./img/2_20.webp",
     "audio": "./00 Audio/2_20.mp3"
@@ -814,7 +814,7 @@
   {
     "id": "book2_unit21",
     "book": "book2",
-    "unit": "A 21: A day off work",
+    "unit": " 21: A day off work",
     "lyrics": "./00 Lyrics/2_21.lrc",
     "image": "./img/2_21.webp",
     "audio": "./00 Audio/2_21.mp3"
@@ -886,7 +886,7 @@
   {
     "id": "book2_unit30",
     "book": "book2",
-    "unit": "30: The bad boy of British football",
+    "unit": "+30: The bad boy of British football",
     "lyrics": "./00 Lyrics/2_30.lrc",
     "image": "./img/2_30.webp",
     "audio": "./00 Audio/2_30.mp3"
@@ -934,7 +934,7 @@
   {
     "id": "book2_unit36",
     "book": "book2",
-    "unit": "36: The smuggler",
+    "unit": "+36: The smuggler",
     "lyrics": "./00 Lyrics/2_36.lrc",
     "image": "./img/2_36.webp",
     "audio": "./00 Audio/2_36.mp3"
@@ -982,7 +982,7 @@
   {
     "id": "book2_unit42",
     "book": "book2",
-    "unit": "42: The Empty Chair",
+    "unit": "+42: The Empty Chair",
     "lyrics": "./00 Lyrics/2_42.lrc",
     "image": "./img/2_42.webp",
     "audio": "./00 Audio/2_42.mp3"
