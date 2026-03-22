@@ -830,7 +830,7 @@
   {
     "id": "book2_unit23",
     "book": "book2",
-    "unit": " 23: Four disasters",
+    "unit": "+23: Four disasters",
     "lyrics": "./00 Lyrics/2_23.lrc",
     "image": "./img/2_23.webp",
     "audio": "./00 Audio/2_23.mp3"
