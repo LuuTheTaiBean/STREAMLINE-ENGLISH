@@ -1185,7 +1185,7 @@
   {
     "id": "book2_unit66",
     "book": "book2",
-    "unit": "A 66: The Eight O'Clock News",
+    "unit": "+66: The Eight O'Clock News",
     "lyrics": "./00 Lyrics/2_66.lrc",
     "image": "./img/2_66.webp",
     "audio": "./00 Audio/2_66.mp3"
@@ -1225,7 +1225,7 @@
   {
     "id": "book2_unit71",
     "book": "book2",
-    "unit": "A 71: North Sea Oil",
+    "unit": " 71: North Sea Oil",
     "lyrics": "./00 Lyrics/2_71.lrc",
     "image": "./img/2_71.webp",
     "audio": "./00 Audio/2_71.mp3"
