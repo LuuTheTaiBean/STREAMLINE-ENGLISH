@@ -808,7 +808,7 @@
     "book": "book2",
     "unit": "+20: Comparisons",
     "lyrics": "./00 Lyrics/2_20.lrc",
-    "image": "./img/2_20.webp",
+    "images": ["./img/2_20-1.webp", "./img/2_20-2.webp"],
     "audio": "./00 Audio/2_20.mp3"
   },
   {
@@ -816,7 +816,12 @@
     "book": "book2",
     "unit": "+21: A day off work",
     "lyrics": "./00 Lyrics/2_21.lrc",
-    "image": "./img/2_21.webp",
+    "images": [
+      "./img/2_21-1.webp",
+      "./img/2_21-2.webp",
+      "./img/2_21-3.webp",
+      "./img/2_21-4.webp"
+    ],
     "audio": "./00 Audio/2_21.mp3"
   },
   {
@@ -832,7 +837,13 @@
     "book": "book2",
     "unit": "+23: Four disasters",
     "lyrics": "./00 Lyrics/2_23.lrc",
-    "image": "./img/2_23.webp",
+    "images": [
+      "./img/2_23-1.webp",
+      "./img/2_23-2.webp",
+      "./img/2_23-3.webp",
+      "./img/2_23-4.webp",
+      "./img/2_23-5.webp"
+    ],
     "audio": "./00 Audio/2_23.mp3"
   },
   {
@@ -888,7 +899,7 @@
     "book": "book2",
     "unit": "+30: The bad boy of British football",
     "lyrics": "./00 Lyrics/2_30.lrc",
-    "image": "./img/2_30.webp",
+    "images": ["./img/2_30-1.webp", "./img/2_30-2.webp", "./img/2_30-3.webp"],
     "audio": "./00 Audio/2_30.mp3"
   },
   {
