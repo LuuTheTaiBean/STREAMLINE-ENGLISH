@@ -712,3 +712,117 @@ input[type="color"] {
 .image-box {
   -ms-overflow-style: none;
 }
+.show-question-btn {
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  /* display: flex; */
+  align-items: center;
+  justify-content: center;
+  vertical-align: middle;
+}
+
+.show-question-btn i {
+  font-size: 13px;
+}
+
+.speak-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: none;
+  background: linear-gradient(135deg, #4facfe, #00f2fe);
+  color: white;
+  /* display: flex; */
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.speak-btn:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 10px rgba(0, 242, 254, 0.6);
+}
+
+.speak-btn i {
+  font-size: 14px;
+}
+
+.question-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 15px;
+}
+
+.question-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 40px;
+  justify-content: center;
+  align-items: center;
+}
+
+.question-content {
+  flex: 1;
+  background: #f8f9fa;
+  padding: 10px;
+  border-radius: 8px;
+
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+
+  transition:
+    max-height 0.3s ease,
+    opacity 0.25s ease;
+}
+
+.speak-btn i,
+.show-question-btn i {
+  width: 16px;
+  height: 16px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Khi hiện */
+.question-content.show {
+  max-height: 150px; /* chỉnh theo nội dung */
+  opacity: 1;
+}
+
+.speak-btn {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: #0d6efd;
+  color: white;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.15s ease;
+}
+
+.speak-btn:hover {
+  transform: scale(1.1);
+}
+.show-question-btn i,
+.speak-btn i {
+  transition: transform 0.15s ease;
+}
+
+.show-question-btn:active i,
+.speak-btn:active i {
+  transform: scale(0.9);
+}
+.show-question-btn,
+.speak-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

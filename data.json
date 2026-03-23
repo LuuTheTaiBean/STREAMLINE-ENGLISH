@@ -101,7 +101,8 @@
     "unit": "+13: Elton Kash",
     "lyrics": "./00 Lyrics/1_13.lrc",
     "images": ["./img/1_13-1.webp", "./img/1_13-2.webp"],
-    "audio": "./00 Audio/1_13.mp3"
+    "audio": "./00 Audio/1_13.mp3",
+    "questions": "./00 Questions/1_13.txt"
   },
   {
     "id": "book1_unit14",
@@ -125,7 +126,8 @@
     "unit": "+16: Gloria Gusto, Tom Atkins and Terry Archer",
     "lyrics": "./00 Lyrics/1_16.lrc",
     "images": ["./img/1_16-1.webp", "./img/1_16-2.webp", "./img/1_16-3.webp"],
-    "audio": "./00 Audio/1_16.mp3"
+    "audio": "./00 Audio/1_16.mp3",
+    "questions": "./00 Questions/1_16.txt"
   },
   {
     "id": "book1_unit17",
