@@ -276,7 +276,7 @@
 
       <div id="questionContainer"></div>
 
-      <button id="submitAnswers" class="btn btn-success mt-3">Submit</button>
+      <button id="submitAnswers" class="btn btn-success mt-3">Save</button>
       <div id="answerResult" class="mt-3"></div>
     </div>
   </div>
@@ -1193,91 +1193,108 @@
       try {
         const res = await fetch(filePath);
         const text = await res.text();
-
-        // mỗi dòng là 1 câu hỏi
         currentQuestions = text.split(/\r?\n/).filter(q => q.trim() !== "");
 
-        renderQuestions();
+        // TẢI DỮ LIỆU CŨ TỪ FIREBASE
+        const savedAnswers = await window.loadStudentAnswers(currentUnitId);
+
+        renderQuestions(savedAnswers); // Truyền dữ liệu cũ vào hàm render
 
       } catch (err) {
         console.error("Load questions error:", err);
       }
     }
 
-    function renderQuestions() {
+    function renderQuestions(savedAnswers) {
       const container = document.getElementById("questionContainer");
-
       container.innerHTML = "";
 
       currentQuestions.forEach((q, index) => {
+        // Kiểm tra xem câu hỏi này đã có câu trả lời lưu trong Firebase chưa
+        const oldData = savedAnswers ? savedAnswers[`question_${index}`] : null;
+        const oldAnswer = oldData ? oldData.answer : "";
+
         const div = document.createElement("div");
         div.className = "mb-3";
 
         div.innerHTML = `
-<div class="question-row">
-  
-  <!-- ICONS -->
-  <div class="question-actions">
-    <button class="speak-btn">
-      <i class="fa-solid fa-volume-high fa-xs"></i>
-    </button>
+      <div class="question-row">
+        <div class="question-actions">
+          <button class="speak-btn"><i class="fa-solid fa-volume-high fa-xs"></i></button>
+          <button class="btn btn-sm btn-outline-secondary show-question-btn">
+            <i class="fa-solid fa-eye fa-xs"></i>
+          </button>
+        </div>
+        <div class="question-content ${oldAnswer ? 'show' : 'hidden'}">
+          <strong>Question ${index + 1}:</strong> ${q}
+          <input type="text" class="form-control mt-2" id="answer_${index}" 
+                 placeholder="Your answer..." value="${oldAnswer}">
+        </div>
+      </div>
+     `;
 
-    <button class="btn btn-sm btn-outline-secondary show-question-btn">
-      <i class="fa-solid fa-eye fa-xs"></i>
-    </button>
-  </div>
-
-  <!-- CONTENT -->
-<div class="question-content hidden">
-    <strong>Question ${index + 1}:</strong> ${q}
-    <input type="text" class="form-control mt-2" id="answer_${index}" placeholder="Your answer...">
-  </div>
-
-</div>
-`;
+        // Giữ nguyên các sự kiện click loa và con mắt như cũ của bạn...
         const showBtn = div.querySelector(".show-question-btn");
         const content = div.querySelector(".question-content");
         const icon = showBtn.querySelector("i");
+        if (oldAnswer) { icon.classList.replace("fa-eye", "fa-eye-slash"); } // Đổi icon nếu đang hiện
 
         showBtn.addEventListener("click", () => {
-
           const isOpen = content.classList.contains("show");
-
           if (isOpen) {
-            // đang mở → đóng lại
             content.classList.remove("show");
-            icon.classList.remove("fa-eye-slash");
-            icon.classList.add("fa-eye");
+            icon.classList.replace("fa-eye-slash", "fa-eye");
           } else {
-            // đang đóng → mở ra
             content.classList.add("show");
-            icon.classList.remove("fa-eye");
-            icon.classList.add("fa-eye-slash");
+            icon.classList.replace("fa-eye", "fa-eye-slash");
           }
-
         });
 
-        const speakBtn = div.querySelector(".speak-btn");
-        speakBtn.addEventListener("click", () => {
-          speakText(q);
-        });
+        div.querySelector(".speak-btn").addEventListener("click", () => speakText(q));
         container.appendChild(div);
       });
 
       document.getElementById("questionPanel").classList.remove("d-none");
     }
 
-    document.getElementById("submitAnswers").addEventListener("click", () => {
+    // Thay thế hàm submitAnswers hiện tại của bạn
+    document.getElementById("submitAnswers").addEventListener("click", async () => {
+      if (!window.currentUser || !currentUnitId) {
+        alert("Vui lòng đăng nhập và chọn bài học!");
+        return;
+      }
 
-      let answered = 0;
+      const answersData = {};
+      let answeredCount = 0;
 
+      // Thu thập dữ liệu từ các input
       currentQuestions.forEach((q, index) => {
-        const val = document.getElementById(`answer_${index}`).value.trim();
-        if (val !== "") answered++;
+        const answerVal = document.getElementById(`answer_${index}`).value.trim();
+        if (answerVal !== "") {
+          answeredCount++;
+        }
+        // Lưu cặp Câu hỏi: Câu trả lời
+        answersData[`question_${index}`] = {
+          question: q,
+          answer: answerVal
+        };
       });
 
-      document.getElementById("answerResult").innerHTML =
-        `<h5>You answered ${answered}/${currentQuestions.length} questions</h5>`;
+      if (answeredCount === 0) {
+        alert("Bạn chưa trả lời câu hỏi nào!");
+        return;
+      }
+
+      try {
+        // Gọi hàm lưu vào Firebase (định nghĩa ở phần script module)
+        await window.saveStudentAnswers(currentUnitId, answersData);
+
+        document.getElementById("answerResult").innerHTML =
+          `<h5 class="text-success">Đã lưu thành công ${answeredCount}/${currentQuestions.length} câu trả lời!</h5>`;
+      } catch (error) {
+        console.error("Lỗi khi lưu câu trả lời:", error);
+        alert("Có lỗi xảy ra khi lưu bài. Vui lòng thử lại.");
+      }
     });
 
     document.getElementById("closeQuestion").addEventListener("click", () => {
@@ -1337,6 +1354,48 @@
     import { deleteDoc }
       from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
+    // Thêm vào bên trong <script type="module">
+    async function saveStudentAnswers(unitId, answersData) {
+      const user = auth.currentUser;
+      if (!user) return;
+
+      // Lưu vào collection "answers" của từng user
+      // Cấu trúc: users -> {userId} -> answers -> {unitId}
+      await setDoc(
+        doc(db, "users", user.uid, "answers", unitId),
+        {
+          unitId: unitId,
+          answers: answersData,
+          submittedAt: new Date(),
+          status: "completed"
+        },
+        { merge: true } // Sử dụng merge để tránh ghi đè toàn bộ nếu bạn muốn cập nhật sau này
+      );
+    }
+
+    // Xuất hàm ra window để dùng ở script thường
+    window.saveStudentAnswers = saveStudentAnswers;
+
+    // Thêm vào trong <script type="module">
+    async function loadStudentAnswers(unitId) {
+      const user = auth.currentUser;
+      if (!user || !unitId) return null;
+
+      try {
+        const docRef = doc(db, "users", user.uid, "answers", unitId);
+        const docSnap = await getDoc(docRef);
+
+        if (docSnap.exists()) {
+          return docSnap.data().answers; // Trả về object chứa các câu hỏi/trả lời
+        }
+      } catch (error) {
+        console.error("Lỗi khi tải câu trả lời:", error);
+      }
+      return null;
+    }
+
+    // Xuất ra window
+    window.loadStudentAnswers = loadStudentAnswers;
     let vocabData = {};
     let editingId = null;
     async function increaseListenCount(uid, unitId) {
