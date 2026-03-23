@@ -1344,7 +1344,8 @@
     "unit": "01: Arrivals",
     "lyrics": "./00 Lyrics/3_01.lrc",
     "image": "./img/3_01.webp",
-    "audio": "./00 Audio/3_01.mp3"
+    "audio": "./00 Audio/3_01.mp3",
+    "questions": "./00 Questions/3_01.txt"
   },
   {
     "id": "book3_unit2",
@@ -1352,7 +1353,8 @@
     "unit": "02: Is everything ready?",
     "lyrics": "./00 Lyrics/3_02.lrc",
     "image": "./img/3_02.webp",
-    "audio": "./00 Audio/3_02.mp3"
+    "audio": "./00 Audio/3_02.mp3",
+    "questions": "./00 Questions/3_02.txt"
   },
   {
     "id": "book3_unit3",
