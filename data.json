@@ -292,7 +292,12 @@
     "book": "book1",
     "unit": "+37: What does he do every day?",
     "lyrics": "./00 Lyrics/1_37.lrc",
-    "image": "./img/1_37.webp",
+    "images": [
+      "./img/1_37-1.webp",
+      "./img/1_37-2.webp",
+      "./img/1_37-3.webp",
+      "./img/1_37-4.webp"
+    ],
     "audio": "./00 Audio/1_37.mp3"
   },
   {
@@ -300,7 +305,12 @@
     "book": "book1",
     "unit": "+38: Well or badly?",
     "lyrics": "./00 Lyrics/1_38.lrc",
-    "image": "./img/1_38.webp",
+    "images": [
+      "./img/1_38-1.webp",
+      "./img/1_38-2.webp",
+      "./img/1_38-3.webp",
+      "./img/1_38-4.webp"
+    ],
     "audio": "./00 Audio/1_38.mp3"
   },
   {
@@ -380,7 +390,12 @@
     "book": "book1",
     "unit": "+48: Foreign holidays",
     "lyrics": "./00 Lyrics/1_48.lrc",
-    "image": "./img/1_48.webp",
+    "images": [
+      "./img/1_48-1.webp",
+      "./img/1_48-2.webp",
+      "./img/1_48-3.webp",
+      "./img/1_48-4.webp"
+    ],
     "audio": "./00 Audio/1_48.mp3"
   },
   {
@@ -412,7 +427,13 @@
     "book": "book1",
     "unit": "+52: The Eight O'Clock News",
     "lyrics": "./00 Lyrics/1_52.lrc",
-    "image": "./img/1_52.webp",
+    "images": [
+      "./img/1_52-1.webp",
+      "./img/1_52-2.webp",
+      "./img/1_52-3.webp",
+      "./img/1_52-4.webp",
+      "./img/1_52-5.webp"
+    ],
     "audio": "./00 Audio/1_52.mp3"
   },
   {
@@ -508,7 +529,7 @@
     "book": "book1",
     "unit": "+64: Town and Country",
     "lyrics": "./00 Lyrics/1_64.lrc",
-    "image": "./img/1_64.webp",
+    "images": ["./img/1_64-1.webp", "./img/1_64-2.webp"],
     "audio": "./00 Audio/1_64.mp3"
   },
   {
@@ -548,7 +569,13 @@
     "book": "book1",
     "unit": "+69: A hard life",
     "lyrics": "./00 Lyrics/1_69.lrc",
-    "image": "./img/1_69.webp",
+    "images": [
+      "./img/1_69-1.webp",
+      "./img/1_69-2.webp",
+      "./img/1_69-3.webp",
+      "./img/1_69-4.webp",
+      "./img/1_69-5.webp"
+    ],
     "audio": "./00 Audio/1_69.mp3"
   },
   {
@@ -572,7 +599,13 @@
     "book": "book1",
     "unit": "+72: George and Brenda",
     "lyrics": "./00 Lyrics/1_72.lrc",
-    "image": "./img/1_72.webp",
+    "images": [
+      "./img/1_72-1.webp",
+      "./img/1_72-2.webp",
+      "./img/1_72-3.webp",
+      "./img/1_72-4.webp",
+      "./img/1_72-5.webp"
+    ],
     "audio": "./00 Audio/1_72.mp3"
   },
   {
@@ -596,7 +629,7 @@
     "book": "book1",
     "unit": "+75: Four lives",
     "lyrics": "./00 Lyrics/1_75.lrc",
-    "image": "./img/1_75.webp",
+    "images": ["./img/1_75-1.webp", "./img/1_75-2.webp"],
     "audio": "./00 Audio/1_75.mp3"
   },
   {
