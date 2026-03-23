@@ -276,7 +276,7 @@
 
       <div id="questionContainer"></div>
 
-      <button id="submitAnswers" class="btn btn-success mt-3">Save</button>
+      <!-- <button id="submitAnswers" class="btn btn-success mt-3">Save</button> -->
       <div id="answerResult" class="mt-3"></div>
     </div>
   </div>
@@ -1211,7 +1211,7 @@
 
       currentQuestions.forEach((q, index) => {
         // Kiểm tra xem câu hỏi này đã có câu trả lời lưu trong Firebase chưa
-        const oldData = savedAnswers ? savedAnswers[`question_${index}`] : null;
+        const oldData = savedAnswers?.[`question_${index}`] || null;
         const oldAnswer = oldData ? oldData.answer : "";
 
         const div = document.createElement("div");
@@ -1251,6 +1251,44 @@
         });
 
         div.querySelector(".speak-btn").addEventListener("click", () => speakText(q));
+        const input = div.querySelector(`#answer_${index}`);
+
+        let debounceTimer;
+
+        input.addEventListener("input", () => {
+          clearTimeout(debounceTimer);
+
+          debounceTimer = setTimeout(async () => {
+
+            if (!window.currentUser || !currentUnitId) return;
+
+            const answerVal = input.value.trim();
+
+            const updateData = {
+              answers: {
+                [`question_${index}`]: {
+                  question: q,
+                  answer: answerVal
+                }
+              },
+              updatedAt: new Date()
+            };
+
+            try {
+              await window.setDoc(
+                window.doc(window.db, "users", window.currentUser.uid, "answers", currentUnitId),
+                updateData,
+                { merge: true }
+              );
+
+              console.log(`Auto-saved question ${index}`);
+
+            } catch (err) {
+              console.error("Auto-save error:", err);
+            }
+
+          }, 500); // delay 0.5s
+        });
         container.appendChild(div);
       });
 
@@ -1258,44 +1296,44 @@
     }
 
     // Thay thế hàm submitAnswers hiện tại của bạn
-    document.getElementById("submitAnswers").addEventListener("click", async () => {
-      if (!window.currentUser || !currentUnitId) {
-        alert("Vui lòng đăng nhập và chọn bài học!");
-        return;
-      }
+    // document.getElementById("submitAnswers").addEventListener("click", async () => {
+    //   if (!window.currentUser || !currentUnitId) {
+    //     alert("Vui lòng đăng nhập và chọn bài học!");
+    //     return;
+    //   }
 
-      const answersData = {};
-      let answeredCount = 0;
+    //   const answersData = {};
+    //   let answeredCount = 0;
 
-      // Thu thập dữ liệu từ các input
-      currentQuestions.forEach((q, index) => {
-        const answerVal = document.getElementById(`answer_${index}`).value.trim();
-        if (answerVal !== "") {
-          answeredCount++;
-        }
-        // Lưu cặp Câu hỏi: Câu trả lời
-        answersData[`question_${index}`] = {
-          question: q,
-          answer: answerVal
-        };
-      });
+    //   // Thu thập dữ liệu từ các input
+    //   currentQuestions.forEach((q, index) => {
+    //     const answerVal = document.getElementById(`answer_${index}`).value.trim();
+    //     if (answerVal !== "") {
+    //       answeredCount++;
+    //     }
+    //     // Lưu cặp Câu hỏi: Câu trả lời
+    //     answersData[`question_${index}`] = {
+    //       question: q,
+    //       answer: answerVal
+    //     };
+    //   });
 
-      if (answeredCount === 0) {
-        alert("Bạn chưa trả lời câu hỏi nào!");
-        return;
-      }
+    //   if (answeredCount === 0) {
+    //     alert("Bạn chưa trả lời câu hỏi nào!");
+    //     return;
+    //   }
 
-      try {
-        // Gọi hàm lưu vào Firebase (định nghĩa ở phần script module)
-        await window.saveStudentAnswers(currentUnitId, answersData);
+    //   try {
+    //     // Gọi hàm lưu vào Firebase (định nghĩa ở phần script module)
+    //     await window.saveStudentAnswers(currentUnitId, answersData);
 
-        document.getElementById("answerResult").innerHTML =
-          `<h5 class="text-success">Đã lưu thành công ${answeredCount}/${currentQuestions.length} câu trả lời!</h5>`;
-      } catch (error) {
-        console.error("Lỗi khi lưu câu trả lời:", error);
-        alert("Có lỗi xảy ra khi lưu bài. Vui lòng thử lại.");
-      }
-    });
+    //     document.getElementById("answerResult").innerHTML =
+    //       `<h5 class="text-success">Đã lưu thành công ${answeredCount}/${currentQuestions.length} câu trả lời!</h5>`;
+    //   } catch (error) {
+    //     console.error("Lỗi khi lưu câu trả lời:", error);
+    //     alert("Có lỗi xảy ra khi lưu bài. Vui lòng thử lại.");
+    //   }
+    // });
 
     document.getElementById("closeQuestion").addEventListener("click", () => {
       document.getElementById("questionPanel").classList.add("d-none");
@@ -1353,7 +1391,9 @@
     import { db } from "./firebase-config.js";
     import { deleteDoc }
       from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
-
+    window.setDoc = setDoc;
+    window.doc = doc;
+    window.db = db;
     // Thêm vào bên trong <script type="module">
     async function saveStudentAnswers(unitId, answersData) {
       const user = auth.currentUser;
