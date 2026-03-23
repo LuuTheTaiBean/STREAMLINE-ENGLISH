@@ -1364,9 +1364,19 @@
     function speakText(text) {
       const utterance = new SpeechSynthesisUtterance(text);
 
-      utterance.lang = "en-US"; // giọng tiếng Anh
-      utterance.rate = 0.9;     // tốc độ (0.5 → 2)
-      utterance.pitch = 1;      // cao độ
+      const voices = speechSynthesis.getVoices();
+
+      // Ưu tiên giọng Anh-Anh
+      const britishVoice = voices.find(v =>
+        v.lang === "en-GB"
+      );
+
+      if (britishVoice) {
+        utterance.voice = britishVoice;
+      }
+
+      utterance.rate = 0.9;
+      utterance.pitch = 1;
 
       speechSynthesis.speak(utterance);
     }
