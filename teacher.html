@@ -159,9 +159,13 @@
 
                 Object.values(data.notes).forEach((tab) => {
                     contentHTML += `
-        <h5>${tab.name}</h5>
-        <p>${tab.content}</p>
-      `;
+    <h5>${tab.name}</h5>
+    <p class="editable-content" 
+       data-docid="${docSnap.id}" 
+       data-tab="${tab.name}">
+       ${tab.content}
+    </p>
+`;
                 });
 
                 card.innerHTML = `
@@ -202,7 +206,24 @@
 `;
                 div.appendChild(card);
                 container.appendChild(div);
+                div.querySelectorAll(".editable-content").forEach(p => {
+                    p.addEventListener("click", () => {
+                        const docId = p.dataset.docid;
+                        const tabName = p.dataset.tab;
 
+                        // encode content để truyền URL
+                        const content = encodeURIComponent(p.innerHTML);
+
+                        const userName = encodeURIComponent(data.userName || "Unknown");
+                        const submittedAt = encodeURIComponent(data.submittedAt?.seconds || "");
+                        const unitId = encodeURIComponent(data.unitId || "");
+
+                        window.open(
+                            `edit.html?docId=${docId}&tab=${tabName}&content=${content}&name=${userName}&time=${submittedAt}&unit=${unitId}`,
+                            "_blank"
+                        );
+                    });
+                });
                 div.querySelector(".exportBtn").addEventListener("click", async () => {
                     await exportToWord(data);
 
