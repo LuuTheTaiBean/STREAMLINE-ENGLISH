@@ -1584,22 +1584,44 @@
     async function saveNotebook() {
       if (!auth.currentUser || !currentUnitId) return;
 
+      const uid = auth.currentUser.uid;
+
+      // 1. users (local)
       await setDoc(
-        doc(db, "users", auth.currentUser.uid, "notes", currentUnitId),
+        doc(db, "users", uid, "notes", currentUnitId),
         notesData
+      );
+
+      // 2. submissions (teacher side)
+      await setDoc(
+        doc(db, "submissions", uid + "_" + currentUnitId),
+        {
+          userId: uid,
+          unitId: currentUnitId,
+          notes: notesData,
+          updatedAt: new Date()
+        },
+        { merge: true }
       );
     }
 
     async function loadNotebook() {
       if (!auth.currentUser || !currentUnitId) return;
 
+      const uid = auth.currentUser.uid;
+
+      // đọc từ submissions (bản teacher đã sửa)
       const docSnap = await getDoc(
-        doc(db, "users", auth.currentUser.uid, "notes", currentUnitId)
+        doc(db, "submissions", uid + "_" + currentUnitId)
       );
 
-      notesData = docSnap.exists() ? docSnap.data() : {};
-      currentTabId = Object.keys(notesData)[0] || null;
+      if (docSnap.exists()) {
+        notesData = docSnap.data().notes || {};
+      } else {
+        notesData = {};
+      }
 
+      currentTabId = Object.keys(notesData)[0] || null;
       renderTabs();
     }
 
