@@ -243,7 +243,7 @@
       <h5>My Notebooks</h5>
       <div>
         <button id="addTabBtn" class="btn btn-sm btn-success">+ Tab</button>
-        <button id="submitNotebook" class="btn btn-sm btn-primary">Send</button>
+        <button id="submitNotebook" class="btn btn-sm btn-primary" disabled>Send</button>
         <button id="closeNotebook" class="btn btn-sm btn-danger">Close</button>
       </div>
     </div>
@@ -251,7 +251,7 @@
     <div id="tabsContainer" class="tabs-container"></div>
 
     <div id="tabContentContainer" class="tab-content-container">
-      <textarea id="noteContent" placeholder="Write your notes here..."></textarea>
+      <textarea id="noteContent" placeholder="Write your notes here..." disabled></textarea>
     </div>
   </div>
 
@@ -1106,6 +1106,23 @@
         noteContent.value = notesData[currentTabId].content;
       } else {
         noteContent.value = "";
+      }
+      const submitBtn = document.getElementById("submitNotebook");
+
+      if (Object.keys(notesData).length === 0) {
+        submitBtn.disabled = true;
+      } else {
+        submitBtn.disabled = false;
+      }
+      const textarea = document.getElementById("noteContent");
+
+      if (!currentTabId) {
+        textarea.value = "";
+        textarea.disabled = true;
+        textarea.placeholder = "Please click + Tab to start writing...";
+      } else {
+        textarea.disabled = false;
+        textarea.placeholder = "Students select a created tab, write their content here, then click “Send” to submit it to the teacher";
       }
     }
 
