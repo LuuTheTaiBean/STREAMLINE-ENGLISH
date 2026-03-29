@@ -1603,22 +1603,10 @@
 
       const uid = auth.currentUser.uid;
 
-      // 1. users (local)
+      // ✅ CHỈ lưu cho user
       await setDoc(
         doc(db, "users", uid, "notes", currentUnitId),
         notesData
-      );
-
-      // 2. submissions (teacher side)
-      await setDoc(
-        doc(db, "submissions", uid + "_" + currentUnitId),
-        {
-          userId: uid,
-          unitId: currentUnitId,
-          notes: notesData,
-          updatedAt: new Date()
-        },
-        { merge: true }
       );
     }
 
@@ -1627,13 +1615,13 @@
 
       const uid = auth.currentUser.uid;
 
-      // đọc từ submissions (bản teacher đã sửa)
+      // ✅ đọc bản đang viết của học sinh
       const docSnap = await getDoc(
-        doc(db, "submissions", uid + "_" + currentUnitId)
+        doc(db, "users", uid, "notes", currentUnitId)
       );
 
       if (docSnap.exists()) {
-        notesData = docSnap.data().notes || {};
+        notesData = docSnap.data();
       } else {
         notesData = {};
       }
@@ -1646,6 +1634,7 @@
     window.loadNotebook = loadNotebook;
 
     document.getElementById("submitNotebook").addEventListener("click", async () => {
+
       if (!auth.currentUser || !currentUnitId) {
         alert("Missing user or unit!");
         return;
@@ -1662,7 +1651,7 @@
         {
           userId: auth.currentUser.uid,
           userEmail: auth.currentUser.email,
-          userName: fullname, // 🔥 FIX TẠI ĐÂY
+          userName: fullname,
           unitId: currentUnitId,
           notes: notesData,
           submittedAt: new Date()
