@@ -194,6 +194,11 @@
     <button class="btn btn-danger flex-fill uploadBtn">
         <i class="fa-solid fa-upload me-1"></i> Upload
     </button>
+
+    <!-- ✅ THÊM NÚT LOCK Ở ĐÂY -->
+    <button class="btn btn-warning flex-fill lockBtn">
+        🔒 Lock
+    </button>
 </div>
 
 <input type="file" class="fileInput d-none" accept=".doc,.docx,.pdf">
@@ -206,6 +211,14 @@
 `;
                 div.appendChild(card);
                 container.appendChild(div);
+                div.querySelector(".lockBtn").addEventListener("click", async () => {
+                    await updateDoc(doc(db, "submissions", docSnap.id), {
+                        locked: true
+                    });
+
+                    alert("Đã khóa bài!");
+                    loadSubmissions();
+                });
                 div.querySelectorAll(".editable-content").forEach(p => {
                     p.addEventListener("click", () => {
                         const docId = p.dataset.docid;

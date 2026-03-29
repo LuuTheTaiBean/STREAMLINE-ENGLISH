@@ -1628,6 +1628,15 @@
 
       currentTabId = Object.keys(notesData)[0] || null;
       renderTabs();
+      const submissionId = auth.currentUser.uid + "_" + currentUnitId;
+
+      const submissionSnap = await getDoc(doc(db, "submissions", submissionId));
+
+      if (submissionSnap.exists() && submissionSnap.data().locked) {
+        document.getElementById("submitNotebook").disabled = true;
+        document.getElementById("submitNotebook").dataset.locked = "true";
+        document.getElementById("noteContent").disabled = true;
+      }
     }
 
     window.saveNotebook = saveNotebook;
@@ -1640,25 +1649,42 @@
         return;
       }
 
+      const submitBtn = document.getElementById("submitNotebook");
+
+      // ❌ Nếu đã khóa thì chặn luôn
+      if (submitBtn.dataset.locked === "true") {
+        alert("Bài đã gửi rồi, không thể gửi lại!");
+        return;
+      }
+
       const confirmSubmit = confirm("Submit your notes?");
       if (!confirmSubmit) return;
 
       const userDoc = await getDoc(doc(db, "users", auth.currentUser.uid));
       const fullname = userDoc.data()?.fullname || "Unknown";
 
+      const docId = auth.currentUser.uid + "_" + currentUnitId;
+
       await setDoc(
-        doc(db, "submissions", auth.currentUser.uid + "_" + currentUnitId),
+        doc(db, "submissions", docId),
         {
           userId: auth.currentUser.uid,
           userEmail: auth.currentUser.email,
           userName: fullname,
           unitId: currentUnitId,
           notes: notesData,
-          submittedAt: new Date()
+          submittedAt: new Date(),
+          locked: true   // 🔥 QUAN TRỌNG
         }
       );
 
       alert("Submitted successfully!");
+
+      // 🔒 KHÓA UI NGAY SAU KHI GỬI
+      submitBtn.disabled = true;
+      submitBtn.dataset.locked = "true";
+
+      document.getElementById("noteContent").disabled = true;
     });
 
     window.showUserInfo = showUserInfo;

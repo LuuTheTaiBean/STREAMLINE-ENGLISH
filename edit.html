@@ -119,6 +119,14 @@
                 }
 
                 const data = snap.data();
+
+                if (data.locked) {
+                    editor.disabled = true;
+                    document.getElementById("saveBtn").disabled = true;
+
+                    status.innerText = "🔒 Bài đã bị khóa";
+                    status.className = "badge bg-danger";
+                }
                 const notes = data.notes;
 
                 Object.values(notes).forEach(tab => {
