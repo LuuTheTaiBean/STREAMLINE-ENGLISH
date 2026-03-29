@@ -1007,7 +1007,7 @@
 
     let currentTabId = null;
     let notesData = {};
-
+    let notebookLocked = false;
     notebookIcons.forEach(icon => {
       icon.addEventListener("click", async () => {
         notebookPanel.classList.toggle("d-none");
@@ -1031,6 +1031,10 @@
       const id = "tab_" + Date.now();
       notesData[id] = { name: tabName, content: "" };
       currentTabId = id;
+
+      // ✅ FIX: mở khóa textarea khi tạo tab mới
+      noteContent.disabled = false;
+      noteContent.removeAttribute("readonly");
 
       renderTabs();
       saveNotebook();
@@ -1103,7 +1107,16 @@
       });
 
       if (currentTabId) {
-        noteContent.value = notesData[currentTabId].content;
+        const currentTab = notesData[currentTabId];
+        noteContent.value = currentTab.content;
+        if (notebookLocked) {
+          noteContent.disabled = true;
+          noteContent.placeholder = "This notebook has been submitted and locked!";
+        } else {
+          noteContent.disabled = false;
+          noteContent.removeAttribute("readonly");
+          noteContent.placeholder = "Write your notes here...";
+        }
       } else {
         noteContent.value = "";
       }
@@ -1125,9 +1138,12 @@
         textarea.placeholder = "Students select a created tab, write their content here, then click “Send” to submit it to the teacher";
       }
     }
-
     noteContent.addEventListener("input", () => {
       if (!currentTabId) return;
+
+      if (notesData[currentTabId].locked) {
+        return; // ❌ không cho sửa
+      }
 
       notesData[currentTabId].content = noteContent.value;
       saveNotebook();
@@ -1292,18 +1308,30 @@
             };
 
             try {
-              await window.setDoc(
-                window.doc(window.db, "users", window.currentUser.uid, "answers", currentUnitId),
-                updateData,
-                { merge: true }
+
+              const docRef = window.doc(
+                window.db,
+                "users",
+                window.currentUser.uid,
+                "answers",
+                currentUnitId
               );
+
+              const snap = await window.getDoc(docRef);
+
+              // 🔒 Nếu đã bị khóa thì không cho sửa
+              if (snap.exists() && snap.data().locked) {
+                console.log("Bài đã bị khóa, không thể sửa");
+                return;
+              }
+
+              await window.setDoc(docRef, updateData, { merge: true });
 
               console.log(`Auto-saved question ${index}`);
 
             } catch (err) {
               console.error("Auto-save error:", err);
             }
-
           }, 500); // delay 0.5s
         });
         container.appendChild(div);
@@ -1601,42 +1629,60 @@
     async function saveNotebook() {
       if (!auth.currentUser || !currentUnitId) return;
 
-      const uid = auth.currentUser.uid;
+      const docId = auth.currentUser.uid + "_" + currentUnitId;
 
-      // ✅ CHỈ lưu cho user
       await setDoc(
-        doc(db, "users", uid, "notes", currentUnitId),
-        notesData
+        doc(db, "submissions", docId),
+        {
+          userId: auth.currentUser.uid,
+          unitId: currentUnitId,
+          notes: notesData,
+          updatedAt: new Date(),
+          status: "draft" // 🟡 đang viết
+        },
+        { merge: true }
       );
     }
 
     async function loadNotebook() {
       if (!auth.currentUser || !currentUnitId) return;
 
-      const uid = auth.currentUser.uid;
+      const docId = auth.currentUser.uid + "_" + currentUnitId;
 
-      // ✅ đọc bản đang viết của học sinh
-      const docSnap = await getDoc(
-        doc(db, "users", uid, "notes", currentUnitId)
-      );
+      const snap = await getDoc(doc(db, "submissions", docId));
 
-      if (docSnap.exists()) {
-        notesData = docSnap.data();
+      if (snap.exists()) {
+        const data = snap.data();
+        notesData = data.notes || {};
+        notebookLocked = data.locked || false;
+        if (data.locked) {
+
+          noteContent.disabled = true;
+          submitNotebook.disabled = true;
+
+          // ❗ CHẶN luôn việc gõ
+          document.querySelectorAll("#noteContent").forEach(el => {
+            el.setAttribute("readonly", true);
+          });
+
+          // ❗ CHẶN thêm input khác nếu có
+          // document.querySelectorAll("input, textarea").forEach(el => {
+          //   el.disabled = true;
+          // });
+
+          // alert("Bài đã bị khóa, bạn không thể chỉnh sửa!");
+        }
+
+        if (data.graded) {
+          showGrade(data);
+        }
+
       } else {
         notesData = {};
       }
 
       currentTabId = Object.keys(notesData)[0] || null;
       renderTabs();
-      const submissionId = auth.currentUser.uid + "_" + currentUnitId;
-
-      const submissionSnap = await getDoc(doc(db, "submissions", submissionId));
-
-      if (submissionSnap.exists() && submissionSnap.data().locked) {
-        document.getElementById("submitNotebook").disabled = true;
-        document.getElementById("submitNotebook").dataset.locked = "true";
-        document.getElementById("noteContent").disabled = true;
-      }
     }
 
     window.saveNotebook = saveNotebook;

@@ -215,7 +215,10 @@
                     await updateDoc(doc(db, "submissions", docSnap.id), {
                         locked: true
                     });
-
+                    await updateDoc(
+                        doc(db, "users", data.userId, "answers", data.unitId),
+                        { locked: true }
+                    );
                     alert("Đã khóa bài!");
                     loadSubmissions();
                 });
